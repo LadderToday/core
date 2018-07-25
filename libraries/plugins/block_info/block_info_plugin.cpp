@@ -1,14 +1,14 @@
 
-#include <smoke/chain/database.hpp>
-#include <smoke/chain/global_property_object.hpp>
+#include <core/chain/database.hpp>
+#include <core/chain/global_property_object.hpp>
 
-#include <smoke/plugins/block_info/block_info.hpp>
-#include <smoke/plugins/block_info/block_info_api.hpp>
-#include <smoke/plugins/block_info/block_info_plugin.hpp>
+#include <core/plugins/block_info/block_info.hpp>
+#include <core/plugins/block_info/block_info_api.hpp>
+#include <core/plugins/block_info/block_info_plugin.hpp>
 
 #include <string>
 
-namespace smoke { namespace plugin { namespace block_info {
+namespace core { namespace plugin { namespace block_info {
 
 block_info_plugin::block_info_plugin( application* app ) : plugin( app ) {}
 block_info_plugin::~block_info_plugin() {}
@@ -53,6 +53,6 @@ void block_info_plugin::on_applied_block( const chain::signed_block& b )
    return;
 }
 
-} } } // smoke::plugin::block_info
+} } } // core::plugin::block_info
 
-SMOKE_DEFINE_PLUGIN( block_info, smoke::plugin::block_info::block_info_plugin )
+CORE_DEFINE_PLUGIN( block_info, core::plugin::block_info::block_info_plugin )

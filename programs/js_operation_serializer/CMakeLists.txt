@@ -4,7 +4,7 @@ if( UNIX AND NOT APPLE )
 endif()
 
 target_link_libraries( js_operation_serializer
-                       PRIVATE smoke_app graphene_net smoke_chain smoke_protocol graphene_utilities smoke_wallet fc ${CMAKE_DL_LIBS} ${PLATFORM_SPECIFIC_LIBS} )
+                       PRIVATE core_app graphene_net core_chain core_protocol graphene_utilities core_wallet fc ${CMAKE_DL_LIBS} ${PLATFORM_SPECIFIC_LIBS} )
 
 install( TARGETS
    js_operation_serializer

@@ -1,19 +1,19 @@
 #pragma once
-#include <smoke/app/plugin.hpp>
-#include <smoke/chain/database.hpp>
+#include <core/app/plugin.hpp>
+#include <core/chain/database.hpp>
 
-#include <smoke/account_by_key/account_by_key_api.hpp>
+#include <core/account_by_key/account_by_key_api.hpp>
 
-namespace smoke { namespace account_by_key {
+namespace core { namespace account_by_key {
 
 #define ACCOUNT_BY_KEY_PLUGIN_NAME "account_by_key"
 
 namespace detail { class account_by_key_plugin_impl; }
 
-class account_by_key_plugin : public smoke::app::plugin
+class account_by_key_plugin : public core::app::plugin
 {
    public:
-      account_by_key_plugin( smoke::app::application* app );
+      account_by_key_plugin( core::app::application* app );
 
       std::string plugin_name()const override { return ACCOUNT_BY_KEY_PLUGIN_NAME; }
       virtual void plugin_set_program_options(
@@ -26,4 +26,4 @@ class account_by_key_plugin : public smoke::app::plugin
       std::unique_ptr< detail::account_by_key_plugin_impl > my;
 };
 
-} } // smoke::account_by_key
+} } // core::account_by_key

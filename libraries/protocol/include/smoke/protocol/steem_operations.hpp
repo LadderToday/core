@@ -1,12 +1,12 @@
 #pragma once
-#include <smoke/protocol/base.hpp>
-#include <smoke/protocol/block_header.hpp>
-#include <smoke/protocol/asset.hpp>
+#include <core/protocol/base.hpp>
+#include <core/protocol/block_header.hpp>
+#include <core/protocol/asset.hpp>
 
 #include <fc/utf8.hpp>
 #include <fc/crypto/equihash.hpp>
 
-namespace smoke { namespace protocol {
+namespace core { namespace protocol {
 
    inline void validate_account_name( const string& name )
    {
@@ -15,7 +15,7 @@ namespace smoke { namespace protocol {
 
    inline void validate_permlink( const string& permlink )
    {
-      FC_ASSERT( permlink.size() < SMOKE_MAX_PERMLINK_LENGTH, "permlink is too long" );
+      FC_ASSERT( permlink.size() < CORE_MAX_PERMLINK_LENGTH, "permlink is too long" );
       FC_ASSERT( fc::is_utf8( permlink ), "permlink not formatted in UTF8" );
    }
 
@@ -128,7 +128,7 @@ namespace smoke { namespace protocol {
       string            permlink;
 
       asset             max_accepted_payout    = asset( 1000000000, STEEM_SYMBOL );       /// SBD value of the maximum payout this post will receive
-      uint16_t          percent_steem_dollars  = SMOKE_100_PERCENT; /// the percent of Steem Dollars to key, unkept amounts will be received as Steem Power
+      uint16_t          percent_steem_dollars  = CORE_100_PERCENT; /// the percent of Steem Dollars to key, unkept amounts will be received as Steem Power
       bool              allow_votes            = true;      /// allows a post to receive votes;
       bool              allow_curation_rewards = true; /// allows voters to recieve curation rewards. Rewards return to reward fund.
       comment_options_extensions_type extensions;
@@ -382,21 +382,21 @@ namespace smoke { namespace protocol {
        *  ability to vote and make transactions.
        */
       asset             account_creation_fee =
-         asset( SMOKE_MIN_ACCOUNT_CREATION_FEE, STEEM_SYMBOL );
+         asset( CORE_MIN_ACCOUNT_CREATION_FEE, STEEM_SYMBOL );
 
       /**
        *  This witnesses vote for the maximum_block_size which is used by the network
        *  to tune rate limiting and capacity
        */
-      uint32_t          maximum_block_size = SMOKE_MIN_BLOCK_SIZE_LIMIT * 2;
-      uint16_t          sbd_interest_rate  = SMOKE_DEFAULT_SBD_INTEREST_RATE;
+      uint32_t          maximum_block_size = CORE_MIN_BLOCK_SIZE_LIMIT * 2;
+      uint16_t          sbd_interest_rate  = CORE_DEFAULT_SBD_INTEREST_RATE;
 
       void validate()const
       {
-         FC_ASSERT( account_creation_fee.amount >= SMOKE_MIN_ACCOUNT_CREATION_FEE);
-         FC_ASSERT( maximum_block_size >= SMOKE_MIN_BLOCK_SIZE_LIMIT);
+         FC_ASSERT( account_creation_fee.amount >= CORE_MIN_ACCOUNT_CREATION_FEE);
+         FC_ASSERT( maximum_block_size >= CORE_MIN_BLOCK_SIZE_LIMIT);
          FC_ASSERT( sbd_interest_rate >= 0 );
-         FC_ASSERT( sbd_interest_rate <= SMOKE_100_PERCENT );
+         FC_ASSERT( sbd_interest_rate <= CORE_100_PERCENT );
       }
    };
 
@@ -521,7 +521,7 @@ namespace smoke { namespace protocol {
 
    /**
     *  This operation instructs the blockchain to start a conversion between STEEM and SBD,
-    *  The funds are deposited after SMOKE_CONVERSION_DELAY
+    *  The funds are deposited after CORE_CONVERSION_DELAY
     */
    struct convert_operation : public base_operation
    {
@@ -683,7 +683,7 @@ namespace smoke { namespace protocol {
    /**
     * This operation is used to report a miner who signs two blocks
     * at the same time. To be valid, the violation must be reported within
-    * SMOKE_MAX_WITNESSES blocks of the head block (1 round) and the
+    * CORE_MAX_WITNESSES blocks of the head block (1 round) and the
     * producer must be in the ACTIVE witness set.
     *
     * Users not in the ACTIVE witness set should not have to worry about their
@@ -939,31 +939,31 @@ namespace smoke { namespace protocol {
       void get_required_active_authorities( flat_set< account_name_type >& a ) const { a.insert( delegator ); }
       void validate() const;
    };
-} } // smoke::protocol
+} } // core::protocol
 
 
-FC_REFLECT( smoke::protocol::transfer_to_savings_operation, (from)(to)(amount)(memo) )
-FC_REFLECT( smoke::protocol::transfer_from_savings_operation, (from)(request_id)(to)(amount)(memo) )
-FC_REFLECT( smoke::protocol::cancel_transfer_from_savings_operation, (from)(request_id) )
+FC_REFLECT( core::protocol::transfer_to_savings_operation, (from)(to)(amount)(memo) )
+FC_REFLECT( core::protocol::transfer_from_savings_operation, (from)(request_id)(to)(amount)(memo) )
+FC_REFLECT( core::protocol::cancel_transfer_from_savings_operation, (from)(request_id) )
 
-FC_REFLECT( smoke::protocol::reset_account_operation, (reset_account)(account_to_reset)(new_owner_authority) )
-FC_REFLECT( smoke::protocol::set_reset_account_operation, (account)(current_reset_account)(reset_account) )
+FC_REFLECT( core::protocol::reset_account_operation, (reset_account)(account_to_reset)(new_owner_authority) )
+FC_REFLECT( core::protocol::set_reset_account_operation, (account)(current_reset_account)(reset_account) )
 
 
-FC_REFLECT( smoke::protocol::report_over_production_operation, (reporter)(first_block)(second_block) )
-FC_REFLECT( smoke::protocol::convert_operation, (owner)(requestid)(amount) )
-FC_REFLECT( smoke::protocol::feed_publish_operation, (publisher)(exchange_rate) )
-FC_REFLECT( smoke::protocol::pow, (worker)(input)(signature)(work) )
-FC_REFLECT( smoke::protocol::pow2, (input)(pow_summary) )
-FC_REFLECT( smoke::protocol::pow2_input, (worker_account)(prev_block)(nonce) )
-FC_REFLECT( smoke::protocol::equihash_pow, (input)(proof)(prev_block)(pow_summary) )
-FC_REFLECT( smoke::protocol::chain_properties, (account_creation_fee)(maximum_block_size)(sbd_interest_rate) );
+FC_REFLECT( core::protocol::report_over_production_operation, (reporter)(first_block)(second_block) )
+FC_REFLECT( core::protocol::convert_operation, (owner)(requestid)(amount) )
+FC_REFLECT( core::protocol::feed_publish_operation, (publisher)(exchange_rate) )
+FC_REFLECT( core::protocol::pow, (worker)(input)(signature)(work) )
+FC_REFLECT( core::protocol::pow2, (input)(pow_summary) )
+FC_REFLECT( core::protocol::pow2_input, (worker_account)(prev_block)(nonce) )
+FC_REFLECT( core::protocol::equihash_pow, (input)(proof)(prev_block)(pow_summary) )
+FC_REFLECT( core::protocol::chain_properties, (account_creation_fee)(maximum_block_size)(sbd_interest_rate) );
 
-FC_REFLECT_TYPENAME( smoke::protocol::pow2_work )
-FC_REFLECT( smoke::protocol::pow_operation, (worker_account)(block_id)(nonce)(work)(props) )
-FC_REFLECT( smoke::protocol::pow2_operation, (work)(new_owner_key)(props) )
+FC_REFLECT_TYPENAME( core::protocol::pow2_work )
+FC_REFLECT( core::protocol::pow_operation, (worker_account)(block_id)(nonce)(work)(props) )
+FC_REFLECT( core::protocol::pow2_operation, (work)(new_owner_key)(props) )
 
-FC_REFLECT( smoke::protocol::account_create_operation,
+FC_REFLECT( core::protocol::account_create_operation,
             (fee)
             (creator)
             (new_account_name)
@@ -973,7 +973,7 @@ FC_REFLECT( smoke::protocol::account_create_operation,
             (memo_key)
             (json_metadata) )
 
-FC_REFLECT( smoke::protocol::account_create_with_delegation_operation,
+FC_REFLECT( core::protocol::account_create_with_delegation_operation,
             (fee)
             (delegation)
             (creator)
@@ -985,7 +985,7 @@ FC_REFLECT( smoke::protocol::account_create_with_delegation_operation,
             (json_metadata)
             (extensions) )
 
-FC_REFLECT( smoke::protocol::account_update_operation,
+FC_REFLECT( core::protocol::account_update_operation,
             (account)
             (owner)
             (active)
@@ -993,38 +993,38 @@ FC_REFLECT( smoke::protocol::account_update_operation,
             (memo_key)
             (json_metadata) )
 
-FC_REFLECT( smoke::protocol::transfer_operation, (from)(to)(amount)(memo) )
-FC_REFLECT( smoke::protocol::transfer_to_vesting_operation, (from)(to)(amount) )
-FC_REFLECT( smoke::protocol::withdraw_vesting_operation, (account)(vesting_shares) )
-FC_REFLECT( smoke::protocol::set_withdraw_vesting_route_operation, (from_account)(to_account)(percent)(auto_vest) )
-FC_REFLECT( smoke::protocol::witness_update_operation, (owner)(url)(block_signing_key)(props)(fee) )
-FC_REFLECT( smoke::protocol::account_witness_vote_operation, (account)(witness)(approve) )
-FC_REFLECT( smoke::protocol::account_witness_proxy_operation, (account)(proxy) )
-FC_REFLECT( smoke::protocol::comment_operation, (parent_author)(parent_permlink)(author)(permlink)(title)(body)(json_metadata) )
-FC_REFLECT( smoke::protocol::vote_operation, (voter)(author)(permlink)(weight) )
-FC_REFLECT( smoke::protocol::custom_operation, (required_auths)(id)(data) )
-FC_REFLECT( smoke::protocol::custom_json_operation, (required_auths)(required_posting_auths)(id)(json) )
-FC_REFLECT( smoke::protocol::custom_binary_operation, (required_owner_auths)(required_active_auths)(required_posting_auths)(required_auths)(id)(data) )
-FC_REFLECT( smoke::protocol::limit_order_create_operation, (owner)(orderid)(amount_to_sell)(min_to_receive)(fill_or_kill)(expiration) )
-FC_REFLECT( smoke::protocol::limit_order_create2_operation, (owner)(orderid)(amount_to_sell)(exchange_rate)(fill_or_kill)(expiration) )
-FC_REFLECT( smoke::protocol::limit_order_cancel_operation, (owner)(orderid) )
+FC_REFLECT( core::protocol::transfer_operation, (from)(to)(amount)(memo) )
+FC_REFLECT( core::protocol::transfer_to_vesting_operation, (from)(to)(amount) )
+FC_REFLECT( core::protocol::withdraw_vesting_operation, (account)(vesting_shares) )
+FC_REFLECT( core::protocol::set_withdraw_vesting_route_operation, (from_account)(to_account)(percent)(auto_vest) )
+FC_REFLECT( core::protocol::witness_update_operation, (owner)(url)(block_signing_key)(props)(fee) )
+FC_REFLECT( core::protocol::account_witness_vote_operation, (account)(witness)(approve) )
+FC_REFLECT( core::protocol::account_witness_proxy_operation, (account)(proxy) )
+FC_REFLECT( core::protocol::comment_operation, (parent_author)(parent_permlink)(author)(permlink)(title)(body)(json_metadata) )
+FC_REFLECT( core::protocol::vote_operation, (voter)(author)(permlink)(weight) )
+FC_REFLECT( core::protocol::custom_operation, (required_auths)(id)(data) )
+FC_REFLECT( core::protocol::custom_json_operation, (required_auths)(required_posting_auths)(id)(json) )
+FC_REFLECT( core::protocol::custom_binary_operation, (required_owner_auths)(required_active_auths)(required_posting_auths)(required_auths)(id)(data) )
+FC_REFLECT( core::protocol::limit_order_create_operation, (owner)(orderid)(amount_to_sell)(min_to_receive)(fill_or_kill)(expiration) )
+FC_REFLECT( core::protocol::limit_order_create2_operation, (owner)(orderid)(amount_to_sell)(exchange_rate)(fill_or_kill)(expiration) )
+FC_REFLECT( core::protocol::limit_order_cancel_operation, (owner)(orderid) )
 
-FC_REFLECT( smoke::protocol::delete_comment_operation, (author)(permlink) );
+FC_REFLECT( core::protocol::delete_comment_operation, (author)(permlink) );
 
-FC_REFLECT( smoke::protocol::beneficiary_route_type, (account)(weight) )
-FC_REFLECT( smoke::protocol::comment_payout_beneficiaries, (beneficiaries) )
-FC_REFLECT_TYPENAME( smoke::protocol::comment_options_extension )
-FC_REFLECT( smoke::protocol::comment_options_operation, (author)(permlink)(max_accepted_payout)(percent_steem_dollars)(allow_votes)(allow_curation_rewards)(extensions) )
+FC_REFLECT( core::protocol::beneficiary_route_type, (account)(weight) )
+FC_REFLECT( core::protocol::comment_payout_beneficiaries, (beneficiaries) )
+FC_REFLECT_TYPENAME( core::protocol::comment_options_extension )
+FC_REFLECT( core::protocol::comment_options_operation, (author)(permlink)(max_accepted_payout)(percent_steem_dollars)(allow_votes)(allow_curation_rewards)(extensions) )
 
-FC_REFLECT( smoke::protocol::escrow_transfer_operation, (from)(to)(sbd_amount)(steem_amount)(escrow_id)(agent)(fee)(json_meta)(ratification_deadline)(escrow_expiration) );
-FC_REFLECT( smoke::protocol::escrow_approve_operation, (from)(to)(agent)(who)(escrow_id)(approve) );
-FC_REFLECT( smoke::protocol::escrow_dispute_operation, (from)(to)(agent)(who)(escrow_id) );
-FC_REFLECT( smoke::protocol::escrow_release_operation, (from)(to)(agent)(who)(receiver)(escrow_id)(sbd_amount)(steem_amount) );
-FC_REFLECT( smoke::protocol::challenge_authority_operation, (challenger)(challenged)(require_owner) );
-FC_REFLECT( smoke::protocol::prove_authority_operation, (challenged)(require_owner) );
-FC_REFLECT( smoke::protocol::request_account_recovery_operation, (recovery_account)(account_to_recover)(new_owner_authority)(extensions) );
-FC_REFLECT( smoke::protocol::recover_account_operation, (account_to_recover)(new_owner_authority)(recent_owner_authority)(extensions) );
-FC_REFLECT( smoke::protocol::change_recovery_account_operation, (account_to_recover)(new_recovery_account)(extensions) );
-FC_REFLECT( smoke::protocol::decline_voting_rights_operation, (account)(decline) );
-FC_REFLECT( smoke::protocol::claim_reward_balance_operation, (account)(reward_steem)(reward_sbd)(reward_vests) )
-FC_REFLECT( smoke::protocol::delegate_vesting_shares_operation, (delegator)(delegatee)(vesting_shares) );
+FC_REFLECT( core::protocol::escrow_transfer_operation, (from)(to)(sbd_amount)(steem_amount)(escrow_id)(agent)(fee)(json_meta)(ratification_deadline)(escrow_expiration) );
+FC_REFLECT( core::protocol::escrow_approve_operation, (from)(to)(agent)(who)(escrow_id)(approve) );
+FC_REFLECT( core::protocol::escrow_dispute_operation, (from)(to)(agent)(who)(escrow_id) );
+FC_REFLECT( core::protocol::escrow_release_operation, (from)(to)(agent)(who)(receiver)(escrow_id)(sbd_amount)(steem_amount) );
+FC_REFLECT( core::protocol::challenge_authority_operation, (challenger)(challenged)(require_owner) );
+FC_REFLECT( core::protocol::prove_authority_operation, (challenged)(require_owner) );
+FC_REFLECT( core::protocol::request_account_recovery_operation, (recovery_account)(account_to_recover)(new_owner_authority)(extensions) );
+FC_REFLECT( core::protocol::recover_account_operation, (account_to_recover)(new_owner_authority)(recent_owner_authority)(extensions) );
+FC_REFLECT( core::protocol::change_recovery_account_operation, (account_to_recover)(new_recovery_account)(extensions) );
+FC_REFLECT( core::protocol::decline_voting_rights_operation, (account)(decline) );
+FC_REFLECT( core::protocol::claim_reward_balance_operation, (account)(reward_steem)(reward_sbd)(reward_vests) )
+FC_REFLECT( core::protocol::delegate_vesting_shares_operation, (delegator)(delegatee)(vesting_shares) );

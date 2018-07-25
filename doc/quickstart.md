@@ -1,31 +1,31 @@
 Quickstart
 ----------
 
-### Get current smoked
+### Get current cored
 see [building](building.md) from source if you like to build from source
 
 Pre-build binaries for Ubuntu 16.04 are provided:
-- [smoked - for testnet1](https://testnet.smoke.io/downloads/smoked)
-- [cli_wallet - for testnet1](https://testnet.smoke.io/downloads/cli_wallet)
+- [cored - for testnet1](https://testnet.core.io/downloads/cored)
+- [cli_wallet - for testnet1](https://testnet.core.io/downloads/cli_wallet)
 
 
-### Run smoked
+### Run cored
 
 ```
-./smoked
+./cored
 ```
 
 **Note when running the 1st time:**
 
 - For testnet1, copy config from [testnet1.config.ini](../contrib/testnet1.config.ini)
 
-- start smoked a couple of time (stop with `Ctrl+C`) until file `p2p/node_config.json` created.
+- start cored a couple of time (stop with `Ctrl+C`) until file `p2p/node_config.json` created.
 Copy the private_key in `node_config.json` ( eg., `c1ded8d7deba7c036f18a364b720bcd1fd7575c1530991ddacd2bc105a6be02b` )
 and replace to the private-key of p2p-parameters in the `config.ini` file (`0000000000000000000000000000000000000000000000000000000000000000`)
 
 - Remove comment char (`#`) at the beginning of `#p2p-parameters =`
 
-- Then restart smoked, you should see blocks synching
+- Then restart cored, you should see blocks synching
 
 ### Configure for your use case
 #### Full API node

@@ -1,26 +1,26 @@
-#include <smoke/account_history/account_history_plugin.hpp>
+#include <core/account_history/account_history_plugin.hpp>
 
-#include <smoke/app/impacted.hpp>
+#include <core/app/impacted.hpp>
 
-#include <smoke/protocol/config.hpp>
+#include <core/protocol/config.hpp>
 
-#include <smoke/chain/database.hpp>
-#include <smoke/chain/operation_notification.hpp>
-#include <smoke/chain/history_object.hpp>
+#include <core/chain/database.hpp>
+#include <core/chain/operation_notification.hpp>
+#include <core/chain/history_object.hpp>
 
 #include <fc/smart_ref_impl.hpp>
 #include <fc/thread/thread.hpp>
 
 #include <boost/algorithm/string.hpp>
 
-#define STEEM_NAMESPACE_PREFIX "smoke::protocol::"
+#define STEEM_NAMESPACE_PREFIX "core::protocol::"
 
-namespace smoke { namespace account_history {
+namespace core { namespace account_history {
 
 namespace detail
 {
 
-using namespace smoke::protocol;
+using namespace core::protocol;
 
 class account_history_plugin_impl
 {
@@ -30,7 +30,7 @@ class account_history_plugin_impl
       { }
       virtual ~account_history_plugin_impl();
 
-    smoke::chain::database& database()
+    core::chain::database& database()
       {
          return _self.database();
       }
@@ -154,7 +154,7 @@ struct operation_visitor_filter : operation_visitor
 void account_history_plugin_impl::on_operation( const operation_notification& note )
 {
    flat_set<account_name_type> impacted;
-   smoke::chain::database& db = database();
+   core::chain::database& db = database();
 
    const operation_object* new_obj = nullptr;
    app::operation_get_impacted_accounts( note.op, impacted );
@@ -298,4 +298,4 @@ flat_map< account_name_type, account_name_type > account_history_plugin::tracked
 
 } }
 
-SMOKE_DEFINE_PLUGIN( account_history, smoke::account_history::account_history_plugin )
+CORE_DEFINE_PLUGIN( account_history, core::account_history::account_history_plugin )

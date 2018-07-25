@@ -1,22 +1,22 @@
 #pragma once
 
-#include <smoke/protocol/authority.hpp>
-#include <smoke/protocol/steem_operations.hpp>
+#include <core/protocol/authority.hpp>
+#include <core/protocol/steem_operations.hpp>
 
-#include <smoke/chain/steem_object_types.hpp>
+#include <core/chain/steem_object_types.hpp>
 
 #include <boost/multi_index/composite_key.hpp>
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
-   using smoke::protocol::chain_properties;
-   using smoke::protocol::digest_type;
-   using smoke::protocol::public_key_type;
-   using smoke::protocol::version;
-   using smoke::protocol::hardfork_version;
-   using smoke::protocol::price;
-   using smoke::protocol::asset;
-   using smoke::protocol::asset_symbol_type;
+   using core::protocol::chain_properties;
+   using core::protocol::digest_type;
+   using core::protocol::public_key_type;
+   using core::protocol::version;
+   using core::protocol::hardfork_version;
+   using core::protocol::price;
+   using core::protocol::asset;
+   using core::protocol::asset_symbol_type;
 
    /**
     *  All witnesses with at least 1% net positive approval and
@@ -115,7 +115,7 @@ namespace smoke { namespace chain {
          version           running_version;
 
          hardfork_version  hardfork_version_vote;
-         time_point_sec    hardfork_time_vote = SMOKE_GENESIS_TIME;
+         time_point_sec    hardfork_time_vote = CORE_GENESIS_TIME;
    };
 
 
@@ -151,7 +151,7 @@ namespace smoke { namespace chain {
 
          fc::uint128                                                       current_virtual_time;
          uint32_t                                                          next_shuffle_block_num = 1;
-         fc::array< account_name_type, SMOKE_MAX_WITNESSES >             current_shuffled_witnesses;
+         fc::array< account_name_type, CORE_MAX_WITNESSES >             current_shuffled_witnesses;
          uint8_t                                                           num_scheduled_witnesses = 1;
          uint8_t                                                           top19_weight = 1;
          uint8_t                                                           timeshare_weight = 5;
@@ -160,10 +160,10 @@ namespace smoke { namespace chain {
          chain_properties                                                  median_props;
          version                                                           majority_version;
 
-         uint8_t max_voted_witnesses            = SMOKE_MAX_VOTED_WITNESSES_HF0;
-         uint8_t max_miner_witnesses            = SMOKE_MAX_MINER_WITNESSES_HF0;
-         uint8_t max_runner_witnesses           = SMOKE_MAX_RUNNER_WITNESSES_HF0;
-         uint8_t hardfork_required_witnesses    = SMOKE_HARDFORK_REQUIRED_WITNESSES;
+         uint8_t max_voted_witnesses            = CORE_MAX_VOTED_WITNESSES_HF0;
+         uint8_t max_miner_witnesses            = CORE_MAX_MINER_WITNESSES_HF0;
+         uint8_t max_runner_witnesses           = CORE_MAX_RUNNER_WITNESSES_HF0;
+         uint8_t hardfork_required_witnesses    = CORE_HARDFORK_REQUIRED_WITNESSES;
    };
 
 
@@ -234,9 +234,9 @@ namespace smoke { namespace chain {
 
 } }
 
-FC_REFLECT_ENUM( smoke::chain::witness_object::witness_schedule_type, (top19)(timeshare)(miner)(none) )
+FC_REFLECT_ENUM( core::chain::witness_object::witness_schedule_type, (top19)(timeshare)(miner)(none) )
 
-FC_REFLECT( smoke::chain::witness_object,
+FC_REFLECT( core::chain::witness_object,
              (id)
              (owner)
              (created)
@@ -248,12 +248,12 @@ FC_REFLECT( smoke::chain::witness_object,
              (running_version)
              (hardfork_version_vote)(hardfork_time_vote)
           )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::witness_object, smoke::chain::witness_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::witness_object, core::chain::witness_index )
 
-FC_REFLECT( smoke::chain::witness_vote_object, (id)(witness)(account) )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::witness_vote_object, smoke::chain::witness_vote_index )
+FC_REFLECT( core::chain::witness_vote_object, (id)(witness)(account) )
+CHAINBASE_SET_INDEX_TYPE( core::chain::witness_vote_object, core::chain::witness_vote_index )
 
-FC_REFLECT( smoke::chain::witness_schedule_object,
+FC_REFLECT( core::chain::witness_schedule_object,
              (id)(current_virtual_time)(next_shuffle_block_num)(current_shuffled_witnesses)(num_scheduled_witnesses)
              (top19_weight)(timeshare_weight)(miner_weight)(witness_pay_normalization_factor)
              (median_props)(majority_version)
@@ -262,4 +262,4 @@ FC_REFLECT( smoke::chain::witness_schedule_object,
              (max_runner_witnesses)
              (hardfork_required_witnesses)
           )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::witness_schedule_object, smoke::chain::witness_schedule_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::witness_schedule_object, core::chain::witness_schedule_index )

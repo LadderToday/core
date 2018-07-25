@@ -1,9 +1,9 @@
 #pragma once
 
-#include <smoke/protocol/authority.hpp>
-#include <smoke/protocol/types.hpp>
+#include <core/protocol/authority.hpp>
+#include <core/protocol/types.hpp>
 
-namespace smoke { namespace protocol {
+namespace core { namespace protocol {
 
 typedef std::function<authority(const string&)> authority_getter;
 
@@ -32,7 +32,7 @@ struct sign_state
 
       flat_map<public_key_type,bool>   provided_signatures;
       flat_set<string>                 approved_by;
-      uint32_t                         max_recursion = SMOKE_MAX_SIG_CHECK_DEPTH;
+      uint32_t                         max_recursion = CORE_MAX_SIG_CHECK_DEPTH;
 };
 
-} } // smoke::protocol
+} } // core::protocol

@@ -1,11 +1,11 @@
-#include <smoke/chain/block_log.hpp>
+#include <core/chain/block_log.hpp>
 #include <fstream>
 #include <fc/io/raw.hpp>
 
 #define LOG_READ  (std::ios::in | std::ios::binary)
 #define LOG_WRITE (std::ios::out | std::ios::binary | std::ios::app)
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
    namespace detail {
       class block_log_impl {
@@ -305,4 +305,4 @@ namespace smoke { namespace chain {
       }
       FC_LOG_AND_RETHROW()
    }
-} } // smoke::chain
+} } // core::chain

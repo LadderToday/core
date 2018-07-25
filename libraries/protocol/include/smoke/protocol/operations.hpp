@@ -1,10 +1,10 @@
 #pragma once
 
-#include <smoke/protocol/operation_util.hpp>
-#include <smoke/protocol/steem_operations.hpp>
-#include <smoke/protocol/steem_virtual_operations.hpp>
+#include <core/protocol/operation_util.hpp>
+#include <core/protocol/steem_operations.hpp>
+#include <core/protocol/steem_virtual_operations.hpp>
 
-namespace smoke { namespace protocol {
+namespace core { namespace protocol {
 
    /** NOTE: do not change the order of any operations prior to the virtual operations
     * or it will trigger a hardfork.
@@ -92,12 +92,12 @@ namespace smoke { namespace protocol {
 
    bool is_virtual_operation( const operation& op );
 
-} } // smoke::protocol
+} } // core::protocol
 
 /*namespace fc {
-    void to_variant( const smoke::protocol::operation& var,  fc::variant& vo );
-    void from_variant( const fc::variant& var,  smoke::protocol::operation& vo );
+    void to_variant( const core::protocol::operation& var,  fc::variant& vo );
+    void from_variant( const fc::variant& var,  core::protocol::operation& vo );
 }*/
 
-DECLARE_OPERATION_TYPE( smoke::protocol::operation )
-FC_REFLECT_TYPENAME( smoke::protocol::operation )
+DECLARE_OPERATION_TYPE( core::protocol::operation )
+FC_REFLECT_TYPENAME( core::protocol::operation )

@@ -3,13 +3,13 @@
 
 #include <fc/api.hpp>
 
-#include <smoke/plugins/block_info/block_info.hpp>
+#include <core/plugins/block_info/block_info.hpp>
 
-namespace smoke { namespace app {
+namespace core { namespace app {
    struct api_context;
 } }
 
-namespace smoke { namespace plugin { namespace block_info {
+namespace core { namespace plugin { namespace block_info {
 
 namespace detail {
 class block_info_api_impl;
@@ -24,7 +24,7 @@ struct get_block_info_args
 class block_info_api
 {
    public:
-      block_info_api( const smoke::app::api_context& ctx );
+      block_info_api( const core::app::api_context& ctx );
 
       void on_api_startup();
 
@@ -37,12 +37,12 @@ class block_info_api
 
 } } }
 
-FC_REFLECT( smoke::plugin::block_info::get_block_info_args,
+FC_REFLECT( core::plugin::block_info::get_block_info_args,
    (start_block_num)
    (count)
    )
 
-FC_API( smoke::plugin::block_info::block_info_api,
+FC_API( core::plugin::block_info::block_info_api,
    (get_block_info)
    (get_blocks_with_info)
    )

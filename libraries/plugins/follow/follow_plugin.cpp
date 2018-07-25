@@ -1,17 +1,17 @@
-#include <smoke/follow/follow_api.hpp>
-#include <smoke/follow/follow_objects.hpp>
-#include <smoke/follow/follow_operations.hpp>
+#include <core/follow/follow_api.hpp>
+#include <core/follow/follow_objects.hpp>
+#include <core/follow/follow_operations.hpp>
 
-#include <smoke/app/impacted.hpp>
+#include <core/app/impacted.hpp>
 
-#include <smoke/protocol/config.hpp>
+#include <core/protocol/config.hpp>
 
-#include <smoke/chain/database.hpp>
-#include <smoke/chain/index.hpp>
-#include <smoke/chain/generic_custom_operation_interpreter.hpp>
-#include <smoke/chain/operation_notification.hpp>
-#include <smoke/chain/account_object.hpp>
-#include <smoke/chain/comment_object.hpp>
+#include <core/chain/database.hpp>
+#include <core/chain/index.hpp>
+#include <core/chain/generic_custom_operation_interpreter.hpp>
+#include <core/chain/operation_notification.hpp>
+#include <core/chain/account_object.hpp>
+#include <core/chain/comment_object.hpp>
 
 #include <graphene/schema/schema.hpp>
 #include <graphene/schema/schema_impl.hpp>
@@ -21,12 +21,12 @@
 
 #include <memory>
 
-namespace smoke { namespace follow {
+namespace core { namespace follow {
 
 namespace detail
 {
 
-using namespace smoke::protocol;
+using namespace core::protocol;
 
 class follow_plugin_impl
 {
@@ -35,7 +35,7 @@ class follow_plugin_impl
 
       void plugin_initialize();
 
-    smoke::chain::database& database()
+    core::chain::database& database()
       {
          return _self.database();
       }
@@ -44,13 +44,13 @@ class follow_plugin_impl
       void post_operation( const operation_notification& op_obj );
 
       follow_plugin&   _self;
-      std::shared_ptr< generic_custom_operation_interpreter< smoke::follow::follow_plugin_operation > > _custom_operation_interpreter;
+      std::shared_ptr< generic_custom_operation_interpreter< core::follow::follow_plugin_operation > > _custom_operation_interpreter;
 };
 
 void follow_plugin_impl::plugin_initialize()
 {
    // Each plugin needs its own evaluator registry.
-   _custom_operation_interpreter = std::make_shared< generic_custom_operation_interpreter< smoke::follow::follow_plugin_operation > >( database() );
+   _custom_operation_interpreter = std::make_shared< generic_custom_operation_interpreter< core::follow::follow_plugin_operation > >( database() );
 
    // Add each operation evaluator to the registry
    _custom_operation_interpreter->register_evaluator<follow_evaluator>( &_self );
@@ -389,8 +389,8 @@ void follow_plugin::plugin_startup()
    app().register_api_factory<follow_api>("follow_api");
 }
 
-} } // smoke::follow
+} } // core::follow
 
-SMOKE_DEFINE_PLUGIN( follow, smoke::follow::follow_plugin )
+CORE_DEFINE_PLUGIN( follow, core::follow::follow_plugin )
 
-//DEFINE_OPERATION_TYPE( smoke::follow::follow_plugin_operation )
+//DEFINE_OPERATION_TYPE( core::follow::follow_plugin_operation )

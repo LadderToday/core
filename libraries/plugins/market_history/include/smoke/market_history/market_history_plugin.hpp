@@ -1,7 +1,7 @@
 #pragma once
-#include <smoke/app/plugin.hpp>
+#include <core/app/plugin.hpp>
 
-#include <smoke/chain/steem_object_types.hpp>
+#include <core/chain/steem_object_types.hpp>
 
 #include <boost/multi_index/composite_key.hpp>
 
@@ -24,10 +24,10 @@
 #endif
 
 
-namespace smoke { namespace market_history {
+namespace core { namespace market_history {
 
 using namespace chain;
-using smoke::app::application;
+using core::app::application;
 
 enum market_history_object_types
 {
@@ -40,7 +40,7 @@ namespace detail
    class market_history_plugin_impl;
 }
 
-class market_history_plugin : public smoke::app::plugin
+class market_history_plugin : public core::app::plugin
 {
    public:
       market_history_plugin( application* app );
@@ -134,9 +134,9 @@ typedef multi_index_container<
    allocator< order_history_object >
 > order_history_index;
 
-} } // smoke::market_history
+} } // core::market_history
 
-FC_REFLECT( smoke::market_history::bucket_object,
+FC_REFLECT( core::market_history::bucket_object,
                      (id)
                      (open)(seconds)
                      (high_steem)(high_sbd)
@@ -144,10 +144,10 @@ FC_REFLECT( smoke::market_history::bucket_object,
                      (open_steem)(open_sbd)
                      (close_steem)(close_sbd)
                      (steem_volume)(sbd_volume) )
-CHAINBASE_SET_INDEX_TYPE( smoke::market_history::bucket_object, smoke::market_history::bucket_index )
+CHAINBASE_SET_INDEX_TYPE( core::market_history::bucket_object, core::market_history::bucket_index )
 
-FC_REFLECT( smoke::market_history::order_history_object,
+FC_REFLECT( core::market_history::order_history_object,
                      (id)
                      (time)
                      (op) )
-CHAINBASE_SET_INDEX_TYPE( smoke::market_history::order_history_object, smoke::market_history::order_history_index )
+CHAINBASE_SET_INDEX_TYPE( core::market_history::order_history_object, core::market_history::order_history_index )

@@ -22,16 +22,16 @@
  * THE SOFTWARE.
  */
 
-#include <smoke/protocol/authority.hpp>
+#include <core/protocol/authority.hpp>
 
-#include <smoke/app/impacted.hpp>
+#include <core/app/impacted.hpp>
 
 #include <fc/utility.hpp>
 
-namespace smoke { namespace app {
+namespace core { namespace app {
 
 using namespace fc;
-using namespace smoke::protocol;
+using namespace core::protocol;
 
 // TODO:  Review all of these, especially no-ops
 struct get_impacted_account_visitor

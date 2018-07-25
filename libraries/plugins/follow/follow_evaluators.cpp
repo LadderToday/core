@@ -1,10 +1,10 @@
-#include <smoke/follow/follow_operations.hpp>
-#include <smoke/follow/follow_objects.hpp>
+#include <core/follow/follow_operations.hpp>
+#include <core/follow/follow_objects.hpp>
 
-#include <smoke/chain/account_object.hpp>
-#include <smoke/chain/comment_object.hpp>
+#include <core/chain/account_object.hpp>
+#include <core/chain/comment_object.hpp>
 
-namespace smoke { namespace follow {
+namespace core { namespace follow {
 
 void follow_evaluator::do_apply( const follow_operation& o )
 {
@@ -221,4 +221,4 @@ void reblog_evaluator::do_apply( const reblog_operation& o )
    FC_CAPTURE_AND_RETHROW( (o) )
 }
 
-} } // smoke::follow
+} } // core::follow

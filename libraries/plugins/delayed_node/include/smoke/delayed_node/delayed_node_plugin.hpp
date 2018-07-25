@@ -23,15 +23,15 @@
  */
 #pragma once
 
-#include <smoke/app/plugin.hpp>
-#include <smoke/chain/steem_objects.hpp>
+#include <core/app/plugin.hpp>
+#include <core/chain/steem_objects.hpp>
 
-namespace smoke { namespace delayed_node {
+namespace core { namespace delayed_node {
 namespace detail { struct delayed_node_plugin_impl; }
 
 using app::application;
 
-class delayed_node_plugin : public smoke::app::plugin
+class delayed_node_plugin : public core::app::plugin
 {
    std::unique_ptr<detail::delayed_node_plugin_impl> my;
 public:
@@ -51,5 +51,5 @@ protected:
    void sync_with_trusted_node();
 };
 
-} } //smoke::account_history
+} } //core::account_history
 

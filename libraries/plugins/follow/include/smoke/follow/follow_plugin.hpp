@@ -1,19 +1,19 @@
 #pragma once
-#include <smoke/app/plugin.hpp>
-#include <smoke/chain/database.hpp>
+#include <core/app/plugin.hpp>
+#include <core/chain/database.hpp>
 
 #include <fc/thread/future.hpp>
 
-#include <smoke/follow/follow_api.hpp>
+#include <core/follow/follow_api.hpp>
 
-namespace smoke { namespace follow {
-using smoke::app::application;
+namespace core { namespace follow {
+using core::app::application;
 
 #define FOLLOW_PLUGIN_NAME "follow"
 
 namespace detail { class follow_plugin_impl; }
 
-class follow_plugin : public smoke::app::plugin
+class follow_plugin : public core::app::plugin
 {
    public:
       follow_plugin( application* app );
@@ -31,4 +31,4 @@ class follow_plugin : public smoke::app::plugin
       fc::time_point_sec start_feeds;
 };
 
-} } //smoke::follow
+} } //core::follow

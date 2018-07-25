@@ -1,13 +1,13 @@
 
 #pragma once
 
-#include <smoke/app/plugin.hpp>
+#include <core/app/plugin.hpp>
 
-namespace smoke { namespace plugin { namespace raw_block {
+namespace core { namespace plugin { namespace raw_block {
 
-using smoke::app::application;
+using core::app::application;
 
-class raw_block_plugin : public smoke::app::plugin
+class raw_block_plugin : public core::app::plugin
 {
    public:
       raw_block_plugin( application* app );

@@ -8,15 +8,15 @@
 #include <fc/optional.hpp>
 #include <fc/variant_object.hpp>
 
-#include <smoke/protocol/block.hpp>
+#include <core/protocol/block.hpp>
 
-#include <smoke/chain/witness_objects.hpp>
+#include <core/chain/witness_objects.hpp>
 
-namespace smoke { namespace app {
+namespace core { namespace app {
    struct api_context;
 } }
 
-namespace smoke { namespace plugin { namespace debug_node {
+namespace core { namespace plugin { namespace debug_node {
 
 namespace detail {
 class debug_node_api_impl;
@@ -56,7 +56,7 @@ struct debug_busy_wait_result
 class debug_node_api
 {
    public:
-      debug_node_api( const smoke::app::api_context& ctx );
+      debug_node_api( const core::app::api_context& ctx );
 
       void on_api_startup();
 
@@ -78,17 +78,17 @@ class debug_node_api
       /*
        * Pop a block from the blockchain, returning it
        */
-      fc::optional< smoke::chain::signed_block > debug_pop_block();
+      fc::optional< core::chain::signed_block > debug_pop_block();
 
       /*
        * Push an already constructed block onto the blockchain. For use with pop_block to traverse state block by block.
        */
       // not implemented
-      //void debug_push_block( smoke::chain::signed_block& block );
+      //void debug_push_block( core::chain::signed_block& block );
 
-      smoke::chain::witness_schedule_object debug_get_witness_schedule();
+      core::chain::witness_schedule_object debug_get_witness_schedule();
 
-      smoke::chain::hardfork_property_object debug_get_hardfork_property_object();
+      core::chain::hardfork_property_object debug_get_hardfork_property_object();
 
       /**
        * Directly manipulate database objects (will undo and re-apply last block with new changes post-applied).
@@ -152,32 +152,32 @@ class debug_node_api
 
 } } }
 
-FC_REFLECT( smoke::plugin::debug_node::get_dev_key_args,
+FC_REFLECT( core::plugin::debug_node::get_dev_key_args,
    (name)
    )
 
-FC_REFLECT( smoke::plugin::debug_node::get_dev_key_result,
+FC_REFLECT( core::plugin::debug_node::get_dev_key_result,
    (private_key)
    (public_key)
    )
 
-FC_REFLECT( smoke::plugin::debug_node::debug_mine_args,
+FC_REFLECT( core::plugin::debug_node::debug_mine_args,
    (worker_account)
    (props)
    )
 
-FC_REFLECT( smoke::plugin::debug_node::debug_mine_result,
+FC_REFLECT( core::plugin::debug_node::debug_mine_result,
    )
 
-FC_REFLECT( smoke::plugin::debug_node::debug_busy_wait_args,
+FC_REFLECT( core::plugin::debug_node::debug_busy_wait_args,
    (microseconds)
    )
 
-FC_REFLECT( smoke::plugin::debug_node::debug_busy_wait_result,
+FC_REFLECT( core::plugin::debug_node::debug_busy_wait_result,
    (hash_count)
    )
 
-FC_API(smoke::plugin::debug_node::debug_node_api,
+FC_API(core::plugin::debug_node::debug_node_api,
        (debug_push_blocks)
        (debug_generate_blocks)
        (debug_generate_blocks_until)

@@ -23,16 +23,16 @@
  */
 #include <cctype>
 
-#include <smoke/app/api.hpp>
-#include <smoke/app/api_access.hpp>
-#include <smoke/app/application.hpp>
-#include <smoke/app/impacted.hpp>
+#include <core/app/api.hpp>
+#include <core/app/api_access.hpp>
+#include <core/app/application.hpp>
+#include <core/app/impacted.hpp>
 
-#include <smoke/protocol/get_config.hpp>
+#include <core/protocol/get_config.hpp>
 
-#include <smoke/chain/database.hpp>
-#include <smoke/chain/steem_objects.hpp>
-#include <smoke/chain/transaction_object.hpp>
+#include <core/chain/database.hpp>
+#include <core/chain/steem_objects.hpp>
+#include <core/chain/transaction_object.hpp>
 #include <fc/time.hpp>
 
 #include <graphene/utilities/key_conversion.hpp>
@@ -43,7 +43,7 @@
 #include <graphene/utilities/git_revision.hpp>
 #include <fc/git_revision.hpp>
 
-namespace smoke { namespace app {
+namespace core { namespace app {
 
     login_api::login_api(const api_context& ctx)
     :_ctx(ctx)
@@ -118,7 +118,7 @@ namespace smoke { namespace app {
     steem_version_info login_api::get_version()
     {
        return steem_version_info(
-         fc::string( SMOKE_BLOCKCHAIN_VERSION ),
+         fc::string( CORE_BLOCKCHAIN_VERSION ),
          fc::string( graphene::utilities::git_revision_sha ),
          fc::string( fc::git_revision_sha ) );
     }
@@ -333,4 +333,4 @@ namespace smoke { namespace app {
        return _app.p2p_node()->set_advanced_node_parameters(params);
     }
 
-} } // smoke::app
+} } // core::app

@@ -22,22 +22,22 @@
  * THE SOFTWARE.
  */
 
-#include <smoke/private_message/private_message_evaluators.hpp>
-#include <smoke/private_message/private_message_operations.hpp>
-#include <smoke/private_message/private_message_plugin.hpp>
+#include <core/private_message/private_message_evaluators.hpp>
+#include <core/private_message/private_message_operations.hpp>
+#include <core/private_message/private_message_plugin.hpp>
 
-#include <smoke/app/impacted.hpp>
+#include <core/app/impacted.hpp>
 
-#include <smoke/protocol/config.hpp>
+#include <core/protocol/config.hpp>
 
-#include <smoke/chain/database.hpp>
-#include <smoke/chain/index.hpp>
-#include <smoke/chain/generic_custom_operation_interpreter.hpp>
+#include <core/chain/database.hpp>
+#include <core/chain/index.hpp>
+#include <core/chain/generic_custom_operation_interpreter.hpp>
 
 #include <fc/smart_ref_impl.hpp>
 #include <fc/thread/thread.hpp>
 
-namespace smoke { namespace private_message {
+namespace core { namespace private_message {
 
 namespace detail
 {
@@ -48,20 +48,20 @@ class private_message_plugin_impl
       private_message_plugin_impl(private_message_plugin& _plugin);
       virtual ~private_message_plugin_impl();
 
-      smoke::chain::database& database()
+      core::chain::database& database()
       {
          return _self.database();
       }
 
       private_message_plugin&   _self;
-      std::shared_ptr< generic_custom_operation_interpreter< smoke::private_message::private_message_plugin_operation > >   _custom_operation_interpreter;
+      std::shared_ptr< generic_custom_operation_interpreter< core::private_message::private_message_plugin_operation > >   _custom_operation_interpreter;
       flat_map<string,string>  _tracked_accounts;
 };
 
 private_message_plugin_impl::private_message_plugin_impl( private_message_plugin& _plugin )
    : _self( _plugin )
 {
-   _custom_operation_interpreter = std::make_shared< generic_custom_operation_interpreter< smoke::private_message::private_message_plugin_operation > >( database() );
+   _custom_operation_interpreter = std::make_shared< generic_custom_operation_interpreter< core::private_message::private_message_plugin_operation > >( database() );
 
    _custom_operation_interpreter->register_evaluator< private_message_evaluator >( &_self );
 
@@ -185,6 +185,6 @@ flat_map<string,string> private_message_plugin::tracked_accounts() const
 
 } }
 
-SMOKE_DEFINE_PLUGIN( private_message, smoke::private_message::private_message_plugin )
+CORE_DEFINE_PLUGIN( private_message, core::private_message::private_message_plugin )
 
-DEFINE_OPERATION_TYPE( smoke::private_message::private_message_plugin_operation )
+DEFINE_OPERATION_TYPE( core::private_message::private_message_plugin_operation )

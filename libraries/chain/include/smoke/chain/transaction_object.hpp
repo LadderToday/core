@@ -1,13 +1,13 @@
 #pragma once
-#include <smoke/protocol/transaction.hpp>
+#include <core/protocol/transaction.hpp>
 
-#include <smoke/chain/steem_object_types.hpp>
+#include <core/chain/steem_object_types.hpp>
 
 #include <boost/multi_index/hashed_index.hpp>
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
-   using smoke::protocol::signed_transaction;
+   using core::protocol::signed_transaction;
 
    /**
     * The purpose of this object is to enable the detection of duplicate transactions. When a transaction is included
@@ -45,7 +45,7 @@ namespace smoke { namespace chain {
       allocator< transaction_object >
    > transaction_index;
 
-} } // smoke::chain
+} } // core::chain
 
-FC_REFLECT( smoke::chain::transaction_object, (id)(packed_trx)(trx_id)(expiration) )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::transaction_object, smoke::chain::transaction_index )
+FC_REFLECT( core::chain::transaction_object, (id)(packed_trx)(trx_id)(expiration) )
+CHAINBASE_SET_INDEX_TYPE( core::chain::transaction_object, core::chain::transaction_index )

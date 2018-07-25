@@ -1,14 +1,14 @@
 #pragma once
 #include <fc/uint128.hpp>
 
-#include <smoke/chain/steem_object_types.hpp>
+#include <core/chain/steem_object_types.hpp>
 
-#include <smoke/protocol/asset.hpp>
+#include <core/protocol/asset.hpp>
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
-   using smoke::protocol::asset;
-   using smoke::protocol::price;
+   using core::protocol::asset;
+   using core::protocol::price;
 
    /**
     * @class dynamic_global_property_object
@@ -80,7 +80,7 @@ namespace smoke { namespace chain {
           */
          uint16_t sbd_interest_rate = 0;
 
-         uint16_t sbd_print_rate = SMOKE_100_PERCENT;
+         uint16_t sbd_print_rate = CORE_100_PERCENT;
 
          /**
           *  Maximum block size is decided by the set of active witnesses which change every round.
@@ -124,9 +124,9 @@ namespace smoke { namespace chain {
       allocator< dynamic_global_property_object >
    > dynamic_global_property_index;
 
-} } // smoke::chain
+} } // core::chain
 
-FC_REFLECT( smoke::chain::dynamic_global_property_object,
+FC_REFLECT( core::chain::dynamic_global_property_object,
              (id)
              (head_block_number)
              (head_block_id)
@@ -154,4 +154,4 @@ FC_REFLECT( smoke::chain::dynamic_global_property_object,
              (last_irreversible_block_num)
              (vote_power_reserve_rate)
           )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::dynamic_global_property_object, smoke::chain::dynamic_global_property_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::dynamic_global_property_object, core::chain::dynamic_global_property_index )

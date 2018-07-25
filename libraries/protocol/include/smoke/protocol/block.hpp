@@ -1,8 +1,8 @@
 #pragma once
-#include <smoke/protocol/block_header.hpp>
-#include <smoke/protocol/transaction.hpp>
+#include <core/protocol/block_header.hpp>
+#include <core/protocol/transaction.hpp>
 
-namespace smoke { namespace protocol {
+namespace core { namespace protocol {
 
    struct signed_block : public signed_block_header
    {
@@ -10,6 +10,6 @@ namespace smoke { namespace protocol {
       vector<signed_transaction> transactions;
    };
 
-} } // smoke::protocol
+} } // core::protocol
 
-FC_REFLECT_DERIVED( smoke::protocol::signed_block, (smoke::protocol::signed_block_header), (transactions) )
+FC_REFLECT_DERIVED( core::protocol::signed_block, (core::protocol::signed_block_header), (transactions) )

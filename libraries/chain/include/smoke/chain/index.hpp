@@ -1,8 +1,8 @@
 #pragma once
 
-#include <smoke/chain/database.hpp>
+#include <core/chain/database.hpp>
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
 template< typename MultiIndexType >
 void _add_index_impl( database& db )

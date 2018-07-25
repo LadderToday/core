@@ -1,10 +1,10 @@
 #pragma once
 
-#include <smoke/protocol/types.hpp>
+#include <core/protocol/types.hpp>
 
 #include <fc/uint128.hpp>
 
-namespace smoke { namespace chain { namespace util {
+namespace core { namespace chain { namespace util {
 
 inline u256 to256( const fc::uint128& t )
 {

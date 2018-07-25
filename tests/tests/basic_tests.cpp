@@ -24,10 +24,10 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <smoke/chain/database.hpp>
-#include <smoke/protocol/protocol.hpp>
+#include <core/chain/database.hpp>
+#include <core/protocol/protocol.hpp>
 
-#include <smoke/protocol/steem_operations.hpp>
+#include <core/protocol/steem_operations.hpp>
 
 #include <fc/crypto/digest.hpp>
 #include <fc/crypto/hex.hpp>
@@ -36,9 +36,9 @@
 #include <algorithm>
 #include <random>
 
-using namespace smoke;
-using namespace smoke::chain;
-using namespace smoke::protocol;
+using namespace core;
+using namespace core::chain;
+using namespace core::protocol;
 
 BOOST_FIXTURE_TEST_SUITE( basic_tests, clean_database_fixture )
 

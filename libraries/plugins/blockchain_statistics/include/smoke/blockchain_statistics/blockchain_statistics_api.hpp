@@ -1,14 +1,14 @@
 #pragma once
 
-#include <smoke/blockchain_statistics/blockchain_statistics_plugin.hpp>
+#include <core/blockchain_statistics/blockchain_statistics_plugin.hpp>
 
 #include <fc/api.hpp>
 
-namespace smoke { namespace app {
+namespace core { namespace app {
    struct api_context;
 } }
 
-namespace smoke { namespace blockchain_statistics {
+namespace core { namespace blockchain_statistics {
 
 namespace detail
 {
@@ -76,7 +76,7 @@ struct statistics
 class blockchain_statistics_api
 {
    public:
-      blockchain_statistics_api( const smoke::app::api_context& ctx );
+      blockchain_statistics_api( const core::app::api_context& ctx );
 
       void on_api_startup();
 
@@ -105,9 +105,9 @@ class blockchain_statistics_api
       std::shared_ptr< detail::blockchain_statistics_api_impl > my;
 };
 
-} } // smoke::blockchain_statistics
+} } // core::blockchain_statistics
 
-FC_REFLECT( smoke::blockchain_statistics::statistics,
+FC_REFLECT( core::blockchain_statistics::statistics,
    (blocks)
    (bandwidth)
    (operations)
@@ -162,7 +162,7 @@ FC_REFLECT( smoke::blockchain_statistics::statistics,
    (estimated_hashpower) )
 
 
-FC_API( smoke::blockchain_statistics::blockchain_statistics_api,
+FC_API( core::blockchain_statistics::blockchain_statistics_api,
    (get_stats_for_time)
    (get_stats_for_interval)
    (get_lifetime_stats)

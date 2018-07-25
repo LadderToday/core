@@ -1,11 +1,11 @@
 #pragma once
-#include <smoke/protocol/base.hpp>
-#include <smoke/protocol/block_header.hpp>
-#include <smoke/protocol/asset.hpp>
+#include <core/protocol/base.hpp>
+#include <core/protocol/block_header.hpp>
+#include <core/protocol/asset.hpp>
 
 #include <fc/utf8.hpp>
 
-namespace smoke { namespace protocol {
+namespace core { namespace protocol {
 
    struct author_reward_operation : public virtual_operation {
       author_reward_operation(){}
@@ -176,20 +176,20 @@ namespace smoke { namespace protocol {
 
    };
 
-} } //smoke::protocol
+} } //core::protocol
 
-FC_REFLECT( smoke::protocol::author_reward_operation, (author)(permlink)(sbd_payout)(steem_payout)(vesting_payout) )
-FC_REFLECT( smoke::protocol::curation_reward_operation, (curator)(reward)(comment_author)(comment_permlink) )
-FC_REFLECT( smoke::protocol::comment_reward_operation, (author)(permlink)(payout) )
-FC_REFLECT( smoke::protocol::fill_convert_request_operation, (owner)(requestid)(amount_in)(amount_out) )
-FC_REFLECT( smoke::protocol::liquidity_reward_operation, (owner)(payout) )
-FC_REFLECT( smoke::protocol::interest_operation, (owner)(interest) )
-FC_REFLECT( smoke::protocol::fill_vesting_withdraw_operation, (from_account)(to_account)(withdrawn)(deposited) )
-FC_REFLECT( smoke::protocol::shutdown_witness_operation, (owner) )
-FC_REFLECT( smoke::protocol::fill_order_operation, (current_owner)(current_orderid)(current_pays)(open_owner)(open_orderid)(open_pays) )
-FC_REFLECT( smoke::protocol::fill_transfer_from_savings_operation, (from)(to)(amount)(request_id)(memo) )
-FC_REFLECT( smoke::protocol::hardfork_operation, (hardfork_id) )
-FC_REFLECT( smoke::protocol::comment_payout_update_operation, (author)(permlink) )
-FC_REFLECT( smoke::protocol::return_vesting_delegation_operation, (account)(vesting_shares) )
-FC_REFLECT( smoke::protocol::comment_benefactor_reward_operation, (benefactor)(author)(permlink)(reward) )
-FC_REFLECT( smoke::protocol::producer_reward_operation, (producer)(vesting_shares) )
+FC_REFLECT( core::protocol::author_reward_operation, (author)(permlink)(sbd_payout)(steem_payout)(vesting_payout) )
+FC_REFLECT( core::protocol::curation_reward_operation, (curator)(reward)(comment_author)(comment_permlink) )
+FC_REFLECT( core::protocol::comment_reward_operation, (author)(permlink)(payout) )
+FC_REFLECT( core::protocol::fill_convert_request_operation, (owner)(requestid)(amount_in)(amount_out) )
+FC_REFLECT( core::protocol::liquidity_reward_operation, (owner)(payout) )
+FC_REFLECT( core::protocol::interest_operation, (owner)(interest) )
+FC_REFLECT( core::protocol::fill_vesting_withdraw_operation, (from_account)(to_account)(withdrawn)(deposited) )
+FC_REFLECT( core::protocol::shutdown_witness_operation, (owner) )
+FC_REFLECT( core::protocol::fill_order_operation, (current_owner)(current_orderid)(current_pays)(open_owner)(open_orderid)(open_pays) )
+FC_REFLECT( core::protocol::fill_transfer_from_savings_operation, (from)(to)(amount)(request_id)(memo) )
+FC_REFLECT( core::protocol::hardfork_operation, (hardfork_id) )
+FC_REFLECT( core::protocol::comment_payout_update_operation, (author)(permlink) )
+FC_REFLECT( core::protocol::return_vesting_delegation_operation, (account)(vesting_shares) )
+FC_REFLECT( core::protocol::comment_benefactor_reward_operation, (benefactor)(author)(permlink)(reward) )
+FC_REFLECT( core::protocol::producer_reward_operation, (producer)(vesting_shares) )

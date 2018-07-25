@@ -1,7 +1,7 @@
 #pragma once
-#include <smoke/app/plugin.hpp>
+#include <core/app/plugin.hpp>
 
-#include <smoke/chain/steem_object_types.hpp>
+#include <core/chain/steem_object_types.hpp>
 
 #include <boost/multi_index/composite_key.hpp>
 
@@ -23,9 +23,9 @@
 #define BLOCKCHAIN_STATISTICS_PLUGIN_NAME "chain_stats"
 #endif
 
-namespace smoke { namespace blockchain_statistics {
+namespace core { namespace blockchain_statistics {
 
-using namespace smoke::chain;
+using namespace core::chain;
 using app::application;
 
 enum blockchain_statistics_object_type
@@ -38,7 +38,7 @@ namespace detail
    class blockchain_statistics_plugin_impl;
 }
 
-class blockchain_statistics_plugin : public smoke::app::plugin
+class blockchain_statistics_plugin : public core::app::plugin
 {
    public:
       blockchain_statistics_plugin( application* app );
@@ -134,9 +134,9 @@ typedef multi_index_container<
    allocator< bucket_object >
 > bucket_index;
 
-} } // smoke::blockchain_statistics
+} } // core::blockchain_statistics
 
-FC_REFLECT( smoke::blockchain_statistics::bucket_object,
+FC_REFLECT( core::blockchain_statistics::bucket_object,
    (id)
    (open)
    (seconds)
@@ -184,4 +184,4 @@ FC_REFLECT( smoke::blockchain_statistics::bucket_object,
    (total_pow)
    (estimated_hashpower)
 )
-CHAINBASE_SET_INDEX_TYPE( smoke::blockchain_statistics::bucket_object, smoke::blockchain_statistics::bucket_index )
+CHAINBASE_SET_INDEX_TYPE( core::blockchain_statistics::bucket_object, core::blockchain_statistics::bucket_index )

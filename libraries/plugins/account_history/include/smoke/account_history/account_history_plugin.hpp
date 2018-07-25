@@ -23,12 +23,12 @@
  */
 #pragma once
 
-#include <smoke/app/plugin.hpp>
-#include <smoke/chain/database.hpp>
+#include <core/app/plugin.hpp>
+#include <core/chain/database.hpp>
 
 #include <fc/thread/future.hpp>
 
-namespace smoke { namespace account_history {
+namespace core { namespace account_history {
 using namespace chain;
 using app::application;
 
@@ -62,7 +62,7 @@ namespace detail
  *  This plugin is designed to track a range of operations by account so that one node
  *  doesn't need to hold the full operation history in memory.
  */
-class account_history_plugin : public smoke::app::plugin
+class account_history_plugin : public core::app::plugin
 {
    public:
       account_history_plugin( application* app );
@@ -82,5 +82,5 @@ class account_history_plugin : public smoke::app::plugin
       std::unique_ptr<detail::account_history_plugin_impl> my;
 };
 
-} } //smoke::account_history
+} } //core::account_history
 

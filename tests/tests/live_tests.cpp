@@ -1,10 +1,10 @@
 #include <boost/test/unit_test.hpp>
 
-#include <smoke/protocol/exceptions.hpp>
+#include <core/protocol/exceptions.hpp>
 
-#include <smoke/chain/database.hpp>
-#include <smoke/chain/hardfork.hpp>
-#include <smoke/chain/steem_objects.hpp>
+#include <core/chain/database.hpp>
+#include <core/chain/hardfork.hpp>
+#include <core/chain/steem_objects.hpp>
 
 #include <fc/crypto/digest.hpp>
 
@@ -12,9 +12,9 @@
 
 #include <iostream>
 
-using namespace smoke;
-using namespace smoke::chain;
-using namespace smoke::protocol;
+using namespace core;
+using namespace core::chain;
+using namespace core::protocol;
 
 #ifndef IS_TEST_NET
 

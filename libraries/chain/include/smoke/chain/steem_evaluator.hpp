@@ -1,12 +1,12 @@
 #pragma once
 
-#include <smoke/protocol/steem_operations.hpp>
+#include <core/protocol/steem_operations.hpp>
 
-#include <smoke/chain/evaluator.hpp>
+#include <core/chain/evaluator.hpp>
 
-namespace smoke{ namespace chain {
+namespace core{ namespace chain {
 
-using namespace smoke::protocol;
+using namespace core::protocol;
 
 DEFINE_EVALUATOR( account_create )
 DEFINE_EVALUATOR( account_create_with_delegation )
@@ -51,4 +51,4 @@ DEFINE_EVALUATOR( set_reset_account )
 DEFINE_EVALUATOR( claim_reward_balance )
 DEFINE_EVALUATOR( delegate_vesting_shares )
 
-} } // smoke::chain
+} } // core::chain

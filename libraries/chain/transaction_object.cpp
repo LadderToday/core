@@ -1,6 +1,6 @@
-#include <smoke/chain/transaction_object.hpp>
+#include <core/chain/transaction_object.hpp>
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
 const object* transaction_index::create(const std::function<void (object*)>& constructor, object_id_type)
 {
@@ -69,4 +69,4 @@ const object*transaction_index::get(object_id_type id) const
    return &*itr;
 }
 
-} } // smoke::chain
+} } // core::chain

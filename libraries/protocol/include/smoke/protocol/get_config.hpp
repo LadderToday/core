@@ -2,8 +2,8 @@
 
 #include <fc/variant_object.hpp>
 
-namespace smoke { namespace protocol {
+namespace core { namespace protocol {
 
 fc::variant_object get_config();
 
-} } // smoke::protocol
+} } // core::protocol

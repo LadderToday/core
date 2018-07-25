@@ -1,12 +1,12 @@
 
 #pragma once
 
-#include <smoke/protocol/steem_operations.hpp>
-#include <smoke/protocol/operation_util_impl.hpp>
+#include <core/protocol/steem_operations.hpp>
+#include <core/protocol/operation_util_impl.hpp>
 
-#include <smoke/chain/evaluator.hpp>
-#include <smoke/chain/evaluator_registry.hpp>
-#include <smoke/chain/custom_operation_interpreter.hpp>
+#include <core/chain/evaluator.hpp>
+#include <core/chain/evaluator_registry.hpp>
+#include <core/chain/custom_operation_interpreter.hpp>
 
 #include <graphene/schema/schema.hpp>
 
@@ -15,7 +15,7 @@
 #include <string>
 #include <vector>
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
 class database;
 

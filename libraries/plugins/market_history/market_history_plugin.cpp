@@ -1,14 +1,14 @@
-#include <smoke/market_history/market_history_api.hpp>
+#include <core/market_history/market_history_api.hpp>
 
-#include <smoke/chain/database.hpp>
-#include <smoke/chain/index.hpp>
-#include <smoke/chain/operation_notification.hpp>
+#include <core/chain/database.hpp>
+#include <core/chain/index.hpp>
+#include <core/chain/operation_notification.hpp>
 
-namespace smoke { namespace market_history {
+namespace core { namespace market_history {
 
 namespace detail {
 
-using smoke::protocol::fill_order_operation;
+using core::protocol::fill_order_operation;
 
 class market_history_plugin_impl
 {
@@ -215,6 +215,6 @@ uint32_t market_history_plugin::get_max_history_per_bucket() const
    return _my->_maximum_history_per_bucket_size;
 }
 
-} } // smoke::market_history
+} } // core::market_history
 
-SMOKE_DEFINE_PLUGIN( market_history, smoke::market_history::market_history_plugin )
+CORE_DEFINE_PLUGIN( market_history, core::market_history::market_history_plugin )

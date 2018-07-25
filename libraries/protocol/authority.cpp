@@ -1,6 +1,6 @@
-#include <smoke/protocol/authority.hpp>
+#include <core/protocol/authority.hpp>
 
-namespace smoke { namespace protocol {
+namespace core { namespace protocol {
 
 // authority methods
 void authority::add_authority( const public_key_type& k, weight_type w )
@@ -45,15 +45,15 @@ void authority::validate()const
 
 bool is_valid_account_name( const string& name )
 {
-#if SMOKE_MIN_ACCOUNT_NAME_LENGTH < 3
+#if CORE_MIN_ACCOUNT_NAME_LENGTH < 3
 #error This is_valid_account_name implementation implicitly enforces minimum name length of 3.
 #endif
 
    const size_t len = name.size();
-   if( len < SMOKE_MIN_ACCOUNT_NAME_LENGTH )
+   if( len < CORE_MIN_ACCOUNT_NAME_LENGTH )
       return false;
 
-   if( len > SMOKE_MAX_ACCOUNT_NAME_LENGTH )
+   if( len > CORE_MAX_ACCOUNT_NAME_LENGTH )
       return false;
 
    size_t begin = 0;
@@ -116,4 +116,4 @@ bool operator == ( const authority& a, const authority& b )
             ( a.key_auths      == b.key_auths );
 }
 
-} } // smoke::protocol
+} } // core::protocol

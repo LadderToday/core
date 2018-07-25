@@ -1,13 +1,13 @@
 #pragma once
 
-#include <smoke/protocol/base.hpp>
+#include <core/protocol/base.hpp>
 
-#include <smoke/follow/follow_plugin.hpp>
+#include <core/follow/follow_plugin.hpp>
 
-namespace smoke { namespace follow {
+namespace core { namespace follow {
 
 using namespace std;
-using smoke::protocol::base_operation;
+using core::protocol::base_operation;
 
 struct follow_operation : base_operation
 {
@@ -39,11 +39,11 @@ typedef fc::static_variant<
 DEFINE_PLUGIN_EVALUATOR( follow_plugin, follow_plugin_operation, follow );
 DEFINE_PLUGIN_EVALUATOR( follow_plugin, follow_plugin_operation, reblog );
 
-} } // smoke::follow
+} } // core::follow
 
-FC_REFLECT( smoke::follow::follow_operation, (follower)(following)(what) )
-FC_REFLECT( smoke::follow::reblog_operation, (account)(author)(permlink) )
+FC_REFLECT( core::follow::follow_operation, (follower)(following)(what) )
+FC_REFLECT( core::follow::reblog_operation, (account)(author)(permlink) )
 
-DECLARE_OPERATION_TYPE( smoke::follow::follow_plugin_operation )
+DECLARE_OPERATION_TYPE( core::follow::follow_plugin_operation )
 
-FC_REFLECT_TYPENAME( smoke::follow::follow_plugin_operation )
+FC_REFLECT_TYPENAME( core::follow::follow_plugin_operation )

@@ -21,14 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#include <smoke/app/api.hpp>
-#include <smoke/app/api_access.hpp>
-#include <smoke/app/application.hpp>
-#include <smoke/app/plugin.hpp>
+#include <core/app/api.hpp>
+#include <core/app/api_access.hpp>
+#include <core/app/application.hpp>
+#include <core/app/plugin.hpp>
 
-#include <smoke/chain/steem_objects.hpp>
-#include <smoke/chain/steem_object_types.hpp>
-#include <smoke/chain/database_exceptions.hpp>
+#include <core/chain/steem_objects.hpp>
+#include <core/chain/steem_object_types.hpp>
+#include <core/chain/database_exceptions.hpp>
 
 #include <fc/time.hpp>
 
@@ -62,7 +62,7 @@
 // Every 3-6 blocks, rebroadcast. Do this randomly to prevent simultaneous p2p spam.
 #define REBROADCAST_RAND_INTERVAL() 3 + ( rand() % 4 )
 
-namespace smoke { namespace app {
+namespace core { namespace app {
 using graphene::net::item_hash_t;
 using graphene::net::item_id;
 using graphene::net::message;
@@ -310,7 +310,7 @@ namespace detail {
          if( !read_only )
          {
             _self->_read_only = false;
-            ilog( "Starting Smoke node in write mode." );
+            ilog( "Starting Core node in write mode." );
             _max_block_age =_options->at("max-block-age").as<int32_t>();
 
             if( _options->count("resync-blockchain") )
@@ -340,7 +340,7 @@ namespace detail {
             {
                try
                {
-                  _chain_db->open(_data_dir / "blockchain", _shared_dir, SMOKE_INIT_SUPPLY, SMOKE_INIT_SUPPLY_SBD, _shared_file_size, chainbase::database::read_write );\
+                  _chain_db->open(_data_dir / "blockchain", _shared_dir, CORE_INIT_SUPPLY, CORE_INIT_SUPPLY_SBD, _shared_file_size, chainbase::database::read_write );\
                }
                catch( fc::assert_exception& )
                {
@@ -353,7 +353,7 @@ namespace detail {
                   catch( chain::block_log_exception& )
                   {
                      wlog( "Error opening block log. Having to resync from network..." );
-                     _chain_db->open( _data_dir / "blockchain", _shared_dir, SMOKE_INIT_SUPPLY, SMOKE_INIT_SUPPLY_SBD, _shared_file_size, chainbase::database::read_write );
+                     _chain_db->open( _data_dir / "blockchain", _shared_dir, CORE_INIT_SUPPLY, CORE_INIT_SUPPLY_SBD, _shared_file_size, chainbase::database::read_write );
                   }
                }
             }
@@ -367,7 +367,7 @@ namespace detail {
          else
          {
             ilog( "Starting Steem node in read mode." );
-            _chain_db->open( _data_dir / "blockchain", _shared_dir, SMOKE_INIT_SUPPLY, SMOKE_INIT_SUPPLY_SBD, _shared_file_size, chainbase::database::read_only );
+            _chain_db->open( _data_dir / "blockchain", _shared_dir, CORE_INIT_SUPPLY, CORE_INIT_SUPPLY_SBD, _shared_file_size, chainbase::database::read_only );
 
             if( _options->count( "read-forward-rpc" ) )
             {
@@ -554,7 +554,7 @@ namespace detail {
                }
 
                return result;
-            } catch ( const smoke::chain::unlinkable_block_exception& e ) {
+            } catch ( const core::chain::unlinkable_block_exception& e ) {
                // translate to a graphene::net exception
                fc_elog(fc::logger::get("sync"),
                      "Error when pushing block, current head block is ${head}:\n${e}",
@@ -958,7 +958,7 @@ namespace detail {
       api_access _apiaccess;
 
       //std::shared_ptr<graphene::db::object_database>   _pending_trx_db;
-      std::shared_ptr<smoke::chain::database>        _chain_db;
+      std::shared_ptr<core::chain::database>        _chain_db;
       std::shared_ptr<graphene::net::node>             _p2p_network;
       std::shared_ptr<fc::http::websocket_server>      _websocket_server;
       std::shared_ptr<fc::http::websocket_tls_server>  _websocket_tls_server;

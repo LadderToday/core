@@ -1,6 +1,6 @@
 #pragma once
-#include <smoke/protocol/config.hpp>
-#include <smoke/protocol/fixed_string.hpp>
+#include <core/protocol/config.hpp>
+#include <core/protocol/fixed_string.hpp>
 
 #include <fc/container/flat_fwd.hpp>
 #include <fc/io/varint.hpp>
@@ -26,7 +26,7 @@
 #include <deque>
 #include <cstdint>
 
-namespace smoke {
+namespace core {
 
    using                                    fc::uint128_t;
    typedef boost::multiprecision::uint256_t u256;
@@ -100,7 +100,7 @@ namespace smoke {
             friend bool operator != ( const public_key_type& p1, const public_key_type& p2);
       };
 
-      #define SMOKE_INIT_PUBLIC_KEY (smoke::protocol::public_key_type(SMOKE_INIT_PUBLIC_KEY_STR))
+      #define CORE_INIT_PUBLIC_KEY (core::protocol::public_key_type(CORE_INIT_PUBLIC_KEY_STR))
 
       struct extended_public_key_type
       {
@@ -145,25 +145,25 @@ namespace smoke {
          friend bool operator == ( const extended_private_key_type& p1, const extended_private_key_type& p2);
          friend bool operator != ( const extended_private_key_type& p1, const extended_private_key_type& p2);
       };
-} }  // smoke::protocol
+} }  // core::protocol
 
 namespace fc
 {
-    void to_variant( const smoke::protocol::public_key_type& var,  fc::variant& vo );
-    void from_variant( const fc::variant& var,  smoke::protocol::public_key_type& vo );
-    void to_variant( const smoke::protocol::extended_public_key_type& var, fc::variant& vo );
-    void from_variant( const fc::variant& var, smoke::protocol::extended_public_key_type& vo );
-    void to_variant( const smoke::protocol::extended_private_key_type& var, fc::variant& vo );
-    void from_variant( const fc::variant& var, smoke::protocol::extended_private_key_type& vo );
+    void to_variant( const core::protocol::public_key_type& var,  fc::variant& vo );
+    void from_variant( const fc::variant& var,  core::protocol::public_key_type& vo );
+    void to_variant( const core::protocol::extended_public_key_type& var, fc::variant& vo );
+    void from_variant( const fc::variant& var, core::protocol::extended_public_key_type& vo );
+    void to_variant( const core::protocol::extended_private_key_type& var, fc::variant& vo );
+    void from_variant( const fc::variant& var, core::protocol::extended_private_key_type& vo );
 }
 
-FC_REFLECT( smoke::protocol::public_key_type, (key_data) )
-FC_REFLECT( smoke::protocol::public_key_type::binary_key, (data)(check) )
-FC_REFLECT( smoke::protocol::extended_public_key_type, (key_data) )
-FC_REFLECT( smoke::protocol::extended_public_key_type::binary_key, (check)(data) )
-FC_REFLECT( smoke::protocol::extended_private_key_type, (key_data) )
-FC_REFLECT( smoke::protocol::extended_private_key_type::binary_key, (check)(data) )
+FC_REFLECT( core::protocol::public_key_type, (key_data) )
+FC_REFLECT( core::protocol::public_key_type::binary_key, (data)(check) )
+FC_REFLECT( core::protocol::extended_public_key_type, (key_data) )
+FC_REFLECT( core::protocol::extended_public_key_type::binary_key, (check)(data) )
+FC_REFLECT( core::protocol::extended_private_key_type, (key_data) )
+FC_REFLECT( core::protocol::extended_private_key_type::binary_key, (check)(data) )
 
-FC_REFLECT_TYPENAME( smoke::protocol::share_type )
+FC_REFLECT_TYPENAME( core::protocol::share_type )
 
-FC_REFLECT( smoke::void_t, )
+FC_REFLECT( core::void_t, )

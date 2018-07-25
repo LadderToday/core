@@ -23,9 +23,9 @@
  */
 #pragma once
 
-#include <smoke/app/api_context.hpp>
-#include <smoke/app/database_api.hpp>
-#include <smoke/protocol/types.hpp>
+#include <core/app/api_context.hpp>
+#include <core/app/database_api.hpp>
+#include <core/protocol/types.hpp>
 
 #include <graphene/net/node.hpp>
 
@@ -41,8 +41,8 @@
 #include <string>
 #include <vector>
 
-namespace smoke { namespace app {
-   using namespace smoke::chain;
+namespace core { namespace app {
+   using namespace core::chain;
    using namespace fc::ecc;
    using namespace std;
 
@@ -214,22 +214,22 @@ namespace smoke { namespace app {
          api_context _ctx;
    };
 
-}}  // smoke::app
+}}  // core::app
 
-FC_REFLECT( smoke::app::network_broadcast_api::transaction_confirmation,
+FC_REFLECT( core::app::network_broadcast_api::transaction_confirmation,
         (id)(block_num)(trx_num)(expired) )
-FC_REFLECT( smoke::app::steem_version_info, (blockchain_version)(steem_revision)(fc_revision) )
+FC_REFLECT( core::app::steem_version_info, (blockchain_version)(steem_revision)(fc_revision) )
 //FC_REFLECT_TYPENAME( fc::ecc::compact_signature );
 //FC_REFLECT_TYPENAME( fc::ecc::commitment_type );
 
-FC_API(smoke::app::network_broadcast_api,
+FC_API(core::app::network_broadcast_api,
        (broadcast_transaction)
        (broadcast_transaction_with_callback)
        (broadcast_transaction_synchronous)
        (broadcast_block)
        (set_max_block_age)
      )
-FC_API(smoke::app::network_node_api,
+FC_API(core::app::network_node_api,
        (get_info)
        (add_node)
        (get_connected_peers)
@@ -237,7 +237,7 @@ FC_API(smoke::app::network_node_api,
        (get_advanced_node_parameters)
        (set_advanced_node_parameters)
      )
-FC_API(smoke::app::login_api,
+FC_API(core::app::login_api,
        (login)
        (get_api_by_name)
        (get_version)

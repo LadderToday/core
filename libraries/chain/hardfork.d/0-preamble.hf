@@ -9,11 +9,11 @@
 
 #pragma once
 
-#include <smoke/protocol/types.hpp>
-#include <smoke/protocol/version.hpp>
-#include <smoke/protocol/config.hpp>
+#include <core/protocol/types.hpp>
+#include <core/protocol/version.hpp>
+#include <core/protocol/config.hpp>
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
 class hardfork_property_object : public object< hardfork_property_object_type, hardfork_property_object >
 {
@@ -42,11 +42,11 @@ typedef multi_index_container<
    allocator< hardfork_property_object >
 > hardfork_property_index;
 
-} } // namespace smoke::chain
+} } // namespace core::chain
 
-FC_REFLECT( smoke::chain::hardfork_property_object,
+FC_REFLECT( core::chain::hardfork_property_object,
    (id)(processed_hardforks)(last_hardfork)(current_hardfork_version)
    (next_hardfork)(next_hardfork_time) )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::hardfork_property_object, smoke::chain::hardfork_property_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::hardfork_property_object, core::chain::hardfork_property_index )
 
-#define SMOKE_NUM_HARDFORKS 20
+#define CORE_NUM_HARDFORKS 20

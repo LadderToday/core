@@ -1,11 +1,11 @@
-file(GLOB HEADERS "include/smoke/plugins/raw_block/*.hpp")
+file(GLOB HEADERS "include/core/plugins/raw_block/*.hpp")
 
-add_library( smoke_raw_block
+add_library( core_raw_block
              ${HEADERS}
              raw_block_plugin.cpp
              raw_block_api.cpp
            )
 
-target_link_libraries( smoke_raw_block smoke_app smoke_chain smoke_protocol fc )
-target_include_directories( smoke_raw_block
+target_link_libraries( core_raw_block core_app core_chain core_protocol fc )
+target_include_directories( core_raw_block
                             PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include" )

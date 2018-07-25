@@ -12,7 +12,7 @@ class websocket_api_connection;
 
 } }
 
-namespace smoke { namespace app {
+namespace core { namespace app {
 
 class application;
 

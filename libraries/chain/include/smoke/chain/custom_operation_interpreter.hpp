@@ -7,11 +7,11 @@ namespace graphene { namespace schema {
    struct abstract_schema;
 } }
 
-namespace smoke { namespace protocol {
+namespace core { namespace protocol {
    struct custom_json_operation;
 } }
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
 class custom_operation_interpreter
 {
@@ -21,4 +21,4 @@ class custom_operation_interpreter
       virtual std::shared_ptr< graphene::schema::abstract_schema > get_operation_schema() = 0;
 };
 
-} } // smoke::chain
+} } // core::chain

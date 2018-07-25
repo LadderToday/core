@@ -11,13 +11,13 @@ from tempfile import TemporaryDirectory
 from threading import Lock
 from time import sleep
 
-from smokeapi.smokenoderpc import SmokeNodeRPC
+from coreapi.corenoderpc import CoreNodeRPC
 
 class DebugNode( object ):
-   """ Wraps the smoked debug node plugin for easier automated testing of the Smoke Network"""
+   """ Wraps the cored debug node plugin for easier automated testing of the Core Network"""
 
-   def __init__( self, smoked, data_dir, args='', plugins=[], apis=[], smoked_out=None, smoked_err=None ):
-      """ Creates a smoked debug node.
+   def __init__( self, cored, data_dir, args='', plugins=[], apis=[], cored_out=None, cored_err=None ):
+      """ Creates a cored debug node.
 
       It can be ran by using 'with debug_node:'
       While in the context of 'with' the debug node will continue to run.
@@ -26,29 +26,29 @@ class DebugNode( object ):
       For all other requests, the python-steem library should be used.
 
       args:
-         smoked -- The string path to the location of the smoked binary
-         data_dir -- The string path to an existing smoked data directory which will be used to pull blocks from.
-         args -- Other string args to pass to smoked.
+         cored -- The string path to the location of the cored binary
+         data_dir -- The string path to an existing cored data directory which will be used to pull blocks from.
+         args -- Other string args to pass to cored.
          plugins -- Any additional plugins to start with the debug node. Modify plugins DebugNode.plugins
          apis -- Any additional APIs to have available. APIs will retain this order for accesibility starting at id 3.
             database_api is 0, login_api is 1, and debug_node_api is 2. Modify apis with DebugNode.api
-         smoked_stdout -- A stream for smoked's stdout. Default is to pipe to /dev/null
-         smoked_stderr -- A stream for smoked's stderr. Default is to pipe to /dev/null
+         cored_stdout -- A stream for cored's stdout. Default is to pipe to /dev/null
+         cored_stderr -- A stream for cored's stderr. Default is to pipe to /dev/null
       """
       self._data_dir = None
       self._debug_key = None
       self._FNULL = None
       self._rpc = None
-      self._smoked_bin = None
-      self._smoked_lock = None
-      self._smoked_process = None
+      self._cored_bin = None
+      self._cored_lock = None
+      self._cored_process = None
       self._temp_data_dir = None
 
-      self._smoked_bin = Path( smoked )
-      if( not self._smoked_bin.exists() ):
-         raise ValueError( 'smoked does not exist' )
-      if( not self._smoked_bin.is_file() ):
-         raise ValueError( 'smoked is not a file' )
+      self._cored_bin = Path( cored )
+      if( not self._cored_bin.exists() ):
+         raise ValueError( 'cored does not exist' )
+      if( not self._cored_bin.is_file() ):
+         raise ValueError( 'cored is not a file' )
 
       self._data_dir = Path( data_dir )
       if( not self._data_dir.exists() ):
@@ -65,22 +65,22 @@ class DebugNode( object ):
          self._args = list()
 
       self._FNULL = open( devnull, 'w' )
-      if( smoked_out != None ):
-         self.smoked_out = smoked_out
+      if( cored_out != None ):
+         self.cored_out = cored_out
       else:
-         self.smoked_out = self._FNULL
+         self.cored_out = self._FNULL
 
-      if( smoked_err != None ):
-         self.smoked_err = smoked_err
+      if( cored_err != None ):
+         self.cored_err = cored_err
       else:
-         self.smoked_err = self._FNULL
+         self.cored_err = self._FNULL
 
       self._debug_key = '5JHNbFNDg834SFj8CMArV6YW7td4zrPzXveqTfaShmYVuYNeK69'
-      self._smoked_lock = Lock()
+      self._cored_lock = Lock()
 
 
    def __enter__( self ):
-      self._smoked_lock.acquire()
+      self._cored_lock.acquire()
 
       # Setup temp directory to use as the data directory for this
       self._temp_data_dir = TemporaryDirectory()
@@ -97,42 +97,42 @@ class DebugNode( object ):
       config.touch()
       config.write_text( self._get_config() )
 
-      smoked = [ str( self._smoked_bin ), '--data-dir=' + str( self._temp_data_dir.name ) ]
-      smoked.extend( self._args )
+      cored = [ str( self._cored_bin ), '--data-dir=' + str( self._temp_data_dir.name ) ]
+      cored.extend( self._args )
 
-      self._smoked_process = Popen( smoked, stdout=self.smoked_out, stderr=self.smoked_err )
-      self._smoked_process.poll()
+      self._cored_process = Popen( cored, stdout=self.cored_out, stderr=self.cored_err )
+      self._cored_process.poll()
       sleep( 5 )
-      if( not self._smoked_process.returncode ):
-         self._rpc = SmokeNodeRPC( 'ws://127.0.0.1:8095', '', '' )
+      if( not self._cored_process.returncode ):
+         self._rpc = CoreNodeRPC( 'ws://127.0.0.1:8095', '', '' )
       else:
-         raise Exception( "smoked did not start properly..." )
+         raise Exception( "cored did not start properly..." )
 
    def __exit__( self, exc, value, tb ):
       self._rpc = None
 
-      if( self._smoked_process != None ):
-         self._smoked_process.poll()
+      if( self._cored_process != None ):
+         self._cored_process.poll()
 
-         if( not self._smoked_process.returncode ):
-            self._smoked_process.send_signal( SIGINT )
+         if( not self._cored_process.returncode ):
+            self._cored_process.send_signal( SIGINT )
 
             sleep( 7 )
-            self._smoked_process.poll()
+            self._cored_process.poll()
 
-            if( not self._smoked_process.returncode ):
-               self._smoked_process.send_signal( SIGTERM )
+            if( not self._cored_process.returncode ):
+               self._cored_process.send_signal( SIGTERM )
 
                sleep( 5 )
-               self._smoked_process.poll()
+               self._cored_process.poll()
 
-               if( self._smoked_process.returncode ):
-                  loggin.error( 'smoked did not properly shut down after SIGINT and SIGTERM. User intervention may be required.' )
+               if( self._cored_process.returncode ):
+                  loggin.error( 'cored did not properly shut down after SIGINT and SIGTERM. User intervention may be required.' )
 
-      self._smoked_process = None
+      self._cored_process = None
       self._temp_data_dir.cleanup()
       self._temp_data_dir = None
-      self._smoked_lock.release()
+      self._cored_lock.release()
 
 
    def _get_config( self ):
@@ -207,7 +207,7 @@ class DebugNode( object ):
 
       args:
          hardfork_id: The id of the hardfork to set. Hardfork IDs start at 1 (0 is genesis) and increment
-            by one for each hardfork. The maximum value is SMOKE_NUM_HARDFORKS in chain/hardfork.d/0-preamble.hf
+            by one for each hardfork. The maximum value is CORE_NUM_HARDFORKS in chain/hardfork.d/0-preamble.hf
       """
       if( hardfork_id < 0 ):
          raise ValueError( "hardfork_id cannot be negative" )
@@ -233,7 +233,7 @@ if __name__=="__main__":
    def main():
       global WAITING
       """
-      This example contains a simple parser to obtain the locations of both smoked and the data directory,
+      This example contains a simple parser to obtain the locations of both cored and the data directory,
       creates and runs a new debug node, replays all of the blocks in the data directory, and finally waits
       for the user to interface with it outside of the script. Sending SIGINT succesfully and cleanly terminates
       the program.
@@ -248,26 +248,26 @@ if __name__=="__main__":
       parser = ArgumentParser( description='Run a Debug Node on an existing chain. This simply replays all blocks ' + \
                                  'and then waits indefinitely to allow user interaction through RPC calls and ' + \
                                  'the CLI wallet' )
-      parser.add_argument( '--smoked', '-s', type=str, required=True, help='The location of a smoked binary to run the debug node' )
+      parser.add_argument( '--cored', '-s', type=str, required=True, help='The location of a cored binary to run the debug node' )
       parser.add_argument( '--data-dir', '-d', type=str, required=True, help='The location of an existing data directory. ' + \
                            'The debug node will pull blocks from this directory when replaying the chain. The directory ' + \
                            'will not be changed.' )
 
       args = parser.parse_args()
 
-      smoked = Path( args.smoked )
-      if( not smoked.exists() ):
-         print( 'Error: smoked does not exist.' )
+      cored = Path( args.cored )
+      if( not cored.exists() ):
+         print( 'Error: cored does not exist.' )
          return
 
-      smoked = smoked.resolve()
-      if( not smoked.is_file() ):
-         print( 'Error: smoked is not a file.' )
+      cored = cored.resolve()
+      if( not cored.is_file() ):
+         print( 'Error: cored is not a file.' )
          return
 
       data_dir = Path( args.data_dir )
       if( not data_dir.exists() ):
-         print( 'Error: data_dir does not exist or is not a properly constructed smoked data directory' )
+         print( 'Error: data_dir does not exist or is not a properly constructed cored data directory' )
 
       data_dir = data_dir.resolve()
       if( not data_dir.is_dir() ):
@@ -276,7 +276,7 @@ if __name__=="__main__":
       signal.signal( signal.SIGINT, sigint_handler )
 
       print( 'Creating and starting debug node' )
-      debug_node = DebugNode( str( smoked ), str( data_dir ), smoked_err=sys.stderr )
+      debug_node = DebugNode( str( cored ), str( data_dir ), cored_err=sys.stderr )
 
       with debug_node:
          print( 'Done!' )

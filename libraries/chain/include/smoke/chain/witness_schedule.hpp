@@ -1,6 +1,6 @@
 #pragma once
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
 class database;
 

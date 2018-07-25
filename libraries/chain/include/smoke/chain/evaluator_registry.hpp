@@ -1,8 +1,8 @@
 #pragma once
 
-#include <smoke/chain/evaluator.hpp>
+#include <core/chain/evaluator.hpp>
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
 template< typename OperationType >
 class evaluator_registry

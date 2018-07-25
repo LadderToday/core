@@ -1,4 +1,4 @@
-#include <smoke/app/plugin.hpp>
+#include <core/app/plugin.hpp>
 
 #include <boost/multi_index/composite_key.hpp>
 
@@ -20,7 +20,7 @@
 #define ACCOUNT_STATISTICS_PLUGIN_NAME "account_stats"
 #endif
 
-namespace smoke { namespace account_statistics {
+namespace core { namespace account_statistics {
 
 using namespace chain;
 using app::application;
@@ -135,7 +135,7 @@ namespace detail
    class account_statistics_plugin_impl;
 }
 
-class account_statistics_plugin : public smoke::app::plugin
+class account_statistics_plugin : public core::app::plugin
 {
    public:
       account_statistics_plugin( application* app );
@@ -157,9 +157,9 @@ class account_statistics_plugin : public smoke::app::plugin
       std::unique_ptr< detail::account_statistics_plugin_impl > _my;
 };
 
-} } // smoke::account_statistics
+} } // core::account_statistics
 
-FC_REFLECT( smoke::account_statistics::account_stats_bucket_object,
+FC_REFLECT( core::account_statistics::account_stats_bucket_object,
    (id)
    (open)
    (seconds)
@@ -224,10 +224,10 @@ FC_REFLECT( smoke::account_statistics::account_stats_bucket_object,
    (total_pow)
    (estimated_hashpower)
 )
-//SET_INDEX_TYPE( smoke::account_statistics::account_stats_bucket_object,)
+//SET_INDEX_TYPE( core::account_statistics::account_stats_bucket_object,)
 
 FC_REFLECT(
-   smoke::account_statistics::account_activity_bucket_object,
+   core::account_statistics::account_activity_bucket_object,
    (id)
    (open)
    (seconds)

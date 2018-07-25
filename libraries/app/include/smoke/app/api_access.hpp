@@ -29,7 +29,7 @@
 #include <string>
 #include <vector>
 
-namespace smoke { namespace app {
+namespace core { namespace app {
 
 struct api_access_info
 {
@@ -44,15 +44,15 @@ struct api_access
    std::map< std::string, api_access_info > permission_map;
 };
 
-} } // smoke::app
+} } // core::app
 
-FC_REFLECT( smoke::app::api_access_info,
+FC_REFLECT( core::app::api_access_info,
     (username)
     (password_hash_b64)
     (password_salt_b64)
     (allowed_apis)
    )
 
-FC_REFLECT( smoke::app::api_access,
+FC_REFLECT( core::app::api_access,
     (permission_map)
    )

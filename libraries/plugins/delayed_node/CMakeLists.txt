@@ -1,11 +1,11 @@
-file(GLOB HEADERS "include/smoke/delayed_node/*.hpp")
+file(GLOB HEADERS "include/core/delayed_node/*.hpp")
 
-add_library( smoke_delayed_node
+add_library( core_delayed_node
              delayed_node_plugin.cpp
            )
 
-target_link_libraries( smoke_delayed_node smoke_chain smoke_protocol smoke_app )
-target_include_directories( smoke_delayed_node
+target_link_libraries( core_delayed_node core_chain core_protocol core_app )
+target_include_directories( core_delayed_node
                             PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include" )
 
 if(MSVC)
@@ -13,7 +13,7 @@ if(MSVC)
 endif(MSVC)
 
 install( TARGETS
-   smoke_delayed_node
+   core_delayed_node
 
    RUNTIME DESTINATION bin
    LIBRARY DESTINATION lib

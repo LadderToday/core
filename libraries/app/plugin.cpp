@@ -22,11 +22,11 @@
  * THE SOFTWARE.
  */
 
-#include <smoke/app/plugin.hpp>
+#include <core/app/plugin.hpp>
 
 #include <fc/vector.hpp>
 
-namespace smoke { namespace app {
+namespace core { namespace app {
 
 plugin::plugin( application* app ) : _app( app )
 {
@@ -66,4 +66,4 @@ void plugin::plugin_set_program_options(
    return;
 }
 
-} } // smoke::app
+} } // core::app

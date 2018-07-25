@@ -1,16 +1,16 @@
 #pragma once
 
-#include <smoke/market_history/market_history_plugin.hpp>
+#include <core/market_history/market_history_plugin.hpp>
 
-#include <smoke/protocol/types.hpp>
+#include <core/protocol/types.hpp>
 
 #include <fc/api.hpp>
 
-namespace smoke { namespace app {
+namespace core { namespace app {
    struct api_context;
 } }
 
-namespace smoke{ namespace market_history {
+namespace core{ namespace market_history {
 
 using chain::share_type;
 using fc::time_point_sec;
@@ -59,7 +59,7 @@ struct market_trade
 class market_history_api
 {
    public:
-      market_history_api( const smoke::app::api_context& ctx );
+      market_history_api( const core::app::api_context& ctx );
 
       void on_api_startup();
 
@@ -113,20 +113,20 @@ class market_history_api
       std::shared_ptr< detail::market_history_api_impl > my;
 };
 
-} } // smoke::market_history
+} } // core::market_history
 
-FC_REFLECT( smoke::market_history::market_ticker,
+FC_REFLECT( core::market_history::market_ticker,
    (latest)(lowest_ask)(highest_bid)(percent_change)(steem_volume)(sbd_volume) );
-FC_REFLECT( smoke::market_history::market_volume,
+FC_REFLECT( core::market_history::market_volume,
    (steem_volume)(sbd_volume) );
-FC_REFLECT( smoke::market_history::order,
+FC_REFLECT( core::market_history::order,
    (price)(steem)(sbd) );
-FC_REFLECT( smoke::market_history::order_book,
+FC_REFLECT( core::market_history::order_book,
    (bids)(asks) );
-FC_REFLECT( smoke::market_history::market_trade,
+FC_REFLECT( core::market_history::market_trade,
    (date)(current_pays)(open_pays) );
 
-FC_API( smoke::market_history::market_history_api,
+FC_API( core::market_history::market_history_api,
    (get_ticker)
    (get_volume)
    (get_order_book)

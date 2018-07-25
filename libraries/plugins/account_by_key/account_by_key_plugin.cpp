@@ -1,15 +1,15 @@
-#include <smoke/account_by_key/account_by_key_plugin.hpp>
-#include <smoke/account_by_key/account_by_key_objects.hpp>
+#include <core/account_by_key/account_by_key_plugin.hpp>
+#include <core/account_by_key/account_by_key_objects.hpp>
 
-#include <smoke/chain/account_object.hpp>
-#include <smoke/chain/database.hpp>
-#include <smoke/chain/index.hpp>
-#include <smoke/chain/operation_notification.hpp>
+#include <core/chain/account_object.hpp>
+#include <core/chain/database.hpp>
+#include <core/chain/index.hpp>
+#include <core/chain/operation_notification.hpp>
 
 #include <graphene/schema/schema.hpp>
 #include <graphene/schema/schema_impl.hpp>
 
-namespace smoke { namespace account_by_key {
+namespace core { namespace account_by_key {
 
 namespace detail
 {
@@ -19,7 +19,7 @@ class account_by_key_plugin_impl
    public:
       account_by_key_plugin_impl( account_by_key_plugin& _plugin ) : _self( _plugin ) {}
 
-    smoke::chain::database& database()
+    core::chain::database& database()
       {
          return _self.database();
       }
@@ -143,7 +143,7 @@ struct post_operation_visitor
 
    void operator()( const hardfork_operation& op )const
    {
-      if( op.hardfork_id == SMOKE_HARDFORK_0_9 )
+      if( op.hardfork_id == CORE_HARDFORK_0_9 )
       {
          auto& db = _plugin.database();
 
@@ -241,7 +241,7 @@ void account_by_key_plugin_impl::post_operation( const operation_notification& n
 
 } // detail
 
-account_by_key_plugin::account_by_key_plugin( smoke::app::application* app )
+account_by_key_plugin::account_by_key_plugin( core::app::application* app )
    : plugin( app ), my( new detail::account_by_key_plugin_impl( *this ) ) {}
 
 void account_by_key_plugin::plugin_set_program_options(
@@ -269,6 +269,6 @@ void account_by_key_plugin::plugin_startup()
    app().register_api_factory< account_by_key_api >( "account_by_key_api" );
 }
 
-} } // smoke::account_by_key
+} } // core::account_by_key
 
-SMOKE_DEFINE_PLUGIN( account_by_key, smoke::account_by_key::account_by_key_plugin )
+CORE_DEFINE_PLUGIN( account_by_key, core::account_by_key::account_by_key_plugin )

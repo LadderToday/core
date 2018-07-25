@@ -1,16 +1,16 @@
 #pragma once
 
-#include <smoke/protocol/authority.hpp>
-#include <smoke/protocol/operations.hpp>
-#include <smoke/protocol/steem_operations.hpp>
+#include <core/protocol/authority.hpp>
+#include <core/protocol/operations.hpp>
+#include <core/protocol/steem_operations.hpp>
 
-#include <smoke/chain/steem_object_types.hpp>
-#include <smoke/chain/witness_objects.hpp>
+#include <core/chain/steem_object_types.hpp>
+#include <core/chain/witness_objects.hpp>
 
 #include <boost/multi_index/composite_key.hpp>
 
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
    class operation_object : public object< operation_object_type, operation_object >
    {
@@ -97,8 +97,8 @@ namespace smoke { namespace chain {
    > account_history_index;
 } }
 
-FC_REFLECT( smoke::chain::operation_object, (id)(trx_id)(block)(trx_in_block)(op_in_trx)(virtual_op)(timestamp)(serialized_op) )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::operation_object, smoke::chain::operation_index )
+FC_REFLECT( core::chain::operation_object, (id)(trx_id)(block)(trx_in_block)(op_in_trx)(virtual_op)(timestamp)(serialized_op) )
+CHAINBASE_SET_INDEX_TYPE( core::chain::operation_object, core::chain::operation_index )
 
-FC_REFLECT( smoke::chain::account_history_object, (id)(account)(sequence)(op) )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::account_history_object, smoke::chain::account_history_index )
+FC_REFLECT( core::chain::account_history_object, (id)(account)(sequence)(op) )
+CHAINBASE_SET_INDEX_TYPE( core::chain::account_history_object, core::chain::account_history_index )

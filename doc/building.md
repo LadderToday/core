@@ -8,15 +8,15 @@ the symbol table for debugging. Unless you are specifically debugging or
 running tests, it is recommended to build as release.
 
 * `LOW_MEMORY_NODE=[OFF/ON]`
-Builds smoked to be a consensus-only low memory node. Data and fields not
+Builds cored to be a consensus-only low memory node. Data and fields not
 needed for consensus are not stored in the object database.  This option is
 recommended for witnesses and seed-nodes.
 
 * `CLEAR_VOTES=[ON/OFF]`
 Clears old votes from memory that are no longer required for consensus.
 
-* `BUILD_SMOKE_TESTNET=[OFF/ON]`
-Builds smoke for use in a private testnet. Also required for building unit tests.
+* `BUILD_CORE_TESTNET=[OFF/ON]`
+Builds core for use in a private testnet. Also required for building unit tests.
 
 * `SKIP_BY_TX_ID=[OFF/ON]`
 By default this is off. Enabling will prevent the account history plugin querying transactions 
@@ -26,7 +26,7 @@ huge gain if you do not need this functionality.
 
 ## Building on Ubuntu 16.04
 
-For Ubuntu 16.04 users, after installing the right packages with `apt` Smoke
+For Ubuntu 16.04 users, after installing the right packages with `apt` Core
 will build out of the box without further effort:
 
     # Required packages
@@ -66,13 +66,13 @@ will build out of the box without further effort:
         libreadline-dev \
         perl
 
-    git clone https://github.com/smokenetwork/smoked
-    cd smoked
+    git clone https://github.com/LadderToday/core
+    cd cored
     git submodule update --init --recursive
     mkdir build
     cd build
     cmake -DCMAKE_BUILD_TYPE=Release ..
-    make -j$(nproc) smoked
+    make -j$(nproc) cored
     make -j$(nproc) cli_wallet
     # optional
     make install  # defaults to /usr/local
@@ -101,7 +101,7 @@ Install Homebrew by following the instructions here: http://brew.sh/
    brew update
 ```
 
-###### Install smoked dependencies:
+###### Install cored dependencies:
 
     brew install \
         autoconf \
@@ -128,8 +128,8 @@ steem. Until then, this will allow you to install boost 1.60.0.
 
 ###### Clone the Repository
 
-    git clone https://github.com/smokenetwork/smoked.git
-    cd smoke
+    git clone https://github.com/LadderToday/core.git
+    cd core
 
 ###### Compile
 
@@ -142,15 +142,15 @@ steem. Until then, this will allow you to install boost 1.60.0.
 
 Also, some useful build targets for `make` are:
 
-    smoked
+    cored
     chain_test
     cli_wallet
 
 e.g.:
 
-    make -j$(sysctl -n hw.logicalcpu) smoked
+    make -j$(sysctl -n hw.logicalcpu) cored
 
-This will only build `smoked`.
+This will only build `cored`.
 
 ## Building on Other Platforms
 

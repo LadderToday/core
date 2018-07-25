@@ -1,10 +1,10 @@
 #pragma once
 
-#include <smoke/protocol/operations.hpp>
+#include <core/protocol/operations.hpp>
 
-#include <smoke/chain/steem_object_types.hpp>
+#include <core/chain/steem_object_types.hpp>
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
 struct operation_notification
 {

@@ -1,16 +1,16 @@
 #pragma once
-#include <smoke/app/applied_operation.hpp>
-#include <smoke/app/state.hpp>
+#include <core/app/applied_operation.hpp>
+#include <core/app/state.hpp>
 
-#include <smoke/chain/database.hpp>
-#include <smoke/chain/steem_objects.hpp>
-#include <smoke/chain/steem_object_types.hpp>
-#include <smoke/chain/history_object.hpp>
+#include <core/chain/database.hpp>
+#include <core/chain/steem_objects.hpp>
+#include <core/chain/steem_object_types.hpp>
+#include <core/chain/history_object.hpp>
 
-#include <smoke/tags/tags_plugin.hpp>
+#include <core/tags/tags_plugin.hpp>
 
-#include <smoke/follow/follow_plugin.hpp>
-#include <smoke/witness/witness_plugin.hpp>
+#include <core/follow/follow_plugin.hpp>
+#include <core/witness/witness_plugin.hpp>
 
 #include <fc/api.hpp>
 #include <fc/optional.hpp>
@@ -25,10 +25,10 @@
 #include <memory>
 #include <vector>
 
-namespace smoke { namespace app {
+namespace core { namespace app {
 
-using namespace smoke::chain;
-using namespace smoke::protocol;
+using namespace core::chain;
+using namespace core::protocol;
 using namespace std;
 
 struct order
@@ -108,7 +108,7 @@ struct discussion_query {
 class database_api
 {
    public:
-      database_api(const smoke::app::api_context& ctx);
+      database_api(const core::app::api_context& ctx);
       ~database_api();
 
       ///////////////////
@@ -437,17 +437,17 @@ class database_api
 
 } }
 
-FC_REFLECT( smoke::app::order, (order_price)(real_price)(steem)(sbd)(created) );
-FC_REFLECT( smoke::app::order_book, (asks)(bids) );
-FC_REFLECT( smoke::app::scheduled_hardfork, (hf_version)(live_time) );
-FC_REFLECT( smoke::app::liquidity_balance, (account)(weight) );
-FC_REFLECT( smoke::app::withdraw_route, (from_account)(to_account)(percent)(auto_vest) );
+FC_REFLECT( core::app::order, (order_price)(real_price)(steem)(sbd)(created) );
+FC_REFLECT( core::app::order_book, (asks)(bids) );
+FC_REFLECT( core::app::scheduled_hardfork, (hf_version)(live_time) );
+FC_REFLECT( core::app::liquidity_balance, (account)(weight) );
+FC_REFLECT( core::app::withdraw_route, (from_account)(to_account)(percent)(auto_vest) );
 
-FC_REFLECT( smoke::app::discussion_query, (tag)(filter_tags)(select_tags)(select_authors)(truncate_body)(start_author)(start_permlink)(parent_author)(parent_permlink)(limit) );
+FC_REFLECT( core::app::discussion_query, (tag)(filter_tags)(select_tags)(select_authors)(truncate_body)(start_author)(start_permlink)(parent_author)(parent_permlink)(limit) );
 
-FC_REFLECT_ENUM( smoke::app::withdraw_route_type, (incoming)(outgoing)(all) );
+FC_REFLECT_ENUM( core::app::withdraw_route_type, (incoming)(outgoing)(all) );
 
-FC_API(smoke::app::database_api,
+FC_API(core::app::database_api,
    // Subscriptions
    (set_block_applied_callback)
 

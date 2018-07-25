@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <smoke/protocol/authority.hpp>
+#include <core/protocol/authority.hpp>
 
 #include <fc/variant.hpp>
 
@@ -22,7 +22,7 @@ void from_variant( const fc::variant&, OperationType& );                        
                                                                                  \
 } /* fc */                                                                       \
                                                                                  \
-namespace smoke { namespace protocol {                                         \
+namespace core { namespace protocol {                                         \
                                                                                  \
 void operation_validate( const OperationType& o );                               \
 void operation_get_required_authorities( const OperationType& op,                \
@@ -31,4 +31,4 @@ void operation_get_required_authorities( const OperationType& op,               
                                          flat_set< account_name_type >& posting, \
                                          vector< authority >& other );           \
                                                                                  \
-} } /* smoke::protocol */
+} } /* core::protocol */

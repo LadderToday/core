@@ -1,6 +1,6 @@
-file(GLOB HEADERS "include/smoke/app/*.hpp")
+file(GLOB HEADERS "include/core/app/*.hpp")
 
-add_library( smoke_app
+add_library( core_app
              database_api.cpp
              api.cpp
              application.cpp
@@ -9,8 +9,8 @@ add_library( smoke_app
              ${HEADERS}
            )
 
-target_link_libraries( smoke_app smoke_chain smoke_protocol smoke_tags smoke_follow smoke_witness smoke_mf_plugins fc graphene_net graphene_utilities )
-target_include_directories( smoke_app
+target_link_libraries( core_app core_chain core_protocol core_tags core_follow core_witness core_mf_plugins fc graphene_net graphene_utilities )
+target_include_directories( core_app
                             PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include" )
 
 if(MSVC)
@@ -18,10 +18,10 @@ if(MSVC)
 endif(MSVC)
 
 INSTALL( TARGETS
-   smoke_app
+   core_app
 
    RUNTIME DESTINATION bin
    LIBRARY DESTINATION lib
    ARCHIVE DESTINATION lib
 )
-INSTALL( FILES ${HEADERS} DESTINATION "include/smoke/app" )
+INSTALL( FILES ${HEADERS} DESTINATION "include/core/app" )

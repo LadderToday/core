@@ -24,8 +24,8 @@
 #ifdef IS_TEST_NET
 #include <boost/test/unit_test.hpp>
 
-#include <smoke/chain/steem_objects.hpp>
-#include <smoke/chain/database.hpp>
+#include <core/chain/steem_objects.hpp>
+#include <core/chain/database.hpp>
 
 #include <fc/crypto/digest.hpp>
 #include <fc/crypto/elliptic.hpp>
@@ -35,9 +35,9 @@
 
 #include <cmath>
 
-using namespace smoke;
-using namespace smoke::chain;
-using namespace smoke::protocol;
+using namespace core;
+using namespace core::chain;
+using namespace core::protocol;
 
 BOOST_FIXTURE_TEST_SUITE( serialization_tests, clean_database_fixture )
 
@@ -261,19 +261,19 @@ BOOST_AUTO_TEST_CASE( version_test )
       BOOST_REQUIRE( ver == version( 12, 34, 56 ) );
 
       ver_str = fc::variant( "256.0.0" );
-      SMOKE_REQUIRE_THROW( fc::from_variant( ver_str, ver ), fc::exception );
+      CORE_REQUIRE_THROW( fc::from_variant( ver_str, ver ), fc::exception );
 
       ver_str = fc::variant( "0.256.0" );
-      SMOKE_REQUIRE_THROW( fc::from_variant( ver_str, ver ), fc::exception );
+      CORE_REQUIRE_THROW( fc::from_variant( ver_str, ver ), fc::exception );
 
       ver_str = fc::variant( "0.0.65536" );
-      SMOKE_REQUIRE_THROW( fc::from_variant( ver_str, ver ), fc::exception );
+      CORE_REQUIRE_THROW( fc::from_variant( ver_str, ver ), fc::exception );
 
       ver_str = fc::variant( "1.0" );
-      SMOKE_REQUIRE_THROW( fc::from_variant( ver_str, ver ), fc::exception );
+      CORE_REQUIRE_THROW( fc::from_variant( ver_str, ver ), fc::exception );
 
       ver_str = fc::variant( "1.0.0.1" );
-      SMOKE_REQUIRE_THROW( fc::from_variant( ver_str, ver ), fc::exception );
+      CORE_REQUIRE_THROW( fc::from_variant( ver_str, ver ), fc::exception );
    }
    FC_LOG_AND_RETHROW();
 }
@@ -306,20 +306,20 @@ BOOST_AUTO_TEST_CASE( hardfork_version_test )
       BOOST_REQUIRE( ver == hardfork_version( 12, 34 ) );
 
       ver_str = fc::variant( "256.0.0" );
-      SMOKE_REQUIRE_THROW( fc::from_variant( ver_str, ver ), fc::exception );
+      CORE_REQUIRE_THROW( fc::from_variant( ver_str, ver ), fc::exception );
 
       ver_str = fc::variant( "0.256.0" );
-      SMOKE_REQUIRE_THROW( fc::from_variant( ver_str, ver ), fc::exception );
+      CORE_REQUIRE_THROW( fc::from_variant( ver_str, ver ), fc::exception );
 
       ver_str = fc::variant( "0.0.1" );
       fc::from_variant( ver_str, ver );
       BOOST_REQUIRE( ver == hardfork_version( 0, 0 ) );
 
       ver_str = fc::variant( "1.0" );
-      SMOKE_REQUIRE_THROW( fc::from_variant( ver_str, ver ), fc::exception );
+      CORE_REQUIRE_THROW( fc::from_variant( ver_str, ver ), fc::exception );
 
       ver_str = fc::variant( "1.0.0.1" );
-      SMOKE_REQUIRE_THROW( fc::from_variant( ver_str, ver ), fc::exception );
+      CORE_REQUIRE_THROW( fc::from_variant( ver_str, ver ), fc::exception );
    }
    FC_LOG_AND_RETHROW();
 }
@@ -327,10 +327,10 @@ BOOST_AUTO_TEST_CASE( hardfork_version_test )
 BOOST_AUTO_TEST_CASE( min_block_size )
 {
    signed_block b;
-   while( b.witness.length() < SMOKE_MIN_ACCOUNT_NAME_LENGTH )
+   while( b.witness.length() < CORE_MIN_ACCOUNT_NAME_LENGTH )
       b.witness += 'a';
    size_t min_size = fc::raw::pack_size( b );
-   BOOST_CHECK( min_size == SMOKE_MIN_BLOCK_SIZE );
+   BOOST_CHECK( min_size == CORE_MIN_BLOCK_SIZE );
 }
 
 BOOST_AUTO_TEST_SUITE_END()

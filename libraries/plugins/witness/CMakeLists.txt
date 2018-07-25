@@ -1,17 +1,17 @@
-file(GLOB HEADERS "include/smoke/witness/*.hpp")
+file(GLOB HEADERS "include/core/witness/*.hpp")
 
-add_library( smoke_witness
+add_library( core_witness
              witness_plugin.cpp
              witness_evaluators.cpp
              witness_operations.cpp
            )
 
-target_link_libraries( smoke_witness smoke_chain smoke_protocol smoke_app )
-target_include_directories( smoke_witness
+target_link_libraries( core_witness core_chain core_protocol core_app )
+target_include_directories( core_witness
                             PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include" )
 
 install( TARGETS
-        smoke_witness
+        core_witness
 
    RUNTIME DESTINATION bin
    LIBRARY DESTINATION lib

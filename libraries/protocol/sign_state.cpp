@@ -1,7 +1,7 @@
 
-#include <smoke/protocol/sign_state.hpp>
+#include <core/protocol/sign_state.hpp>
 
-namespace smoke { namespace protocol {
+namespace core { namespace protocol {
 
 bool sign_state::signed_by( const public_key_type& k )
 {
@@ -82,4 +82,4 @@ sign_state::sign_state(
    approved_by.insert( "temp"  );
 }
 
-} } // smoke::protocol
+} } // core::protocol

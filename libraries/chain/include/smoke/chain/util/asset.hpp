@@ -1,11 +1,11 @@
 #pragma once
 
-#include <smoke/protocol/asset.hpp>
+#include <core/protocol/asset.hpp>
 
-namespace smoke { namespace chain { namespace util {
+namespace core { namespace chain { namespace util {
 
-using smoke::protocol::asset;
-using smoke::protocol::price;
+using core::protocol::asset;
+using core::protocol::price;
 
 inline asset to_sbd( const price& p, const asset& steem )
 {

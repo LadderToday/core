@@ -24,7 +24,7 @@
 #pragma once
 
 #include <graphene/net/config.hpp>
-#include <smoke/protocol/block.hpp>
+#include <core/protocol/block.hpp>
 
 #include <fc/crypto/ripemd160.hpp>
 #include <fc/crypto/elliptic.hpp>
@@ -40,10 +40,10 @@
 #include <vector>
 
 namespace graphene { namespace net {
-  using smoke::protocol::signed_transaction;
-  using smoke::protocol::block_id_type;
-  using smoke::protocol::transaction_id_type;
-  using smoke::protocol::signed_block;
+  using core::protocol::signed_transaction;
+  using core::protocol::block_id_type;
+  using core::protocol::transaction_id_type;
+  using core::protocol::signed_block;
 
   typedef fc::ecc::public_key_data node_id_t;
   typedef fc::ripemd160 item_hash_t;

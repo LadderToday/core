@@ -1,6 +1,6 @@
 #pragma once
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
    /**
     * @brief Contains per-node database configuration.
@@ -20,4 +20,4 @@ namespace smoke { namespace chain {
 
          uint32_t skip_flags = 0;
    };
-} } // smoke::chain
+} } // core::chain

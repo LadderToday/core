@@ -17,7 +17,7 @@ add_library( {plugin_provider}_{plugin_name}
              {plugin_name}_api.cpp
            )
 
-target_link_libraries( {plugin_provider}_{plugin_name} smoke_app smoke_chain smoke_protocol )
+target_link_libraries( {plugin_provider}_{plugin_name} core_app core_chain core_protocol )
 target_include_directories( {plugin_provider}_{plugin_name}
                             PUBLIC "${{CMAKE_CURRENT_SOURCE_DIR}}/include" )
 """,
@@ -28,7 +28,7 @@ target_include_directories( {plugin_provider}_{plugin_name}
 
 #include <fc/api.hpp>
 
-namespace smoke {{ namespace app {{
+namespace core {{ namespace app {{
    struct api_context;
 }} }}
 
@@ -41,7 +41,7 @@ class {plugin_name}_api_impl;
 class {plugin_name}_api
 {{
    public:
-      {plugin_name}_api( const smoke::app::api_context& ctx );
+      {plugin_name}_api( const core::app::api_context& ctx );
 
       void on_api_startup();
 
@@ -62,7 +62,7 @@ FC_API( {plugin_provider}::plugin::{plugin_name}::{plugin_name}_api,
 """
 #pragma once
 
-#include <smoke/app/plugin.hpp>
+#include <core/app/plugin.hpp>
 
 namespace {plugin_provider} {{ namespace plugin {{ namespace {plugin_name} {{
 
@@ -70,10 +70,10 @@ namespace detail {{
 class {plugin_name}_plugin_impl;
 }}
 
-class {plugin_name}_plugin : public smoke::app::plugin
+class {plugin_name}_plugin : public core::app::plugin
 {{
    public:
-      {plugin_name}_plugin( smoke::app::application* app );
+      {plugin_name}_plugin( core::app::application* app );
       virtual ~{plugin_name}_plugin();
 
       virtual std::string plugin_name()const override;
@@ -90,8 +90,8 @@ class {plugin_name}_plugin : public smoke::app::plugin
 
 "{plugin_name}_api.cpp" :
 """
-#include <smoke/app/api_context.hpp>
-#include <smoke/app/application.hpp>
+#include <core/app/api_context.hpp>
+#include <core/app/application.hpp>
 
 #include <{plugin_provider}/plugins/{plugin_name}/{plugin_name}_api.hpp>
 #include <{plugin_provider}/plugins/{plugin_name}/{plugin_name}_plugin.hpp>
@@ -103,14 +103,14 @@ namespace detail {{
 class {plugin_name}_api_impl
 {{
    public:
-      {plugin_name}_api_impl( smoke::app::application& _app );
+      {plugin_name}_api_impl( core::app::application& _app );
 
       std::shared_ptr< {plugin_provider}::plugin::{plugin_name}::{plugin_name}_plugin > get_plugin();
 
-      smoke::app::application& app;
+      core::app::application& app;
 }};
 
-{plugin_name}_api_impl::{plugin_name}_api_impl( smoke::app::application& _app ) : app( _app )
+{plugin_name}_api_impl::{plugin_name}_api_impl( core::app::application& _app ) : app( _app )
 {{}}
 
 std::shared_ptr< {plugin_provider}::plugin::{plugin_name}::{plugin_name}_plugin > {plugin_name}_api_impl::get_plugin()
@@ -120,7 +120,7 @@ std::shared_ptr< {plugin_provider}::plugin::{plugin_name}::{plugin_name}_plugin 
 
 }} // detail
 
-{plugin_name}_api::{plugin_name}_api( const smoke::app::api_context& ctx )
+{plugin_name}_api::{plugin_name}_api( const core::app::api_context& ctx )
 {{
    my = std::make_shared< detail::{plugin_name}_api_impl >(ctx.app);
 }}
@@ -145,7 +145,7 @@ namespace detail {{
 class {plugin_name}_plugin_impl
 {{
    public:
-      {plugin_name}_plugin_impl( smoke::app::application& app );
+      {plugin_name}_plugin_impl( core::app::application& app );
       virtual ~{plugin_name}_plugin_impl();
 
       virtual std::string plugin_name()const;
@@ -154,11 +154,11 @@ class {plugin_name}_plugin_impl
       virtual void plugin_shutdown();
       void on_applied_block( const chain::signed_block& b );
 
-      smoke::app::application& _app;
+      core::app::application& _app;
       boost::signals2::scoped_connection _applied_block_conn;
 }};
 
-{plugin_name}_plugin_impl::{plugin_name}_plugin_impl( smoke::app::application& app )
+{plugin_name}_plugin_impl::{plugin_name}_plugin_impl( core::app::application& app )
   : _app(app) {{}}
 
 {plugin_name}_plugin_impl::~{plugin_name}_plugin_impl() {{}}
@@ -189,7 +189,7 @@ void {plugin_name}_plugin_impl::on_applied_block( const chain::signed_block& b )
 
 }}
 
-{plugin_name}_plugin::{plugin_name}_plugin( smoke::app::application* app )
+{plugin_name}_plugin::{plugin_name}_plugin( core::app::application* app )
    : plugin(app)
 {{
    FC_ASSERT( app != nullptr );
@@ -220,7 +220,7 @@ void {plugin_name}_plugin::plugin_shutdown()
 
 }} }} }} // {plugin_provider}::plugin::{plugin_name}
 
-SMOKE_DEFINE_PLUGIN( {plugin_name}, {plugin_provider}::plugin::{plugin_name}::{plugin_name}_plugin )
+CORE_DEFINE_PLUGIN( {plugin_name}, {plugin_provider}::plugin::{plugin_name}::{plugin_name}_plugin )
 """,
 }
 
@@ -230,7 +230,7 @@ import sys
 
 def main(argv):
     parser = argparse.ArgumentParser()
-    parser.add_argument("provider", help="Name of plugin provider (smoke for plugins developed by Smoke)")
+    parser.add_argument("provider", help="Name of plugin provider (core for plugins developed by Core)")
     parser.add_argument("name", help="Name of plugin to create")
     args = parser.parse_args(argv[1:])
     ctx = {

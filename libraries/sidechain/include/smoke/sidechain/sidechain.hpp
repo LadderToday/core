@@ -1,6 +1,6 @@
 #pragma once
 
-namespace smoke { namespace sidechain {
+namespace core { namespace sidechain {
   using std::string;
 
 #define side_ids 10
@@ -44,7 +44,7 @@ namespace smoke { namespace sidechain {
         asset    dollar_balance;
   };
 
-  FC_REFLECT_DERIVED( smoke::sidechain::side_account, (graphene::db::object),
+  FC_REFLECT_DERIVED( core::sidechain::side_account, (graphene::db::object),
                       (sidechain)(name)(steem_balance)(dollar_balance)
                      );
 

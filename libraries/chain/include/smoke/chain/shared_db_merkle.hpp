@@ -1,6 +1,6 @@
-#include <smoke/protocol/types.hpp>
+#include <core/protocol/types.hpp>
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
 inline static const map< uint32_t, checksum_type >& get_shared_db_merkle()
 {
@@ -19,4 +19,4 @@ inline static const map< uint32_t, checksum_type >& get_shared_db_merkle()
    return shared_db_merkle;
 }
 
-} } //smoke::chain
+} } //core::chain

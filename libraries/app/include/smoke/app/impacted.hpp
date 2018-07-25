@@ -24,23 +24,23 @@
 #pragma once
 
 #include <fc/container/flat.hpp>
-#include <smoke/protocol/operations.hpp>
-#include <smoke/protocol/transaction.hpp>
-#include <smoke/chain/steem_object_types.hpp>
+#include <core/protocol/operations.hpp>
+#include <core/protocol/transaction.hpp>
+#include <core/chain/steem_object_types.hpp>
 
 #include <fc/string.hpp>
 
-namespace smoke { namespace app {
+namespace core { namespace app {
 
 using namespace fc;
 
 void operation_get_impacted_accounts(
-   const smoke::protocol::operation& op,
+   const core::protocol::operation& op,
    fc::flat_set<protocol::account_name_type>& result );
 
 void transaction_get_impacted_accounts(
-   const smoke::protocol::transaction& tx,
+   const core::protocol::transaction& tx,
    fc::flat_set<protocol::account_name_type>& result
    );
 
-} } // smoke::app
+} } // core::app

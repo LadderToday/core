@@ -1,23 +1,23 @@
 #!/bin/bash
 
-VERSION=`cat /etc/smokedversion`
+VERSION=`cat /etc/coredversion`
 
-SMOKED="/usr/local/smoked-full/bin/smoked"
+CORED="/usr/local/cored-full/bin/cored"
 
-chown -R smoked:smoked $HOME
+chown -R cored:cored $HOME
 
 # clean out data dir since it may be semi-persistent block storage on the ec2 with stale data
 rm -rf $HOME/*
 
 # seed nodes come from doc/seednodes.txt which is
-# installed by docker into /etc/smoked/seednodes.txt
-SEED_NODES="$(cat /etc/smoked/seednodes.txt | awk -F' ' '{print $1}')"
+# installed by docker into /etc/cored/seednodes.txt
+SEED_NODES="$(cat /etc/cored/seednodes.txt | awk -F' ' '{print $1}')"
 
 ARGS=""
 
 # if user did not pass in any desired
 # seed nodes, use the ones above:
-if [[ -z "$SMOKED_SEED_NODES" ]]; then
+if [[ -z "$CORED_SEED_NODES" ]]; then
     for NODE in $SEED_NODES ; do
         ARGS+=" --seed-node=$NODE"
     done
@@ -25,50 +25,50 @@ fi
 
 # if user did pass in desired seed nodes, use
 # the ones the user specified:
-if [[ ! -z "$SMOKED_SEED_NODES" ]]; then
-    for NODE in $SMOKED_SEED_NODES ; do
+if [[ ! -z "$CORED_SEED_NODES" ]]; then
+    for NODE in $CORED_SEED_NODES ; do
         ARGS+=" --seed-node=$NODE"
     done
 fi
 
 NOW=`date +%s`
-SMOKE_FEED_START_TIME=`expr $NOW - 1209600`
+CORE_FEED_START_TIME=`expr $NOW - 1209600`
 
-ARGS+=" --follow-start-feeds=$SMOKED_FEED_START_TIME"
+ARGS+=" --follow-start-feeds=$CORED_FEED_START_TIME"
 
 ARGS+=" --disable-get-block"
 
 # overwrite local config with image one
-cp /etc/smoked/fullnode.config.ini $HOME/config.ini
+cp /etc/cored/fullnode.config.ini $HOME/config.ini
 
-chown smoked:smoked $HOME/config.ini
+chown cored:cored $HOME/config.ini
 
 cd $HOME
 
 mv /etc/nginx/nginx.conf /etc/nginx/nginx.original.conf
-cp /etc/nginx/smoked.nginx.conf /etc/nginx/nginx.conf
+cp /etc/nginx/cored.nginx.conf /etc/nginx/nginx.conf
 
 # get blockchain state from an S3 bucket
-echo smoked: beginning download and decompress of s3://$S3_BUCKET/blockchain-$VERSION-latest.tar.bz2
+echo cored: beginning download and decompress of s3://$S3_BUCKET/blockchain-$VERSION-latest.tar.bz2
 if [[ "$USE_RAMDISK" ]]; then
   mkdir -p /mnt/ramdisk
   mount -t ramfs -o size=${RAMDISK_SIZE_IN_MB:-51200}m ramfs /mnt/ramdisk
   ARGS+=" --shared-file-dir=/mnt/ramdisk/blockchain"
   s3cmd get s3://$S3_BUCKET/blockchain-$VERSION-latest.tar.bz2 - | pbzip2 -m2000dc | tar x --wildcards 'blockchain/block*' -C /mnt/ramdisk 'blockchain/shared*'
-  chown -R smoked:smoked /mnt/ramdisk/blockchain
+  chown -R cored:cored /mnt/ramdisk/blockchain
 else
   s3cmd get s3://$S3_BUCKET/blockchain-$VERSION-latest.tar.bz2 - | pbzip2 -m2000dc | tar x
 fi
 if [[ $? -ne 0 ]]; then
   if [[ ! "$SYNC_TO_S3" ]]; then
-    echo notifyalert smoked: unable to pull blockchain state from S3 - exiting
+    echo notifyalert cored: unable to pull blockchain state from S3 - exiting
     exit 1
   else
-    echo notifysmokedsync smokedsync: shared memory file for $VERSION not found, creating a new one by replaying the blockchain
+    echo notifycoredsync coredsync: shared memory file for $VERSION not found, creating a new one by replaying the blockchain
     mkdir blockchain
     aws s3 cp s3://$S3_BUCKET/block_log-latest blockchain/block_log
     if [[ $? -ne 0 ]]; then
-      echo notifysmokedsync smokedsync: unable to pull latest block_log from S3, will sync from scratch.
+      echo notifycoredsync coredsync: unable to pull latest block_log from S3, will sync from scratch.
     else
       ARGS+=" --replay-blockchain --force-validate"
     fi
@@ -83,18 +83,18 @@ if [[ "$SYNC_TO_S3" ]]; then
   chown www-data:www-data /tmp/issyncnode
 fi
 
-chown -R smoked:smoked $HOME/*
+chown -R cored:cored $HOME/*
 
 # start multiple read-only instances based on the number of cores
 # attach to the local interface since a proxy will be used to loadbalance
 if [[ "$USE_MULTICORE_READONLY" ]]; then
-    exec chpst -usmoked \
-        $SMOKED \
+    exec chpst -ucored \
+        $CORED \
             --rpc-endpoint=127.0.0.1:8091 \
             --p2p-endpoint=0.0.0.0:2001 \
             --data-dir=$HOME \
             $ARGS \
-            $SMOKED_EXTRA_OPTS \
+            $CORED_EXTRA_OPTS \
             2>&1 &
     # sleep for a moment to allow the writer node to be ready to accept connections from the readers
     sleep 30
@@ -111,8 +111,8 @@ if [[ "$USE_MULTICORE_READONLY" ]]; then
     PORT_NUM=8092
     for (( i=2; i<=$PROCESSES; i++ ))
       do
-        exec chpst -usmoked \
-        $SMOKED \
+        exec chpst -ucored \
+        $CORED \
           --rpc-endpoint=127.0.0.1:$PORT_NUM \
           --data-dir=$HOME \
           $ARGS \
@@ -130,10 +130,10 @@ if [[ "$USE_MULTICORE_READONLY" ]]; then
     /etc/init.d/fcgiwrap restart
     service nginx restart
     # start runsv script that kills containers if they die
-    mkdir -p /etc/service/smoked
-    cp /usr/local/bin/paas-sv-run.sh /etc/service/smoked/run
-    chmod +x /etc/service/smoked/run
-    runsv /etc/service/smoked
+    mkdir -p /etc/service/cored
+    cp /usr/local/bin/paas-sv-run.sh /etc/service/cored/run
+    chmod +x /etc/service/cored/run
+    runsv /etc/service/cored
 else
     cp /etc/nginx/healthcheck.conf.template /etc/nginx/healthcheck.conf
     echo server 127.0.0.1:8091\; >> /etc/nginx/healthcheck.conf
@@ -142,22 +142,22 @@ else
     cp /etc/nginx/healthcheck.conf /etc/nginx/sites-enabled/default
     /etc/init.d/fcgiwrap restart
     service nginx restart
-    exec chpst -usmoked \
-        $SMOKED \
+    exec chpst -ucored \
+        $CORED \
             --rpc-endpoint=0.0.0.0:8091 \
             --p2p-endpoint=0.0.0.0:2001 \
             --data-dir=$HOME \
             $ARGS \
-            $SMOKED_EXTRA_OPTS \
+            $CORED_EXTRA_OPTS \
             2>&1&
     SAVED_PID=`pgrep -f p2p-endpoint`
-    echo $SAVED_PID >> /tmp/smokedpid
-    mkdir -p /etc/service/smoked
+    echo $SAVED_PID >> /tmp/coredpid
+    mkdir -p /etc/service/cored
     if [[ ! "$SYNC_TO_S3" ]]; then
-      cp /usr/local/bin/paas-sv-run.sh /etc/service/smoked/run
+      cp /usr/local/bin/paas-sv-run.sh /etc/service/cored/run
     else
-      cp /usr/local/bin/sync-sv-run.sh /etc/service/smoked/run
+      cp /usr/local/bin/sync-sv-run.sh /etc/service/cored/run
     fi
-    chmod +x /etc/service/smoked/run
-    runsv /etc/service/smoked
+    chmod +x /etc/service/cored/run
+    runsv /etc/service/cored
 fi

@@ -1,12 +1,12 @@
 #pragma once
-#include <smoke/protocol/authority.hpp>
+#include <core/protocol/authority.hpp>
 #include <boost/interprocess/managed_mapped_file.hpp>
 
-namespace smoke { namespace chain {
-   using smoke::protocol::authority;
-   using smoke::protocol::public_key_type;
-   using smoke::protocol::account_name_type;
-   using smoke::protocol::weight_type;
+namespace core { namespace chain {
+   using core::protocol::authority;
+   using core::protocol::public_key_type;
+   using core::protocol::account_name_type;
+   using core::protocol::weight_type;
 
    namespace bip = boost::interprocess;
 
@@ -98,7 +98,7 @@ namespace smoke { namespace chain {
    bool operator == ( const authority& a, const shared_authority& b );
    bool operator == ( const shared_authority& a, const authority& b );
 
-} } //smoke::chain
+} } //core::chain
 
-FC_REFLECT_TYPENAME( smoke::chain::shared_authority::account_authority_map)
-FC_REFLECT( smoke::chain::shared_authority, (weight_threshold)(account_auths)(key_auths) )
+FC_REFLECT_TYPENAME( core::chain::shared_authority::account_authority_map)
+FC_REFLECT( core::chain::shared_authority, (weight_threshold)(account_auths)(key_auths) )

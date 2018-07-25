@@ -1,15 +1,15 @@
-#include <smoke/tags/tags_plugin.hpp>
+#include <core/tags/tags_plugin.hpp>
 
-#include <smoke/app/impacted.hpp>
+#include <core/app/impacted.hpp>
 
-#include <smoke/protocol/config.hpp>
+#include <core/protocol/config.hpp>
 
-#include <smoke/chain/database.hpp>
-#include <smoke/chain/hardfork.hpp>
-#include <smoke/chain/index.hpp>
-#include <smoke/chain/operation_notification.hpp>
-#include <smoke/chain/account_object.hpp>
-#include <smoke/chain/comment_object.hpp>
+#include <core/chain/database.hpp>
+#include <core/chain/hardfork.hpp>
+#include <core/chain/index.hpp>
+#include <core/chain/operation_notification.hpp>
+#include <core/chain/account_object.hpp>
+#include <core/chain/comment_object.hpp>
 
 #include <fc/smart_ref_impl.hpp>
 #include <fc/thread/thread.hpp>
@@ -19,11 +19,11 @@
 #include <boost/range/iterator_range.hpp>
 #include <boost/algorithm/string.hpp>
 
-namespace smoke { namespace tags {
+namespace core { namespace tags {
 
 namespace detail {
 
-using namespace smoke::protocol;
+using namespace core::protocol;
 
 class tags_plugin_impl
 {
@@ -33,7 +33,7 @@ class tags_plugin_impl
       { }
       virtual ~tags_plugin_impl();
 
-      smoke::chain::database& database()
+      core::chain::database& database()
       {
          return _self.database();
       }
@@ -391,7 +391,7 @@ struct operation_visitor
 
    void operator()( const transfer_operation& op )const
    {
-      if( op.to == SMOKE_NULL_ACCOUNT && op.amount.symbol == SBD_SYMBOL )
+      if( op.to == CORE_NULL_ACCOUNT && op.amount.symbol == SBD_SYMBOL )
       {
          vector<string> part; part.reserve(4);
          auto path = op.memo;
@@ -533,6 +533,6 @@ void tags_plugin::plugin_startup()
 {
 }
 
-} } /// smoke::tags
+} } /// core::tags
 
-SMOKE_DEFINE_PLUGIN( tags, smoke::tags::tags_plugin )
+CORE_DEFINE_PLUGIN( tags, core::tags::tags_plugin )

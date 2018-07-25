@@ -1,13 +1,13 @@
 
 #pragma once
 
-#include <smoke/app/plugin.hpp>
+#include <core/app/plugin.hpp>
 
-namespace smoke { namespace plugin { namespace auth_util {
+namespace core { namespace plugin { namespace auth_util {
 
-using smoke::app::application;
+using core::app::application;
 
-class auth_util_plugin : public smoke::app::plugin
+class auth_util_plugin : public core::app::plugin
 {
    public:
       auth_util_plugin( application* app ) ;

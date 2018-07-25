@@ -1,20 +1,20 @@
-#include <smoke/blockchain_statistics/blockchain_statistics_api.hpp>
+#include <core/blockchain_statistics/blockchain_statistics_api.hpp>
 
-#include <smoke/app/impacted.hpp>
-#include <smoke/chain/account_object.hpp>
-#include <smoke/chain/comment_object.hpp>
-#include <smoke/chain/history_object.hpp>
+#include <core/app/impacted.hpp>
+#include <core/chain/account_object.hpp>
+#include <core/chain/comment_object.hpp>
+#include <core/chain/history_object.hpp>
 
-#include <smoke/chain/database.hpp>
-#include <smoke/chain/index.hpp>
-#include <smoke/chain/operation_notification.hpp>
+#include <core/chain/database.hpp>
+#include <core/chain/index.hpp>
+#include <core/chain/operation_notification.hpp>
 
-namespace smoke { namespace blockchain_statistics {
+namespace core { namespace blockchain_statistics {
 
 namespace detail
 {
 
-using namespace smoke::protocol;
+using namespace core::protocol;
 
 class blockchain_statistics_plugin_impl
 {
@@ -357,11 +357,11 @@ void blockchain_statistics_plugin_impl::pre_operation( const operation_notificat
          auto& account = db.get_account( op.account );
          const auto& bucket = db.get(bucket_id);
 
-         auto new_vesting_withdrawal_rate = op.vesting_shares.amount / SMOKE_VESTING_WITHDRAW_INTERVALS;
+         auto new_vesting_withdrawal_rate = op.vesting_shares.amount / CORE_VESTING_WITHDRAW_INTERVALS;
          if( op.vesting_shares.amount > 0 && new_vesting_withdrawal_rate == 0 )
             new_vesting_withdrawal_rate = 1;
 
-         if( !db.has_hardfork( SMOKE_HARDFORK_0_1 ) )
+         if( !db.has_hardfork( CORE_HARDFORK_0_1 ) )
             new_vesting_withdrawal_rate *= 1000000;
 
          db.modify( bucket, [&]( bucket_object& b )
@@ -468,6 +468,6 @@ uint32_t blockchain_statistics_plugin::get_max_history_per_bucket() const
    return _my->_maximum_history_per_bucket_size;
 }
 
-} } // smoke::blockchain_statistics
+} } // core::blockchain_statistics
 
-SMOKE_DEFINE_PLUGIN( blockchain_statistics, smoke::blockchain_statistics::blockchain_statistics_plugin );
+CORE_DEFINE_PLUGIN( blockchain_statistics, core::blockchain_statistics::blockchain_statistics_plugin );

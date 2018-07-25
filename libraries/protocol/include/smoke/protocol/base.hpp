@@ -1,12 +1,12 @@
 #pragma once
 
-#include <smoke/protocol/types.hpp>
-#include <smoke/protocol/authority.hpp>
-#include <smoke/protocol/version.hpp>
+#include <core/protocol/types.hpp>
+#include <core/protocol/authority.hpp>
+#include <core/protocol/version.hpp>
 
 #include <fc/time.hpp>
 
-namespace smoke { namespace protocol {
+namespace core { namespace protocol {
 
    struct base_operation
    {
@@ -39,7 +39,7 @@ namespace smoke { namespace protocol {
    typedef flat_set<future_extensions> extensions_type;
 
 
-} } // smoke::protocol
+} } // core::protocol
 
-FC_REFLECT_TYPENAME( smoke::protocol::block_header_extensions )
-FC_REFLECT_TYPENAME( smoke::protocol::future_extensions )
+FC_REFLECT_TYPENAME( core::protocol::block_header_extensions )
+FC_REFLECT_TYPENAME( core::protocol::future_extensions )

@@ -1,12 +1,12 @@
 #pragma once
 
-#include <smoke/app/application.hpp>
+#include <core/app/application.hpp>
 
-#include <smoke/account_by_key/account_by_key_objects.hpp>
+#include <core/account_by_key/account_by_key_objects.hpp>
 
 #include <fc/api.hpp>
 
-namespace smoke { namespace account_by_key {
+namespace core { namespace account_by_key {
 
 namespace detail
 {
@@ -26,6 +26,6 @@ class account_by_key_api
       std::shared_ptr< detail::account_by_key_api_impl > my;
 };
 
-} } // smoke::account_by_key
+} } // core::account_by_key
 
-FC_API( smoke::account_by_key::account_by_key_api, (get_key_references) )
+FC_API( core::account_by_key::account_by_key_api, (get_key_references) )

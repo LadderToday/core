@@ -1,18 +1,18 @@
 
 #pragma once
 
-#include <smoke/protocol/types.hpp>
+#include <core/protocol/types.hpp>
 
 #include <fc/api.hpp>
 #include <fc/crypto/sha256.hpp>
 
 #include <string>
 
-namespace smoke { namespace app {
+namespace core { namespace app {
    struct api_context;
 } }
 
-namespace smoke { namespace plugin { namespace auth_util {
+namespace core { namespace plugin { namespace auth_util {
 
 namespace detail {
 class auth_util_api_impl;
@@ -34,7 +34,7 @@ struct check_authority_signature_result
 class auth_util_api
 {
    public:
-      auth_util_api( const smoke::app::api_context& ctx );
+      auth_util_api( const core::app::api_context& ctx );
 
       void on_api_startup();
 
@@ -46,16 +46,16 @@ class auth_util_api
 
 } } }
 
-FC_REFLECT( smoke::plugin::auth_util::check_authority_signature_params,
+FC_REFLECT( core::plugin::auth_util::check_authority_signature_params,
    (account_name)
    (level)
    (dig)
    (sigs)
    )
-FC_REFLECT( smoke::plugin::auth_util::check_authority_signature_result,
+FC_REFLECT( core::plugin::auth_util::check_authority_signature_result,
    (keys)
    )
 
-FC_API( smoke::plugin::auth_util::auth_util_api,
+FC_API( core::plugin::auth_util::auth_util_api,
    (check_authority_signature)
    )

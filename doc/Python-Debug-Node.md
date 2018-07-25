@@ -3,7 +3,7 @@ Python Debug Node Readme
 ------------------------
 
 The Python Debug Node is a wrapper class that automates the creation and maintenance
-of a running Smoke Debug Node. The Debug Node is a plugin for Smoke that allows realtime
+of a running Core Debug Node. The Debug Node is a plugin for Core that allows realtime
 local modification of the chain state in a way that mimicks real world behaviors
 without corrupting a localally saved blockchain or propogating changes to the live chain.
 
@@ -26,7 +26,7 @@ How Do I Use This?
 
 First of all, you need to install the module. Navigate to `tests/external_testing_scripts`
 and run `python3 setup.py install`
-To use the script include `from smokedebugnode import DebugNode`
+To use the script include `from coredebugnode import DebugNode`
 
 There are a couple of examples already made that you can try modifying yourself.
 
@@ -47,7 +47,7 @@ through RPC calls or the CLI Wallet.
 What is the important part of these scripts?
 
 ``` Python
-debug_node = DebugNode( str( smoked ), str( data_dir ) )
+debug_node = DebugNode( str( cored ), str( data_dir ) )
 with debug_node:
    # Do stuff with blockchain
 ```
@@ -58,9 +58,9 @@ and establishes the internal rpc connection. The script can then do whatever it 
 When the `with` block ends, the node automatically shutsdown and cleans up. The node uses
 a system standard temp directory through the standard Python TemporaryDirectory as the
 working data directory for the running node. The only work your script needs to do is
-specify the smoked binary location and a populated data directory. For most configurations
-this will be `programs/smoked/smoked` and `witness_node_data_dir` respectively, from the
-git root directory for Smoke.
+specify the cored binary location and a populated data directory. For most configurations
+this will be `programs/cored/cored` and `witness_node_data_dir` respectively, from the
+git root directory for Core.
 
 TODO/ Long Term Goals
 ---------------------
@@ -75,4 +75,4 @@ the RPC call. Most, if not all, RPC API calls could be programatically generated
 the C++ source. It would also be a good step forward to introduce a simple testing framework
 that could be used to start a debug node and then run a series of test cases on a common
 starting chain state. This would address much of the integration testing that is sorely
-needed for Smoke.
+needed for Core.

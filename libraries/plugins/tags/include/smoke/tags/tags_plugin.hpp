@@ -1,19 +1,19 @@
 #pragma once
 
-#include <smoke/app/plugin.hpp>
-#include <smoke/chain/database.hpp>
-#include <smoke/chain/comment_object.hpp>
+#include <core/app/plugin.hpp>
+#include <core/chain/database.hpp>
+#include <core/chain/comment_object.hpp>
 
 #include <boost/multi_index/composite_key.hpp>
 
 #include <fc/thread/future.hpp>
 #include <fc/api.hpp>
 
-namespace smoke { namespace tags {
-using namespace smoke::chain;
+namespace core { namespace tags {
+using namespace core::chain;
 using namespace boost::multi_index;
 
-using smoke::app::application;
+using core::app::application;
 
 using chainbase::object;
 using chainbase::oid;
@@ -463,7 +463,7 @@ struct comment_metadata { set<string> tags; };
  *  This plugin will scan all changes to posts and/or their meta data and
  *
  */
-class tags_plugin : public smoke::app::plugin
+class tags_plugin : public core::app::plugin
 {
    public:
       tags_plugin( application* app );
@@ -499,23 +499,23 @@ class tag_api : public std::enable_shared_from_this<tag_api> {
 
 
 
-} } //smoke::tag
+} } //core::tag
 
-FC_API( smoke::tags::tag_api, (get_tags) );
+FC_API( core::tags::tag_api, (get_tags) );
 
-FC_REFLECT( smoke::tags::tag_object,
+FC_REFLECT( core::tags::tag_object,
    (id)(tag)(created)(active)(cashout)(net_rshares)(net_votes)(hot)(trending)(promoted_balance)(children)(author)(parent)(comment) )
-CHAINBASE_SET_INDEX_TYPE( smoke::tags::tag_object, smoke::tags::tag_index )
+CHAINBASE_SET_INDEX_TYPE( core::tags::tag_object, core::tags::tag_index )
 
-FC_REFLECT( smoke::tags::tag_stats_object,
+FC_REFLECT( core::tags::tag_stats_object,
    (id)(tag)(total_payout)(net_votes)(top_posts)(comments)(total_trending) );
-CHAINBASE_SET_INDEX_TYPE( smoke::tags::tag_stats_object, smoke::tags::tag_stats_index )
+CHAINBASE_SET_INDEX_TYPE( core::tags::tag_stats_object, core::tags::tag_stats_index )
 
-FC_REFLECT( smoke::tags::peer_stats_object,
+FC_REFLECT( core::tags::peer_stats_object,
    (id)(voter)(peer)(direct_positive_votes)(direct_votes)(indirect_positive_votes)(indirect_votes)(rank) );
-CHAINBASE_SET_INDEX_TYPE( smoke::tags::peer_stats_object, smoke::tags::peer_stats_index )
+CHAINBASE_SET_INDEX_TYPE( core::tags::peer_stats_object, core::tags::peer_stats_index )
 
-FC_REFLECT( smoke::tags::comment_metadata, (tags) );
+FC_REFLECT( core::tags::comment_metadata, (tags) );
 
-FC_REFLECT( smoke::tags::author_tag_stats_object, (id)(author)(tag)(total_posts)(total_rewards) )
-CHAINBASE_SET_INDEX_TYPE( smoke::tags::author_tag_stats_object, smoke::tags::author_tag_stats_index )
+FC_REFLECT( core::tags::author_tag_stats_object, (id)(author)(tag)(total_posts)(total_rewards) )
+CHAINBASE_SET_INDEX_TYPE( core::tags::author_tag_stats_object, core::tags::author_tag_stats_index )

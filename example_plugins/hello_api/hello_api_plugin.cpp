@@ -1,20 +1,20 @@
 
-#include <smoke/app/application.hpp>
-#include <smoke/app/plugin.hpp>
+#include <core/app/application.hpp>
+#include <core/app/plugin.hpp>
 
 #include <sstream>
 #include <string>
 
-namespace smoke { namespace example_plugin {
+namespace core { namespace example_plugin {
 
-class hello_api_plugin : public smoke::app::plugin
+class hello_api_plugin : public core::app::plugin
 {
    public:
       /**
        * The plugin requires a constructor which takes app.  This is called regardless of whether the plugin is loaded.
        * The app parameter should be passed up to the superclass constructor.
        */
-      hello_api_plugin( smoke::app::application* app );
+      hello_api_plugin( core::app::application* app );
 
       /**
        * Plugin is destroyed via base class pointer, so a virtual destructor must be provided.
@@ -39,7 +39,7 @@ class hello_api_plugin : public smoke::app::plugin
       std::string get_message();
 
    private:
-      smoke::app::application* _app;
+      core::app::application* _app;
       std::string _message;
       uint32_t _plugin_call_count = 0;
 };
@@ -47,7 +47,7 @@ class hello_api_plugin : public smoke::app::plugin
 class hello_api_api
 {
    public:
-      hello_api_api( const smoke::app::api_context& ctx );
+      hello_api_api( const core::app::api_context& ctx );
 
       /**
        * Called immediately after the constructor.  If the API class uses enable_shared_from_this,
@@ -58,19 +58,19 @@ class hello_api_api
       std::string get_message();
 
    private:
-      smoke::app::application& _app;
+      core::app::application& _app;
       uint32_t _api_call_count = 0;
 };
 
 } }
 
-FC_API( smoke::example_plugin::hello_api_api,
+FC_API( core::example_plugin::hello_api_api,
    (get_message)
    )
 
-namespace smoke { namespace example_plugin {
+namespace core { namespace example_plugin {
 
-hello_api_plugin::hello_api_plugin( smoke::app::application* app ) : smoke::app::plugin(app) {}
+hello_api_plugin::hello_api_plugin( core::app::application* app ) : core::app::plugin(app) {}
 hello_api_plugin::~hello_api_plugin() {}
 
 std::string hello_api_plugin::plugin_name()const
@@ -95,7 +95,7 @@ std::string hello_api_plugin::get_message()
    return result.str();
 }
 
-hello_api_api::hello_api_api( const smoke::app::api_context& ctx ) : _app(ctx.app) {}
+hello_api_api::hello_api_api( const core::app::api_context& ctx ) : _app(ctx.app) {}
 
 void hello_api_api::on_api_startup() {}
 
@@ -110,8 +110,8 @@ std::string hello_api_api::get_message()
 } }
 
 /**
- * The SMOKE_DEFINE_PLUGIN() macro will define a smoke::plugin::create_hello_api_plugin()
+ * The CORE_DEFINE_PLUGIN() macro will define a core::plugin::create_hello_api_plugin()
  * factory method which is expected by the manifest.
  */
 
-SMOKE_DEFINE_PLUGIN( hello_api, smoke::example_plugin::hello_api_plugin )
+CORE_DEFINE_PLUGIN( hello_api, core::example_plugin::hello_api_plugin )

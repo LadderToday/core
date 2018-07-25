@@ -1,8 +1,8 @@
-#include <smoke/protocol/operations.hpp>
+#include <core/protocol/operations.hpp>
 
-#include <smoke/protocol/operation_util_impl.hpp>
+#include <core/protocol/operation_util_impl.hpp>
 
-namespace smoke { namespace protocol {
+namespace core { namespace protocol {
 
 struct is_market_op_visitor {
    typedef bool result_type;
@@ -32,6 +32,6 @@ bool is_virtual_operation( const operation& op )
    return op.visit( is_vop_visitor() );
 }
 
-} } // smoke::protocol
+} } // core::protocol
 
-DEFINE_OPERATION_TYPE( smoke::protocol::operation )
+DEFINE_OPERATION_TYPE( core::protocol::operation )

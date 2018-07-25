@@ -23,15 +23,15 @@
  */
 #pragma once
 
-#include <smoke/app/plugin.hpp>
-#include <smoke/chain/database.hpp>
+#include <core/app/plugin.hpp>
+#include <core/chain/database.hpp>
 
 #include <boost/multi_index/composite_key.hpp>
 
 #include <fc/thread/future.hpp>
 #include <fc/api.hpp>
 
-namespace smoke { namespace private_message {
+namespace core { namespace private_message {
 using namespace chain;
 using app::application;
 
@@ -49,7 +49,7 @@ using app::application;
 #define PRIVATE_MESSAGE_SPACE_ID 6
 #endif
 
-#define SMOKE_PRIVATE_MESSAGE_COP_ID 777
+#define CORE_PRIVATE_MESSAGE_COP_ID 777
 
 enum private_message_object_type
 {
@@ -167,7 +167,7 @@ typedef multi_index_container<
  *   by the posting key.
  *
  */
-class private_message_plugin : public smoke::app::plugin
+class private_message_plugin : public core::app::plugin
 {
    public:
       private_message_plugin( application* app );
@@ -206,15 +206,15 @@ class private_message_api : public std::enable_shared_from_this<private_message_
       app::application* _app = nullptr;
 };
 
-} } //smoke::private_message
+} } //core::private_message
 
-FC_API( smoke::private_message::private_message_api, (get_inbox)(get_outbox) );
+FC_API( core::private_message::private_message_api, (get_inbox)(get_outbox) );
 
-FC_REFLECT( smoke::private_message::message_body, (thread_start)(subject)(body)(json_meta)(cc) );
+FC_REFLECT( core::private_message::message_body, (thread_start)(subject)(body)(json_meta)(cc) );
 
-FC_REFLECT( smoke::private_message::message_object, (id)(from)(to)(from_memo_key)(to_memo_key)(sent_time)(receive_time)(checksum)(encrypted_message) );
-CHAINBASE_SET_INDEX_TYPE( smoke::private_message::message_object, smoke::private_message::message_index );
+FC_REFLECT( core::private_message::message_object, (id)(from)(to)(from_memo_key)(to_memo_key)(sent_time)(receive_time)(checksum)(encrypted_message) );
+CHAINBASE_SET_INDEX_TYPE( core::private_message::message_object, core::private_message::message_index );
 
-FC_REFLECT( smoke::private_message::message_api_obj, (id)(from)(to)(from_memo_key)(to_memo_key)(sent_time)(receive_time)(checksum)(encrypted_message) );
+FC_REFLECT( core::private_message::message_api_obj, (id)(from)(to)(from_memo_key)(to_memo_key)(sent_time)(receive_time)(checksum)(encrypted_message) );
 
-FC_REFLECT_DERIVED( smoke::private_message::extended_message_object, (smoke::private_message::message_api_obj), (message) );
+FC_REFLECT_DERIVED( core::private_message::extended_message_object, (core::private_message::message_api_obj), (message) );

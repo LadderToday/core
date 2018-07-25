@@ -1,6 +1,6 @@
 #pragma once
 
-#include <smoke/chain/database.hpp>
+#include <core/chain/database.hpp>
 
 /*
  * This file provides with() functions which modify the database
@@ -13,7 +13,7 @@
  * and put the finally block in a destructor.  Aagh!
  */
 
-namespace smoke { namespace chain { namespace detail {
+namespace core { namespace chain { namespace detail {
 /**
  * Class used to help the with_skip_flags implementation.
  * It must be defined in this header because it must be
@@ -134,4 +134,4 @@ void without_pending_transactions(
     return;
 }
 
-} } } // smoke::chain::detail
+} } } // core::chain::detail

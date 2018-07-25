@@ -1,4 +1,4 @@
-#include <smoke/protocol/asset.hpp>
+#include <core/protocol/asset.hpp>
 #include <boost/rational.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
 
@@ -12,7 +12,7 @@ index : field
    7  : \0
 */
 
-namespace smoke { namespace protocol {
+namespace core { namespace protocol {
       typedef boost::multiprecision::int128_t  int128_t;
 
       uint8_t asset::decimals()const
@@ -182,8 +182,8 @@ namespace smoke { namespace protocol {
          return price{ base, quote };
       } FC_CAPTURE_AND_RETHROW( (base)(quote) ) }
 
-      price price::max( asset_symbol_type base, asset_symbol_type quote ) { return asset( share_type(SMOKE_MAX_SHARE_SUPPLY), base ) / asset( share_type(1), quote); }
-      price price::min( asset_symbol_type base, asset_symbol_type quote ) { return asset( 1, base ) / asset( SMOKE_MAX_SHARE_SUPPLY, quote); }
+      price price::max( asset_symbol_type base, asset_symbol_type quote ) { return asset( share_type(CORE_MAX_SHARE_SUPPLY), base ) / asset( share_type(1), quote); }
+      price price::min( asset_symbol_type base, asset_symbol_type quote ) { return asset( 1, base ) / asset( CORE_MAX_SHARE_SUPPLY, quote); }
 
       bool price::is_null() const { return *this == price(); }
 
@@ -195,4 +195,4 @@ namespace smoke { namespace protocol {
       } FC_CAPTURE_AND_RETHROW( (base)(quote) ) }
 
 
-} } // smoke::protocol
+} } // core::protocol

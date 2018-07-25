@@ -1,20 +1,20 @@
 #pragma once
 #include <fc/fixed_string.hpp>
 
-#include <smoke/protocol/authority.hpp>
-#include <smoke/protocol/steem_operations.hpp>
+#include <core/protocol/authority.hpp>
+#include <core/protocol/steem_operations.hpp>
 
-#include <smoke/chain/steem_object_types.hpp>
-#include <smoke/chain/witness_objects.hpp>
-#include <smoke/chain/shared_authority.hpp>
+#include <core/chain/steem_object_types.hpp>
+#include <core/chain/witness_objects.hpp>
+#include <core/chain/shared_authority.hpp>
 
 #include <boost/multi_index/composite_key.hpp>
 
 #include <numeric>
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
-   using smoke::protocol::authority;
+   using core::protocol::authority;
 
    class account_object : public object< account_object_type, account_object >
    {
@@ -44,14 +44,14 @@ namespace smoke { namespace chain {
          time_point_sec    last_owner_proved = time_point_sec::min();
          time_point_sec    last_active_proved = time_point_sec::min();
          account_name_type recovery_account;
-         account_name_type reset_account = SMOKE_NULL_ACCOUNT;
+         account_name_type reset_account = CORE_NULL_ACCOUNT;
          time_point_sec    last_account_recovery;
          uint32_t          comment_count = 0;
          uint32_t          lifetime_vote_count = 0;
          uint32_t          post_count = 0;
 
          bool              can_vote = true;
-         uint16_t          voting_power = SMOKE_100_PERCENT;   ///< current voting power of this account, it falls after every vote
+         uint16_t          voting_power = CORE_100_PERCENT;   ///< current voting power of this account, it falls after every vote
          time_point_sec    last_vote_time; ///< used to increase the voting power of this account the longer it goes without voting.
 
          asset             balance = asset( 0, STEEM_SYMBOL );  ///< total liquid shares held by this account
@@ -65,7 +65,7 @@ namespace smoke { namespace chain {
           *  interest = interest_rate * sbd_seconds / seconds_per_year
           *
           *  Every time the sbd_balance is updated the sbd_seconds is also updated. If at least
-          *  SMOKE_MIN_COMPOUNDING_INTERVAL_SECONDS has past since sbd_last_interest_payment then
+          *  CORE_MIN_COMPOUNDING_INTERVAL_SECONDS has past since sbd_last_interest_payment then
           *  interest is added to sbd_balance.
           *
           *  @defgroup sbd_data sbd Balance Data
@@ -103,7 +103,7 @@ namespace smoke { namespace chain {
          share_type        to_withdraw = 0; /// Might be able to look this up with operation history.
          uint16_t          withdraw_routes = 0;
 
-         fc::array<share_type, SMOKE_MAX_PROXY_RECURSION_DEPTH> proxied_vsf_votes;// = std::vector<share_type>( SMOKE_MAX_PROXY_RECURSION_DEPTH, 0 ); ///< the total VFS votes proxied to this account
+         fc::array<share_type, CORE_MAX_PROXY_RECURSION_DEPTH> proxied_vsf_votes;// = std::vector<share_type>( CORE_MAX_PROXY_RECURSION_DEPTH, 0 ); ///< the total VFS votes proxied to this account
 
          uint16_t          witnesses_voted_for = 0;
 
@@ -457,7 +457,7 @@ namespace smoke { namespace chain {
    > change_recovery_account_request_index;
 } }
 
-FC_REFLECT( smoke::chain::account_object,
+FC_REFLECT( core::chain::account_object,
              (id)(name)(memo_key)(json_metadata)(proxy)(last_account_update)
              (created)(mined)
              (owner_challenged)(active_challenged)(last_owner_proved)(last_active_proved)(recovery_account)(last_account_recovery)(reset_account)
@@ -474,32 +474,32 @@ FC_REFLECT( smoke::chain::account_object,
              (proxied_vsf_votes)(witnesses_voted_for)
              (last_post)(last_root_post)(post_bandwidth)
           )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::account_object, smoke::chain::account_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::account_object, core::chain::account_index )
 
-FC_REFLECT( smoke::chain::account_authority_object,
+FC_REFLECT( core::chain::account_authority_object,
              (id)(account)(owner)(active)(posting)(last_owner_update)
 )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::account_authority_object, smoke::chain::account_authority_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::account_authority_object, core::chain::account_authority_index )
 
-FC_REFLECT( smoke::chain::vesting_delegation_object,
+FC_REFLECT( core::chain::vesting_delegation_object,
             (id)(delegator)(delegatee)(vesting_shares)(min_delegation_time) )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::vesting_delegation_object, smoke::chain::vesting_delegation_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::vesting_delegation_object, core::chain::vesting_delegation_index )
 
-FC_REFLECT( smoke::chain::vesting_delegation_expiration_object,
+FC_REFLECT( core::chain::vesting_delegation_expiration_object,
             (id)(delegator)(vesting_shares)(expiration) )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::vesting_delegation_expiration_object, smoke::chain::vesting_delegation_expiration_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::vesting_delegation_expiration_object, core::chain::vesting_delegation_expiration_index )
 
-FC_REFLECT( smoke::chain::owner_authority_history_object,
+FC_REFLECT( core::chain::owner_authority_history_object,
              (id)(account)(previous_owner_authority)(last_valid_time)
           )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::owner_authority_history_object, smoke::chain::owner_authority_history_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::owner_authority_history_object, core::chain::owner_authority_history_index )
 
-FC_REFLECT( smoke::chain::account_recovery_request_object,
+FC_REFLECT( core::chain::account_recovery_request_object,
              (id)(account_to_recover)(new_owner_authority)(expires)
           )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::account_recovery_request_object, smoke::chain::account_recovery_request_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::account_recovery_request_object, core::chain::account_recovery_request_index )
 
-FC_REFLECT( smoke::chain::change_recovery_account_request_object,
+FC_REFLECT( core::chain::change_recovery_account_request_object,
              (id)(account_to_recover)(recovery_account)(effective_on)
           )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::change_recovery_account_request_object, smoke::chain::change_recovery_account_request_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::change_recovery_account_request_object, core::chain::change_recovery_account_request_index )

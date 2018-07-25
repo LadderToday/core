@@ -1,4 +1,4 @@
-file(GLOB HEADERS "include/smoke/wallet/*.hpp")
+file(GLOB HEADERS "include/core/wallet/*.hpp")
 
 find_package( Perl )
 find_package( Doxygen )
@@ -8,7 +8,7 @@ if( PERL_FOUND AND DOXYGEN_FOUND AND NOT "${CMAKE_GENERATOR}" STREQUAL "Ninja" )
   add_custom_command( OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/doxygen/perlmod/DoxyDocs.pm
                       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                       COMMAND ${DOXYGEN_EXECUTABLE}
-                      DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile ${CMAKE_CURRENT_SOURCE_DIR}/include/smoke/wallet/wallet.hpp )
+                      DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile ${CMAKE_CURRENT_SOURCE_DIR}/include/core/wallet/wallet.hpp )
 
   add_custom_command( OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/api_documentation.cpp
                       COMMAND ${PERL_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/generate_api_documentation.pl ${CMAKE_CURRENT_BINARY_DIR}/api_documentation.cpp.new
@@ -23,20 +23,20 @@ else()
                       DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/api_documentation_standin.cpp )
 endif()
 
-add_library( smoke_wallet wallet.cpp ${CMAKE_CURRENT_BINARY_DIR}/api_documentation.cpp ${HEADERS} )
-# I don't know why smoke_app is required twice in the following line, I just know the linker breaks if it isn't.
-target_link_libraries( smoke_wallet PRIVATE smoke_app graphene_net smoke_chain smoke_protocol graphene_utilities fc smoke_private_message smoke_app smoke_follow smoke_account_by_key ${CMAKE_DL_LIBS} ${PLATFORM_SPECIFIC_LIBS} )
-target_include_directories( smoke_wallet PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include" )
+add_library( core_wallet wallet.cpp ${CMAKE_CURRENT_BINARY_DIR}/api_documentation.cpp ${HEADERS} )
+# I don't know why core_app is required twice in the following line, I just know the linker breaks if it isn't.
+target_link_libraries( core_wallet PRIVATE core_app graphene_net core_chain core_protocol graphene_utilities fc core_private_message core_app core_follow core_account_by_key ${CMAKE_DL_LIBS} ${PLATFORM_SPECIFIC_LIBS} )
+target_include_directories( core_wallet PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include" )
 
 if(MSVC)
   set_source_files_properties( wallet.cpp PROPERTIES COMPILE_FLAGS "/bigobj" )
 endif(MSVC)
 
 install( TARGETS
-   smoke_wallet
+   core_wallet
 
    RUNTIME DESTINATION bin
    LIBRARY DESTINATION lib
    ARCHIVE DESTINATION lib
 )
-install( FILES ${HEADERS} DESTINATION "include/smoke/wallet" )
+install( FILES ${HEADERS} DESTINATION "include/core/wallet" )

@@ -1,11 +1,11 @@
-#include <smoke/account_statistics/account_statistics_api.hpp>
+#include <core/account_statistics/account_statistics_api.hpp>
 
-#include <smoke/chain/account_object.hpp>
-#include <smoke/chain/comment_object.hpp>
+#include <core/chain/account_object.hpp>
+#include <core/chain/comment_object.hpp>
 
-#include <smoke/chain/database.hpp>
+#include <core/chain/database.hpp>
 
-namespace smoke { namespace account_statistics {
+namespace core { namespace account_statistics {
 
 namespace detail
 {
@@ -105,6 +105,6 @@ const flat_set< std::string >& account_statistics_plugin::get_tracked_accounts()
    return _my->_tracked_accounts;
 }
 
-} } // smoke::account_statistics
+} } // core::account_statistics
 
-SMOKE_DEFINE_PLUGIN( account_statistics, smoke::account_statistics::account_statistics_plugin );
+CORE_DEFINE_PLUGIN( account_statistics, core::account_statistics::account_statistics_plugin );

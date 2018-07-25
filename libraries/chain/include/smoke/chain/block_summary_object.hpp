@@ -1,9 +1,9 @@
 #pragma once
-#include <smoke/chain/steem_object_types.hpp>
+#include <core/chain/steem_object_types.hpp>
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
-   using smoke::protocol::block_id_type;
+   using core::protocol::block_id_type;
 
    /**
     *  @brief tracks minimal information about past blocks to implement TaPOS
@@ -38,7 +38,7 @@ namespace smoke { namespace chain {
       allocator< block_summary_object >
    > block_summary_index;
 
-} } // smoke::chain
+} } // core::chain
 
-FC_REFLECT( smoke::chain::block_summary_object, (id)(block_id) )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::block_summary_object, smoke::chain::block_summary_index )
+FC_REFLECT( core::chain::block_summary_object, (id)(block_id) )
+CHAINBASE_SET_INDEX_TYPE( core::chain::block_summary_object, core::chain::block_summary_index )

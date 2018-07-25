@@ -13,10 +13,10 @@ my $outFile = new IO::File($outputFileName, "w")
 my $fileHeader = <<'END';
 /** GENERATED FILE **/
 #include <set>
-#include <smoke/wallet/api_documentation.hpp>
-#include <smoke/wallet/wallet.hpp>
+#include <core/wallet/api_documentation.hpp>
+#include <core/wallet/wallet.hpp>
 
-namespace smoke { namespace wallet {
+namespace core { namespace wallet {
    namespace detail
    {
       struct api_method_name_collector_visitor
@@ -38,7 +38,7 @@ $outFile->print($fileHeader);
 
 for my $class (@{$doxydocs->{classes}})
 {
-  if ($class->{name} eq 'smoke::wallet::wallet_api')
+  if ($class->{name} eq 'core::wallet::wallet_api')
   {
     for my $member (@{$class->{public_methods}->{members}})
     {
@@ -84,7 +84,7 @@ my $fileFooter = <<'END';
           ++iter;
    }
 
-} } // end namespace smoke::wallet
+} } // end namespace core::wallet
 END
 $outFile->print($fileFooter);
 $outFile->close();

@@ -1,20 +1,20 @@
 #pragma once
-#include <smoke/chain/account_object.hpp>
-#include <smoke/chain/block_summary_object.hpp>
-#include <smoke/chain/comment_object.hpp>
-#include <smoke/chain/global_property_object.hpp>
-#include <smoke/chain/history_object.hpp>
-#include <smoke/chain/steem_objects.hpp>
-#include <smoke/chain/transaction_object.hpp>
-#include <smoke/chain/witness_objects.hpp>
+#include <core/chain/account_object.hpp>
+#include <core/chain/block_summary_object.hpp>
+#include <core/chain/comment_object.hpp>
+#include <core/chain/global_property_object.hpp>
+#include <core/chain/history_object.hpp>
+#include <core/chain/steem_objects.hpp>
+#include <core/chain/transaction_object.hpp>
+#include <core/chain/witness_objects.hpp>
 
-#include <smoke/tags/tags_plugin.hpp>
+#include <core/tags/tags_plugin.hpp>
 
-#include <smoke/witness/witness_objects.hpp>
+#include <core/witness/witness_objects.hpp>
 
-namespace smoke { namespace app {
+namespace core { namespace app {
 
-using namespace smoke::chain;
+using namespace core::chain;
 
 /*struct limit_order
 {
@@ -505,9 +505,9 @@ struct dynamic_global_property_api_obj : public dynamic_global_property_object
    uint128_t   max_virtual_bandwidth = 0;
 };
 
-} } // smoke::app
+} } // core::app
 
-FC_REFLECT( smoke::app::comment_api_obj,
+FC_REFLECT( core::app::comment_api_obj,
              (id)(author)(permlink)
              (category)(parent_author)(parent_permlink)
              (title)(body)(json_metadata)(last_update)(created)(active)(last_payout)
@@ -519,7 +519,7 @@ FC_REFLECT( smoke::app::comment_api_obj,
              (beneficiaries)
           )
 
-FC_REFLECT( smoke::app::account_api_obj,
+FC_REFLECT( core::app::account_api_obj,
              (id)(name)(owner)(active)(posting)(memo_key)(json_metadata)(proxy)(last_owner_update)(last_account_update)
              (created)(mined)
              (owner_challenged)(active_challenged)(last_owner_proved)(last_active_proved)(recovery_account)(last_account_recovery)(reset_account)
@@ -538,21 +538,21 @@ FC_REFLECT( smoke::app::account_api_obj,
              (last_post)(last_root_post)
           )
 
-FC_REFLECT( smoke::app::owner_authority_history_api_obj,
+FC_REFLECT( core::app::owner_authority_history_api_obj,
              (id)
              (account)
              (previous_owner_authority)
              (last_valid_time)
           )
 
-FC_REFLECT( smoke::app::account_recovery_request_api_obj,
+FC_REFLECT( core::app::account_recovery_request_api_obj,
              (id)
              (account_to_recover)
              (new_owner_authority)
              (expires)
           )
 
-FC_REFLECT( smoke::app::savings_withdraw_api_obj,
+FC_REFLECT( core::app::savings_withdraw_api_obj,
              (id)
              (from)
              (to)
@@ -562,13 +562,13 @@ FC_REFLECT( smoke::app::savings_withdraw_api_obj,
              (complete)
           )
 
-FC_REFLECT( smoke::app::feed_history_api_obj,
+FC_REFLECT( core::app::feed_history_api_obj,
              (id)
              (current_median_history)
              (price_history)
           )
 
-FC_REFLECT( smoke::app::tag_api_obj,
+FC_REFLECT( core::app::tag_api_obj,
             (name)
             (total_payouts)
             (net_votes)
@@ -577,7 +577,7 @@ FC_REFLECT( smoke::app::tag_api_obj,
             (trending)
           )
 
-FC_REFLECT( smoke::app::witness_api_obj,
+FC_REFLECT( core::app::witness_api_obj,
              (id)
              (owner)
              (created)
@@ -590,13 +590,13 @@ FC_REFLECT( smoke::app::witness_api_obj,
              (hardfork_version_vote)(hardfork_time_vote)
           )
 
-FC_REFLECT_DERIVED( smoke::app::signed_block_api_obj, (smoke::protocol::signed_block),
+FC_REFLECT_DERIVED( core::app::signed_block_api_obj, (core::protocol::signed_block),
                      (block_id)
                      (signing_key)
                      (transaction_ids)
                   )
 
-FC_REFLECT_DERIVED( smoke::app::dynamic_global_property_api_obj, (smoke::chain::dynamic_global_property_object),
+FC_REFLECT_DERIVED( core::app::dynamic_global_property_api_obj, (core::chain::dynamic_global_property_object),
                      (current_reserve_ratio)
                      (average_block_size)
                      (max_virtual_bandwidth)

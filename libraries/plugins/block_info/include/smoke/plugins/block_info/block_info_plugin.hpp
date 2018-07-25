@@ -1,21 +1,21 @@
 
 #pragma once
 
-#include <smoke/app/plugin.hpp>
-#include <smoke/plugins/block_info/block_info.hpp>
+#include <core/app/plugin.hpp>
+#include <core/plugins/block_info/block_info.hpp>
 
 #include <string>
 #include <vector>
 
-namespace smoke { namespace protocol {
+namespace core { namespace protocol {
 struct signed_block;
 } }
 
-namespace smoke { namespace plugin { namespace block_info {
+namespace core { namespace plugin { namespace block_info {
 
-using smoke::app::application;
+using core::app::application;
 
-class block_info_plugin : public smoke::app::plugin
+class block_info_plugin : public core::app::plugin
 {
    public:
       block_info_plugin( application* app );

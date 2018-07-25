@@ -31,7 +31,7 @@
 
 #include <fc/exception/exception.hpp>
 
-namespace smoke { namespace wallet {
+namespace core { namespace wallet {
 
    struct method_description
    {
@@ -74,4 +74,4 @@ namespace smoke { namespace wallet {
       }
    };
 
-} } // end namespace smoke::wallet
+} } // end namespace core::wallet

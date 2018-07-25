@@ -1,12 +1,12 @@
 #pragma once
-#include <smoke/chain/steem_object_types.hpp>
+#include <core/chain/steem_object_types.hpp>
 
 #include <boost/multi_index/composite_key.hpp>
 
-namespace smoke { namespace account_by_key {
+namespace core { namespace account_by_key {
 
 using namespace std;
-using namespace smoke::chain;
+using namespace core::chain;
 
 #ifndef ACCOUNT_BY_KEY_SPACE_ID
 #define ACCOUNT_BY_KEY_SPACE_ID 11
@@ -67,8 +67,8 @@ typedef multi_index_container<
    allocator< key_lookup_object >
 > key_lookup_index;
 
-} } // smoke::account_by_key
+} } // core::account_by_key
 
 
-FC_REFLECT( smoke::account_by_key::key_lookup_object, (id)(key)(account) )
-CHAINBASE_SET_INDEX_TYPE( smoke::account_by_key::key_lookup_object, smoke::account_by_key::key_lookup_index )
+FC_REFLECT( core::account_by_key::key_lookup_object, (id)(key)(account) )
+CHAINBASE_SET_INDEX_TYPE( core::account_by_key::key_lookup_object, core::account_by_key::key_lookup_index )

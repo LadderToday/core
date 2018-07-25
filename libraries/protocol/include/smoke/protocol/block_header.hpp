@@ -1,7 +1,7 @@
 #pragma once
-#include <smoke/protocol/base.hpp>
+#include <core/protocol/base.hpp>
 
-namespace smoke { namespace protocol {
+namespace core { namespace protocol {
 
    struct block_header
    {
@@ -27,7 +27,7 @@ namespace smoke { namespace protocol {
    };
 
 
-} } // smoke::protocol
+} } // core::protocol
 
-FC_REFLECT( smoke::protocol::block_header, (previous)(timestamp)(witness)(transaction_merkle_root)(extensions) )
-FC_REFLECT_DERIVED( smoke::protocol::signed_block_header, (smoke::protocol::block_header), (witness_signature) )
+FC_REFLECT( core::protocol::block_header, (previous)(timestamp)(witness)(transaction_merkle_root)(extensions) )
+FC_REFLECT_DERIVED( core::protocol::signed_block_header, (core::protocol::block_header), (witness_signature) )

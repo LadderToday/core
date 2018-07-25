@@ -3,7 +3,7 @@
 #include <fc/string.hpp>
 #include <fc/time.hpp>
 
-namespace smoke { namespace protocol {
+namespace core { namespace protocol {
 
 /*
  * This class represents the basic versioning scheme of the Steem blockchain.
@@ -62,20 +62,20 @@ struct hardfork_version_vote
    fc::time_point_sec hf_time;
 };
 
-} } // smoke::protocol
+} } // core::protocol
 
 namespace fc
 {
    class variant;
-   void to_variant( const smoke::protocol::version& v, variant& var );
-   void from_variant( const variant& var, smoke::protocol::version& v );
+   void to_variant( const core::protocol::version& v, variant& var );
+   void from_variant( const variant& var, core::protocol::version& v );
 
-   void to_variant( const smoke::protocol::hardfork_version& hv, variant& var );
-   void from_variant( const variant& var, smoke::protocol::hardfork_version& hv );
+   void to_variant( const core::protocol::hardfork_version& hv, variant& var );
+   void from_variant( const variant& var, core::protocol::hardfork_version& hv );
 } // fc
 
 #include <fc/reflect/reflect.hpp>
-FC_REFLECT( smoke::protocol::version, (v_num) )
-FC_REFLECT_DERIVED( smoke::protocol::hardfork_version, (smoke::protocol::version), )
+FC_REFLECT( core::protocol::version, (v_num) )
+FC_REFLECT_DERIVED( core::protocol::hardfork_version, (core::protocol::version), )
 
-FC_REFLECT( smoke::protocol::hardfork_version_vote, (hf_version)(hf_time) )
+FC_REFLECT( core::protocol::hardfork_version_vote, (hf_version)(hf_time) )

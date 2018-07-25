@@ -1,19 +1,19 @@
 #pragma once
 
-#include <smoke/protocol/authority.hpp>
-#include <smoke/protocol/steem_operations.hpp>
+#include <core/protocol/authority.hpp>
+#include <core/protocol/steem_operations.hpp>
 
-#include <smoke/chain/steem_object_types.hpp>
+#include <core/chain/steem_object_types.hpp>
 
 #include <boost/multi_index/composite_key.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
 
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
-   using smoke::protocol::asset;
-   using smoke::protocol::price;
-   using smoke::protocol::asset_symbol_type;
+   using core::protocol::asset;
+   using core::protocol::price;
+   using core::protocol::asset_symbol_type;
 
    typedef protocol::fixed_string_16 reward_fund_name_type;
 
@@ -484,50 +484,50 @@ namespace smoke { namespace chain {
       allocator< reward_fund_object >
    > reward_fund_index;
 
-} } // smoke::chain
+} } // core::chain
 
-#include <smoke/chain/comment_object.hpp>
-#include <smoke/chain/account_object.hpp>
+#include <core/chain/comment_object.hpp>
+#include <core/chain/account_object.hpp>
 
-FC_REFLECT_ENUM( smoke::chain::curve_id,
+FC_REFLECT_ENUM( core::chain::curve_id,
                   (quadratic)(quadratic_curation)(linear)(square_root))
 
-FC_REFLECT( smoke::chain::limit_order_object,
+FC_REFLECT( core::chain::limit_order_object,
              (id)(created)(expiration)(seller)(orderid)(for_sale)(sell_price) )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::limit_order_object, smoke::chain::limit_order_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::limit_order_object, core::chain::limit_order_index )
 
-FC_REFLECT( smoke::chain::feed_history_object,
+FC_REFLECT( core::chain::feed_history_object,
              (id)(current_median_history)(price_history) )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::feed_history_object, smoke::chain::feed_history_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::feed_history_object, core::chain::feed_history_index )
 
-FC_REFLECT( smoke::chain::convert_request_object,
+FC_REFLECT( core::chain::convert_request_object,
              (id)(owner)(requestid)(amount)(conversion_date) )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::convert_request_object, smoke::chain::convert_request_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::convert_request_object, core::chain::convert_request_index )
 
-FC_REFLECT( smoke::chain::liquidity_reward_balance_object,
+FC_REFLECT( core::chain::liquidity_reward_balance_object,
              (id)(owner)(steem_volume)(sbd_volume)(weight)(last_update) )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::liquidity_reward_balance_object, smoke::chain::liquidity_reward_balance_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::liquidity_reward_balance_object, core::chain::liquidity_reward_balance_index )
 
-FC_REFLECT( smoke::chain::withdraw_vesting_route_object,
+FC_REFLECT( core::chain::withdraw_vesting_route_object,
              (id)(from_account)(to_account)(percent)(auto_vest) )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::withdraw_vesting_route_object, smoke::chain::withdraw_vesting_route_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::withdraw_vesting_route_object, core::chain::withdraw_vesting_route_index )
 
-FC_REFLECT( smoke::chain::savings_withdraw_object,
+FC_REFLECT( core::chain::savings_withdraw_object,
              (id)(from)(to)(memo)(request_id)(amount)(complete) )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::savings_withdraw_object, smoke::chain::savings_withdraw_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::savings_withdraw_object, core::chain::savings_withdraw_index )
 
-FC_REFLECT( smoke::chain::escrow_object,
+FC_REFLECT( core::chain::escrow_object,
              (id)(escrow_id)(from)(to)(agent)
              (ratification_deadline)(escrow_expiration)
              (sbd_balance)(steem_balance)(pending_fee)
              (to_approved)(agent_approved)(disputed) )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::escrow_object, smoke::chain::escrow_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::escrow_object, core::chain::escrow_index )
 
-FC_REFLECT( smoke::chain::decline_voting_rights_request_object,
+FC_REFLECT( core::chain::decline_voting_rights_request_object,
              (id)(account)(effective_date) )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::decline_voting_rights_request_object, smoke::chain::decline_voting_rights_request_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::decline_voting_rights_request_object, core::chain::decline_voting_rights_request_index )
 
-FC_REFLECT( smoke::chain::reward_fund_object,
+FC_REFLECT( core::chain::reward_fund_object,
             (id)
             (name)
             (reward_balance)
@@ -539,4 +539,4 @@ FC_REFLECT( smoke::chain::reward_fund_object,
             (author_reward_curve)
             (curation_reward_curve)
          )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::reward_fund_object, smoke::chain::reward_fund_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::reward_fund_object, core::chain::reward_fund_index )

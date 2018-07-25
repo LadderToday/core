@@ -1,3 +1,3 @@
-from smokedebugnode.debugnode import DebugNode
+from coredebugnode.debugnode import DebugNode
 
 __all__ = [ 'debugnode' ]

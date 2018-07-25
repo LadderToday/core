@@ -1,13 +1,13 @@
 #pragma once
 
-#include <smoke/app/application.hpp>
-#include <smoke/app/steem_api_objects.hpp>
+#include <core/app/application.hpp>
+#include <core/app/steem_api_objects.hpp>
 
-#include <smoke/follow/follow_objects.hpp>
+#include <core/follow/follow_objects.hpp>
 
 #include <fc/api.hpp>
 
-namespace smoke { namespace follow {
+namespace core { namespace follow {
 
 using std::vector;
 using std::string;
@@ -112,17 +112,17 @@ class follow_api
       std::shared_ptr< detail::follow_api_impl > my;
 };
 
-} } // smoke::follow
+} } // core::follow
 
-FC_REFLECT( smoke::follow::feed_entry, (author)(permlink)(reblog_by)(reblog_on)(entry_id) );
-FC_REFLECT( smoke::follow::comment_feed_entry, (comment)(reblog_by)(reblog_on)(entry_id) );
-FC_REFLECT( smoke::follow::blog_entry, (author)(permlink)(blog)(reblog_on)(entry_id) );
-FC_REFLECT( smoke::follow::comment_blog_entry, (comment)(blog)(reblog_on)(entry_id) );
-FC_REFLECT( smoke::follow::account_reputation, (account)(reputation) );
-FC_REFLECT( smoke::follow::follow_api_obj, (follower)(following)(what) );
-FC_REFLECT( smoke::follow::follow_count_api_obj, (account)(follower_count)(following_count) );
+FC_REFLECT( core::follow::feed_entry, (author)(permlink)(reblog_by)(reblog_on)(entry_id) );
+FC_REFLECT( core::follow::comment_feed_entry, (comment)(reblog_by)(reblog_on)(entry_id) );
+FC_REFLECT( core::follow::blog_entry, (author)(permlink)(blog)(reblog_on)(entry_id) );
+FC_REFLECT( core::follow::comment_blog_entry, (comment)(blog)(reblog_on)(entry_id) );
+FC_REFLECT( core::follow::account_reputation, (account)(reputation) );
+FC_REFLECT( core::follow::follow_api_obj, (follower)(following)(what) );
+FC_REFLECT( core::follow::follow_count_api_obj, (account)(follower_count)(following_count) );
 
-FC_API( smoke::follow::follow_api,
+FC_API( core::follow::follow_api,
    (get_followers)
    (get_following)
    (get_follow_count)

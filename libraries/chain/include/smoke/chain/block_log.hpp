@@ -1,10 +1,10 @@
 #pragma once
 #include <fc/filesystem.hpp>
-#include <smoke/protocol/block.hpp>
+#include <core/protocol/block.hpp>
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
-   using namespace smoke::protocol;
+   using namespace core::protocol;
 
    namespace detail { class block_log_impl; }
 

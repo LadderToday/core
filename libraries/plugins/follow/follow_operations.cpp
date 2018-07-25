@@ -1,8 +1,8 @@
-#include <smoke/follow/follow_operations.hpp>
+#include <core/follow/follow_operations.hpp>
 
-#include <smoke/protocol/operation_util_impl.hpp>
+#include <core/protocol/operation_util_impl.hpp>
 
-namespace smoke { namespace follow {
+namespace core { namespace follow {
 
 void follow_operation::validate()const
 {
@@ -14,6 +14,6 @@ void reblog_operation::validate()const
    FC_ASSERT( account != author, "You cannot reblog your own content" );
 }
 
-} } //smoke::follow
+} } //core::follow
 
-DEFINE_OPERATION_TYPE( smoke::follow::follow_plugin_operation )
+DEFINE_OPERATION_TYPE( core::follow::follow_plugin_operation )

@@ -1,13 +1,13 @@
 #pragma once
 
-#include <smoke/chain/steem_object_types.hpp>
+#include <core/chain/steem_object_types.hpp>
 
 #include <boost/multi_index/composite_key.hpp>
 
-namespace smoke { namespace witness {
+namespace core { namespace witness {
 
 using namespace std;
-using namespace smoke::chain;
+using namespace core::chain;
 
 #ifndef WITNESS_SPACE_ID
 #define WITNESS_SPACE_ID 12
@@ -94,7 +94,7 @@ class reserve_ratio_object : public object< reserve_ratio_object_type, reserve_r
 
       /**
        *   Any time average_block_size <= 50% maximum_block_size this value grows by 1 until it
-       *   reaches SMOKE_MAX_RESERVE_RATIO.  Any time average_block_size is greater than
+       *   reaches CORE_MAX_RESERVE_RATIO.  Any time average_block_size is greater than
        *   50% it falls by 1%.  Upward adjustments happen once per round, downward adjustments
        *   happen every block.
        */
@@ -103,7 +103,7 @@ class reserve_ratio_object : public object< reserve_ratio_object_type, reserve_r
       /**
        * The maximum bandwidth the blockchain can support is:
        *
-       *    max_bandwidth = maximum_block_size * SMOKE_BANDWIDTH_AVERAGE_WINDOW_SECONDS / SMOKE_BLOCK_INTERVAL
+       *    max_bandwidth = maximum_block_size * CORE_BANDWIDTH_AVERAGE_WINDOW_SECONDS / CORE_BLOCK_INTERVAL
        *
        * The maximum virtual bandwidth is:
        *
@@ -154,18 +154,18 @@ typedef multi_index_container <
    allocator< reserve_ratio_object >
 > reserve_ratio_index;
 
-} } // smoke::witness
+} } // core::witness
 
-FC_REFLECT_ENUM( smoke::witness::bandwidth_type, (post)(forum)(market) )
+FC_REFLECT_ENUM( core::witness::bandwidth_type, (post)(forum)(market) )
 
-FC_REFLECT( smoke::witness::account_bandwidth_object,
+FC_REFLECT( core::witness::account_bandwidth_object,
             (id)(account)(type)(average_bandwidth)(lifetime_bandwidth)(last_bandwidth_update) )
-CHAINBASE_SET_INDEX_TYPE( smoke::witness::account_bandwidth_object, smoke::witness::account_bandwidth_index )
+CHAINBASE_SET_INDEX_TYPE( core::witness::account_bandwidth_object, core::witness::account_bandwidth_index )
 
-FC_REFLECT( smoke::witness::content_edit_lock_object,
+FC_REFLECT( core::witness::content_edit_lock_object,
             (id)(account)(lock_time) )
-CHAINBASE_SET_INDEX_TYPE( smoke::witness::content_edit_lock_object, smoke::witness::content_edit_lock_index )
+CHAINBASE_SET_INDEX_TYPE( core::witness::content_edit_lock_object, core::witness::content_edit_lock_index )
 
-FC_REFLECT( smoke::witness::reserve_ratio_object,
+FC_REFLECT( core::witness::reserve_ratio_object,
             (id)(average_block_size)(current_reserve_ratio)(max_virtual_bandwidth) )
-CHAINBASE_SET_INDEX_TYPE( smoke::witness::reserve_ratio_object, smoke::witness::reserve_ratio_index )
+CHAINBASE_SET_INDEX_TYPE( core::witness::reserve_ratio_object, core::witness::reserve_ratio_index )

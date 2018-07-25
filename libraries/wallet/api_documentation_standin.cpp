@@ -23,10 +23,10 @@
  */
 #include <iomanip>
 #include <boost/algorithm/string/join.hpp>
-#include <smoke/wallet/wallet.hpp>
-#include <smoke/wallet/api_documentation.hpp>
+#include <core/wallet/wallet.hpp>
+#include <core/wallet/api_documentation.hpp>
 
-namespace smoke { namespace wallet {
+namespace core { namespace wallet {
    namespace detail {
       namespace
       {
@@ -88,4 +88,4 @@ namespace smoke { namespace wallet {
                 std::inserter(method_descriptions, method_descriptions.end()));
    }
 
-} } // end namespace smoke::wallet
+} } // end namespace core::wallet

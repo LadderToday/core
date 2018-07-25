@@ -1,6 +1,6 @@
-#include <smoke/chain/shared_authority.hpp>
+#include <core/chain/shared_authority.hpp>
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
 shared_authority::operator authority()const
 {
@@ -90,4 +90,4 @@ bool operator == ( const shared_authority& a, const authority& b )
    return authority( a ) == b;
 }
 
-} } // smoke::chain
+} } // core::chain

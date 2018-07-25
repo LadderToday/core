@@ -1,9 +1,9 @@
-#include <smoke/protocol/block.hpp>
+#include <core/protocol/block.hpp>
 #include <fc/io/raw.hpp>
 #include <fc/bitutil.hpp>
 #include <algorithm>
 
-namespace smoke { namespace protocol {
+namespace core { namespace protocol {
    digest_type block_header::digest()const
    {
       return digest_type::hash(*this);
@@ -66,4 +66,4 @@ namespace smoke { namespace protocol {
       return checksum_type::hash( ids[0] );
    }
 
-} } // smoke::protocol
+} } // core::protocol

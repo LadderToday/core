@@ -1,12 +1,12 @@
 #pragma once
-#include <smoke/protocol/exceptions.hpp>
-#include <smoke/protocol/operations.hpp>
+#include <core/protocol/exceptions.hpp>
+#include <core/protocol/operations.hpp>
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
 class database;
 
-template< typename OperationType=smoke::protocol::operation >
+template< typename OperationType=core::protocol::operation >
 class evaluator
 {
    public:
@@ -14,7 +14,7 @@ class evaluator
       virtual int get_type()const = 0;
 };
 
-template< typename EvaluatorType, typename OperationType=smoke::protocol::operation >
+template< typename EvaluatorType, typename OperationType=core::protocol::operation >
 class evaluator_impl : public evaluator<OperationType>
 {
    public:
@@ -42,13 +42,13 @@ class evaluator_impl : public evaluator<OperationType>
 } }
 
 #define DEFINE_EVALUATOR( X ) \
-class X ## _evaluator : public smoke::chain::evaluator_impl< X ## _evaluator > \
+class X ## _evaluator : public core::chain::evaluator_impl< X ## _evaluator > \
 {                                                                           \
    public:                                                                  \
       typedef X ## _operation operation_type;                               \
                                                                             \
       X ## _evaluator( database& db )                                       \
-         : smoke::chain::evaluator_impl< X ## _evaluator >( db )          \
+         : core::chain::evaluator_impl< X ## _evaluator >( db )          \
       {}                                                                    \
                                                                             \
       void do_apply( const X ## _operation& o );                            \

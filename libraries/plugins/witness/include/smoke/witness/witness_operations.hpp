@@ -1,15 +1,15 @@
 #pragma once
 
-#include <smoke/protocol/base.hpp>
-#include <smoke/protocol/operation_util.hpp>
+#include <core/protocol/base.hpp>
+#include <core/protocol/operation_util.hpp>
 
-#include <smoke/app/plugin.hpp>
+#include <core/app/plugin.hpp>
 
-namespace smoke { namespace witness {
+namespace core { namespace witness {
 
 using namespace std;
-using smoke::protocol::base_operation;
-using smoke::chain::database;
+using core::protocol::base_operation;
+using core::chain::database;
 
 class witness_plugin;
 
@@ -29,10 +29,10 @@ typedef fc::static_variant<
 
 DEFINE_PLUGIN_EVALUATOR( witness_plugin, witness_plugin_operation, enable_content_editing );
 
-} } // smoke::witness
+} } // core::witness
 
-FC_REFLECT( smoke::witness::enable_content_editing_operation, (account)(relock_time) )
+FC_REFLECT( core::witness::enable_content_editing_operation, (account)(relock_time) )
 
-FC_REFLECT_TYPENAME( smoke::witness::witness_plugin_operation )
+FC_REFLECT_TYPENAME( core::witness::witness_plugin_operation )
 
-DECLARE_OPERATION_TYPE( smoke::witness::witness_plugin_operation )
+DECLARE_OPERATION_TYPE( core::witness::witness_plugin_operation )

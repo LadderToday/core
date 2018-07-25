@@ -27,21 +27,21 @@ Then, inside the container:
 (These steps are taken from `/Dockerfile.test` in the
 repository root.)
 
-    git clone https://github.com/smokenetwork/smoked.git \
-        /usr/local/src/smoked
-    cd /usr/local/src/smoked
+    git clone https://github.com/LadderToday/core.git \
+        /usr/local/src/cored
+    cd /usr/local/src/cored
     git checkout <branch> # e.g. 123-feature
     git submodule update --init --recursive
     mkdir build
     cd build
     cmake \
         -DCMAKE_BUILD_TYPE=Debug \
-        -DBUILD_SMOKE_TESTNET=ON \
+        -DBUILD_CORE_TESTNET=ON \
         -DLOW_MEMORY_NODE=OFF \
         -DCLEAR_VOTES=ON \
         ..
     make -j$(nproc) chain_test
     ./tests/chain_test
-    cd /usr/local/src/smoked
+    cd /usr/local/src/cored
     doxygen
     programs/build_helpers/check_reflect.py

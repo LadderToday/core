@@ -23,10 +23,10 @@
  */
 #pragma once
 
-#include <smoke/app/application.hpp>
+#include <core/app/application.hpp>
 
-#include <smoke/chain/evaluator.hpp>
-#include <smoke/chain/database.hpp>
+#include <core/chain/evaluator.hpp>
+#include <core/chain/database.hpp>
 
 #include <boost/program_options.hpp>
 
@@ -37,7 +37,7 @@
 
 #include <memory>
 
-namespace smoke { namespace app {
+namespace core { namespace app {
 
 using fc::static_variant;
 using fc::unique_ptr;
@@ -136,26 +136,26 @@ T dejsonify(const string& s)
 #define LOAD_VALUE_SET(options, name, container, type) \
 if( options.count(name) ) { \
       const std::vector<std::string>& ops = options[name].as<std::vector<std::string>>(); \
-      std::transform(ops.begin(), ops.end(), std::inserter(container, container.end()), &smoke::app::dejsonify<type>); \
+      std::transform(ops.begin(), ops.end(), std::inserter(container, container.end()), &core::app::dejsonify<type>); \
 }
 /// @}
 
-} } //smoke::app
+} } //core::app
 
-#define SMOKE_DEFINE_PLUGIN( plugin_name, plugin_class ) \
-   namespace smoke { namespace plugin { \
-   std::shared_ptr< smoke::app::abstract_plugin > create_ ## plugin_name ## _plugin( app::application* app )  \
+#define CORE_DEFINE_PLUGIN( plugin_name, plugin_class ) \
+   namespace core { namespace plugin { \
+   std::shared_ptr< core::app::abstract_plugin > create_ ## plugin_name ## _plugin( app::application* app )  \
    { return std::make_shared< plugin_class >( app ); } \
    } }
 
 #define DEFINE_PLUGIN_EVALUATOR( PLUGIN, OPERATION, X )                     \
-class X ## _evaluator : public smoke::chain::evaluator_impl< X ## _evaluator, OPERATION > \
+class X ## _evaluator : public core::chain::evaluator_impl< X ## _evaluator, OPERATION > \
 {                                                                           \
    public:                                                                  \
       typedef X ## _operation operation_type;                               \
                                                                             \
       X ## _evaluator( database& db, PLUGIN* plugin )                       \
-         : smoke::chain::evaluator_impl< X ## _evaluator, OPERATION >( db ), \
+         : core::chain::evaluator_impl< X ## _evaluator, OPERATION >( db ), \
            _plugin( plugin )                                                \
       {}                                                                    \
                                                                             \

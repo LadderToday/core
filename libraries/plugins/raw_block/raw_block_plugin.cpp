@@ -1,11 +1,11 @@
 
 
-#include <smoke/plugins/raw_block/raw_block_api.hpp>
-#include <smoke/plugins/raw_block/raw_block_plugin.hpp>
+#include <core/plugins/raw_block/raw_block_api.hpp>
+#include <core/plugins/raw_block/raw_block_plugin.hpp>
 
 #include <string>
 
-namespace smoke { namespace plugin { namespace raw_block {
+namespace core { namespace plugin { namespace raw_block {
 
 raw_block_plugin::raw_block_plugin( application* app ) : plugin( app ) {}
 raw_block_plugin::~raw_block_plugin() {}
@@ -28,6 +28,6 @@ void raw_block_plugin::plugin_shutdown()
 {
 }
 
-} } } // smoke::plugin::raw_block
+} } } // core::plugin::raw_block
 
-SMOKE_DEFINE_PLUGIN( raw_block, smoke::plugin::raw_block::raw_block_plugin )
+CORE_DEFINE_PLUGIN( raw_block, core::plugin::raw_block::raw_block_plugin )

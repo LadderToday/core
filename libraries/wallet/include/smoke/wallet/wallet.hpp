@@ -1,24 +1,24 @@
 #pragma once
 
-#include <smoke/app/api.hpp>
-#include <smoke/private_message/private_message_plugin.hpp>
-#include <smoke/follow/follow_plugin.hpp>
-#include <smoke/app/steem_api_objects.hpp>
+#include <core/app/api.hpp>
+#include <core/private_message/private_message_plugin.hpp>
+#include <core/follow/follow_plugin.hpp>
+#include <core/app/steem_api_objects.hpp>
 
 #include <graphene/utilities/key_conversion.hpp>
 
 #include <fc/real128.hpp>
 #include <fc/crypto/base58.hpp>
 
-using namespace smoke::app;
-using namespace smoke::chain;
+using namespace core::app;
+using namespace core::chain;
 using namespace graphene::utilities;
 using namespace std;
 
-namespace smoke { namespace wallet {
+namespace core { namespace wallet {
 
-using smoke::app::discussion;
-using namespace smoke::private_message;
+using core::app::discussion;
+using namespace core::private_message;
 
 typedef uint16_t transaction_handle_type;
 
@@ -801,7 +801,7 @@ class wallet_api
        * you can fill in.  It's better than nothing.
        *
        * @param operation_type the type of operation to return, must be one of the
-       *                       operations defined in `smoke/chain/operations.hpp`
+       *                       operations defined in `core/chain/operations.hpp`
        *                       (e.g., "global_parameters_update_operation")
        * @return a default-constructed operation of the given type
        */
@@ -983,20 +983,20 @@ struct plain_keys {
 
 } }
 
-FC_REFLECT( smoke::wallet::wallet_data,
+FC_REFLECT( core::wallet::wallet_data,
             (cipher_keys)
             (ws_server)
             (ws_user)
             (ws_password)
           )
 
-FC_REFLECT( smoke::wallet::brain_key_info, (brain_priv_key)(wif_priv_key) (pub_key))
+FC_REFLECT( core::wallet::brain_key_info, (brain_priv_key)(wif_priv_key) (pub_key))
 
-FC_REFLECT( smoke::wallet::plain_keys, (checksum)(keys) )
+FC_REFLECT( core::wallet::plain_keys, (checksum)(keys) )
 
-FC_REFLECT_ENUM( smoke::wallet::authority_type, (owner)(active)(posting) )
+FC_REFLECT_ENUM( core::wallet::authority_type, (owner)(active)(posting) )
 
-FC_API( smoke::wallet::wallet_api,
+FC_API( core::wallet::wallet_api,
         /// wallet api
         (help)(gethelp)
         (about)(is_new)(is_locked)(lock)(unlock)(set_password)
@@ -1090,4 +1090,4 @@ FC_API( smoke::wallet::wallet_api,
         (get_transaction)
       )
 
-FC_REFLECT( smoke::wallet::memo_data, (from)(to)(nonce)(check)(encrypted) )
+FC_REFLECT( core::wallet::memo_data, (from)(to)(nonce)(check)(encrypted) )

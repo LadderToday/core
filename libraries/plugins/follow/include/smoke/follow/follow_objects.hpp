@@ -1,13 +1,13 @@
 #pragma once
 
-#include <smoke/follow/follow_plugin.hpp>
+#include <core/follow/follow_plugin.hpp>
 
-#include <smoke/chain/steem_object_types.hpp>
+#include <core/chain/steem_object_types.hpp>
 
-namespace smoke { namespace follow {
+namespace core { namespace follow {
 
 using namespace std;
-using namespace smoke::chain;
+using namespace core::chain;
 using chainbase::shared_vector;
 
 #ifndef FOLLOW_SPACE_ID
@@ -327,24 +327,24 @@ typedef multi_index_container<
    allocator< follow_count_object >
 > follow_count_index;
 
-} } // smoke::follow
+} } // core::follow
 
-FC_REFLECT_ENUM( smoke::follow::follow_type, (undefined)(blog)(ignore) )
+FC_REFLECT_ENUM( core::follow::follow_type, (undefined)(blog)(ignore) )
 
-FC_REFLECT( smoke::follow::follow_object, (id)(follower)(following)(what) )
-CHAINBASE_SET_INDEX_TYPE( smoke::follow::follow_object, smoke::follow::follow_index )
+FC_REFLECT( core::follow::follow_object, (id)(follower)(following)(what) )
+CHAINBASE_SET_INDEX_TYPE( core::follow::follow_object, core::follow::follow_index )
 
-FC_REFLECT( smoke::follow::feed_object, (id)(account)(first_reblogged_by)(first_reblogged_on)(reblogged_by)(comment)(reblogs)(account_feed_id) )
-CHAINBASE_SET_INDEX_TYPE( smoke::follow::feed_object, smoke::follow::feed_index )
+FC_REFLECT( core::follow::feed_object, (id)(account)(first_reblogged_by)(first_reblogged_on)(reblogged_by)(comment)(reblogs)(account_feed_id) )
+CHAINBASE_SET_INDEX_TYPE( core::follow::feed_object, core::follow::feed_index )
 
-FC_REFLECT( smoke::follow::blog_object, (id)(account)(comment)(reblogged_on)(blog_feed_id) )
-CHAINBASE_SET_INDEX_TYPE( smoke::follow::blog_object, smoke::follow::blog_index )
+FC_REFLECT( core::follow::blog_object, (id)(account)(comment)(reblogged_on)(blog_feed_id) )
+CHAINBASE_SET_INDEX_TYPE( core::follow::blog_object, core::follow::blog_index )
 
-FC_REFLECT( smoke::follow::reputation_object, (id)(account)(reputation) )
-CHAINBASE_SET_INDEX_TYPE( smoke::follow::reputation_object, smoke::follow::reputation_index )
+FC_REFLECT( core::follow::reputation_object, (id)(account)(reputation) )
+CHAINBASE_SET_INDEX_TYPE( core::follow::reputation_object, core::follow::reputation_index )
 
-FC_REFLECT( smoke::follow::follow_count_object, (id)(account)(follower_count)(following_count) )
-CHAINBASE_SET_INDEX_TYPE( smoke::follow::follow_count_object, smoke::follow::follow_count_index )
+FC_REFLECT( core::follow::follow_count_object, (id)(account)(follower_count)(following_count) )
+CHAINBASE_SET_INDEX_TYPE( core::follow::follow_count_object, core::follow::follow_count_index )
 
-FC_REFLECT( smoke::follow::blog_author_stats_object, (id)(blogger)(guest)(count) )
-CHAINBASE_SET_INDEX_TYPE( smoke::follow::blog_author_stats_object, smoke::follow::blog_author_stats_index );
+FC_REFLECT( core::follow::blog_author_stats_object, (id)(blogger)(guest)(count) )
+CHAINBASE_SET_INDEX_TYPE( core::follow::blog_author_stats_object, core::follow::blog_author_stats_index );

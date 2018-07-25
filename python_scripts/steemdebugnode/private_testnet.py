@@ -11,15 +11,15 @@ from time import sleep
 from time import time
 
 # local imports
-from smokedebugnode import DebugNode
-from smokeapi.smokenoderpc import SmokeNodeRPC
+from coredebugnode import DebugNode
+from coreapi.corenoderpc import CoreNodeRPC
 
 WAITING = True
 
 def main( ):
    global WAITING
    """
-   This example contains a simple parser to obtain the locations of both smoked and the data directory,
+   This example contains a simple parser to obtain the locations of both cored and the data directory,
    creates and runs a new debug node, replays all of the blocks in the data directory, and finally waits
    for the user to interface with it outside of the script. Sending SIGINT succesfully and cleanly terminates
    the program.
@@ -34,7 +34,7 @@ def main( ):
    parser = ArgumentParser( description='Run a Debug Node on an existing chain. This simply replays all blocks ' + \
                               'and then waits indefinitely to allow user interaction through RPC calls and ' + \
                               'the CLI wallet' )
-   parser.add_argument( '--smoked', '-s', type=str, required=True, help='The location of a smoked binary to run the debug node' )
+   parser.add_argument( '--cored', '-s', type=str, required=True, help='The location of a cored binary to run the debug node' )
    parser.add_argument( '--data-dir', '-d', type=str, required=True, help='The location of an existing data directory. ' + \
                         'The debug node will pull blocks from this directory when replaying the chain. The directory ' + \
                         'will not be changed.' )
@@ -45,19 +45,19 @@ def main( ):
 
    args = parser.parse_args()
 
-   smoked = Path( args.smoked )
-   if( not smoked.exists() ):
-      print( 'Error: smoked does not exist.' )
+   cored = Path( args.cored )
+   if( not cored.exists() ):
+      print( 'Error: cored does not exist.' )
       return
 
-   smoked = smoked.resolve()
-   if( not smoked.is_file() ):
-      print( 'Error: smoked is not a file.' )
+   cored = cored.resolve()
+   if( not cored.is_file() ):
+      print( 'Error: cored is not a file.' )
       return
 
    data_dir = Path( args.data_dir )
    if( not data_dir.exists() ):
-      print( 'Error: data_dir does not exist or is not a properly constructed smoked data directory' )
+      print( 'Error: data_dir does not exist or is not a properly constructed cored data directory' )
 
    data_dir = data_dir.resolve()
    if( not data_dir.is_dir() ):
@@ -74,7 +74,7 @@ def main( ):
    signal.signal( signal.SIGINT, sigint_handler )
 
    print( 'Creating and starting debug node' )
-   debug_node = DebugNode( str( smoked ), str( data_dir ), plugins=plugins, apis=apis, args='--replay', smoked_err=sys.stderr )
+   debug_node = DebugNode( str( cored ), str( data_dir ), plugins=plugins, apis=apis, args='--replay', cored_err=sys.stderr )
 
    with debug_node:
       debug_node.debug_generate_blocks_until( int( time() ), True )

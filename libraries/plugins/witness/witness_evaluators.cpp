@@ -1,9 +1,9 @@
-#include <smoke/witness/witness_operations.hpp>
-#include <smoke/witness/witness_objects.hpp>
+#include <core/witness/witness_operations.hpp>
+#include <core/witness/witness_objects.hpp>
 
-#include <smoke/chain/comment_object.hpp>
+#include <core/chain/comment_object.hpp>
 
-namespace smoke { namespace witness {
+namespace core { namespace witness {
 
 void enable_content_editing_evaluator::do_apply( const enable_content_editing_operation& o )
 {
@@ -30,4 +30,4 @@ void enable_content_editing_evaluator::do_apply( const enable_content_editing_op
    FC_CAPTURE_AND_RETHROW( (o) )
 }
 
-} } // smoke::witness
+} } // core::witness

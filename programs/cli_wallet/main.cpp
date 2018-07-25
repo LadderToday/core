@@ -38,9 +38,9 @@
 
 #include <graphene/utilities/key_conversion.hpp>
 
-#include <smoke/app/api.hpp>
-#include <smoke/protocol/protocol.hpp>
-#include <smoke/wallet/wallet.hpp>
+#include <core/app/api.hpp>
+#include <core/protocol/protocol.hpp>
+#include <core/wallet/wallet.hpp>
 
 #include <fc/interprocess/signals.hpp>
 #include <boost/program_options.hpp>
@@ -59,9 +59,9 @@
 
 
 using namespace graphene::utilities;
-using namespace smoke::app;
-using namespace smoke::chain;
-using namespace smoke::wallet;
+using namespace core::app;
+using namespace core::chain;
+using namespace core::wallet;
 using namespace std;
 namespace bpo = boost::program_options;
 

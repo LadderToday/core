@@ -1,8 +1,8 @@
 #pragma once
-#include <smoke/protocol/types.hpp>
-#include <smoke/protocol/config.hpp>
+#include <core/protocol/types.hpp>
+#include <core/protocol/config.hpp>
 
-namespace smoke { namespace protocol {
+namespace core { namespace protocol {
 
    typedef uint64_t asset_symbol_type;
 
@@ -115,13 +115,13 @@ namespace smoke { namespace protocol {
    asset operator *  ( const asset& a, const price& b );
 
 
-} } // smoke::protocol
+} } // core::protocol
 
 namespace fc {
-    inline void to_variant( const smoke::protocol::asset& var,  fc::variant& vo ) { vo = var.to_string(); }
-    inline void from_variant( const fc::variant& var,  smoke::protocol::asset& vo ) { vo = smoke::protocol::asset::from_string( var.as_string() ); }
+    inline void to_variant( const core::protocol::asset& var,  fc::variant& vo ) { vo = var.to_string(); }
+    inline void from_variant( const fc::variant& var,  core::protocol::asset& vo ) { vo = core::protocol::asset::from_string( var.as_string() ); }
 }
 
-FC_REFLECT( smoke::protocol::asset, (amount)(symbol) )
-FC_REFLECT( smoke::protocol::price, (base)(quote) )
+FC_REFLECT( core::protocol::asset, (amount)(symbol) )
+FC_REFLECT( core::protocol::price, (base)(quote) )
 

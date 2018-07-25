@@ -9,15 +9,15 @@ if( GPERFTOOLS_FOUND )
     list( APPEND PLATFORM_SPECIFIC_LIBS tcmalloc )
 endif()
 
-if( SMOKE_STATIC_BUILD )
-   # I don't know why smoke_app is required twice in the following line, I just know the linker breaks if it isn't.
+if( CORE_STATIC_BUILD )
+   # I don't know why core_app is required twice in the following line, I just know the linker breaks if it isn't.
    target_link_libraries( cli_wallet PRIVATE
                           "-static-libstdc++ -static-libgcc -lreadline"
-           smoke_app graphene_net smoke_chain smoke_protocol graphene_utilities smoke_wallet smoke_private_message smoke_app smoke_follow fc ${CMAKE_DL_LIBS} ${PLATFORM_SPECIFIC_LIBS} )
-else( SMOKE_STATIC_BUILD )
+           core_app graphene_net core_chain core_protocol graphene_utilities core_wallet core_private_message core_app core_follow fc ${CMAKE_DL_LIBS} ${PLATFORM_SPECIFIC_LIBS} )
+else( CORE_STATIC_BUILD )
    target_link_libraries( cli_wallet PRIVATE
-           smoke_app graphene_net smoke_chain smoke_protocol graphene_utilities smoke_wallet smoke_private_message smoke_app smoke_follow fc ${CMAKE_DL_LIBS} ${PLATFORM_SPECIFIC_LIBS} )
-endif( SMOKE_STATIC_BUILD )
+           core_app graphene_net core_chain core_protocol graphene_utilities core_wallet core_private_message core_app core_follow fc ${CMAKE_DL_LIBS} ${PLATFORM_SPECIFIC_LIBS} )
+endif( CORE_STATIC_BUILD )
 
 if(MSVC)
   set_source_files_properties( main.cpp PROPERTIES COMPILE_FLAGS "/bigobj" )

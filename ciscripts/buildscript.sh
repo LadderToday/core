@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
-export IMAGE_NAME="smoke/smoked:$BRANCH_NAME"
-if [[ $IMAGE_NAME == "smoke/smoked:stable" ]] ; then
-  IMAGE_NAME="smoke/smoked:latest"
+export IMAGE_NAME="core/cored:$BRANCH_NAME"
+if [[ $IMAGE_NAME == "core/cored:stable" ]] ; then
+  IMAGE_NAME="core/cored:latest"
 fi
 sudo docker build -t=$IMAGE_NAME .
 sudo docker login --username=$DOCKER_USER --password=$DOCKER_PASS

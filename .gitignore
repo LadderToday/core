@@ -20,8 +20,8 @@ libraries/wallet/doxygen
 
 programs/cli_wallet/cli_wallet
 programs/js_operation_serializer/js_operation_serializer
-programs/smoked/smoked
-programs/smoked/test
+programs/cored/cored
+programs/cored/test
 programs/delayed_node
 programs/build_helpers/cat-parts
 programs/size_checker/size_checker

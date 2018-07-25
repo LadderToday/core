@@ -5,17 +5,17 @@
 #include <string>
 #include <vector>
 
-namespace smoke { namespace app {
+namespace core { namespace app {
 
 class abstract_plugin;
 class application;
 
 } }
 
-namespace smoke { namespace plugin {
+namespace core { namespace plugin {
 
 void initialize_plugin_factories();
-std::shared_ptr< smoke::app::abstract_plugin > create_plugin( const std::string& name, smoke::app::application* app );
+std::shared_ptr< core::app::abstract_plugin > create_plugin( const std::string& name, core::app::application* app );
 std::vector< std::string > get_available_plugins();
 
 } }

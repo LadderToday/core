@@ -1,11 +1,11 @@
 
 
-#include <smoke/plugins/auth_util/auth_util_api.hpp>
-#include <smoke/plugins/auth_util/auth_util_plugin.hpp>
+#include <core/plugins/auth_util/auth_util_api.hpp>
+#include <core/plugins/auth_util/auth_util_plugin.hpp>
 
 #include <string>
 
-namespace smoke { namespace plugin { namespace auth_util {
+namespace core { namespace plugin { namespace auth_util {
 
 auth_util_plugin::auth_util_plugin( application* app ) : plugin( app ) {}
 auth_util_plugin::~auth_util_plugin() {}
@@ -28,6 +28,6 @@ void auth_util_plugin::plugin_shutdown()
 {
 }
 
-} } } // smoke::plugin::auth_util
+} } } // core::plugin::auth_util
 
-SMOKE_DEFINE_PLUGIN( auth_util, smoke::plugin::auth_util::auth_util_plugin )
+CORE_DEFINE_PLUGIN( auth_util, core::plugin::auth_util::auth_util_plugin )

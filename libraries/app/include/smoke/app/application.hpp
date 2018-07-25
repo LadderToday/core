@@ -23,9 +23,9 @@
  */
 #pragma once
 
-#include <smoke/app/api_access.hpp>
-#include <smoke/app/api_context.hpp>
-#include <smoke/chain/database.hpp>
+#include <core/app/api_access.hpp>
+#include <core/app/api_context.hpp>
+#include <core/chain/database.hpp>
 
 #include <graphene/net/node.hpp>
 
@@ -35,7 +35,7 @@
 
 #include <boost/program_options.hpp>
 
-namespace smoke { namespace app {
+namespace core { namespace app {
    namespace detail { class application_impl; }
    using std::string;
 
@@ -155,4 +155,4 @@ namespace smoke { namespace app {
       } );
    }
 
-} } // smoke::app
+} } // core::app

@@ -1,11 +1,11 @@
 #pragma once
-#include <smoke/protocol/operations.hpp>
-#include <smoke/protocol/sign_state.hpp>
-#include <smoke/protocol/types.hpp>
+#include <core/protocol/operations.hpp>
+#include <core/protocol/sign_state.hpp>
+#include <core/protocol/types.hpp>
 
 #include <numeric>
 
-namespace smoke { namespace protocol {
+namespace core { namespace protocol {
 
    struct transaction
    {
@@ -63,7 +63,7 @@ namespace smoke { namespace protocol {
          const authority_getter& get_active,
          const authority_getter& get_owner,
          const authority_getter& get_posting,
-         uint32_t max_recursion = SMOKE_MAX_SIG_CHECK_DEPTH
+         uint32_t max_recursion = CORE_MAX_SIG_CHECK_DEPTH
          )const;
 
       void verify_authority(
@@ -71,7 +71,7 @@ namespace smoke { namespace protocol {
          const authority_getter& get_active,
          const authority_getter& get_owner,
          const authority_getter& get_posting,
-         uint32_t max_recursion = SMOKE_MAX_SIG_CHECK_DEPTH )const;
+         uint32_t max_recursion = CORE_MAX_SIG_CHECK_DEPTH )const;
 
       set<public_key_type> minimize_required_signatures(
          const chain_id_type& chain_id,
@@ -79,7 +79,7 @@ namespace smoke { namespace protocol {
          const authority_getter& get_active,
          const authority_getter& get_owner,
          const authority_getter& get_posting,
-         uint32_t max_recursion = SMOKE_MAX_SIG_CHECK_DEPTH
+         uint32_t max_recursion = CORE_MAX_SIG_CHECK_DEPTH
          ) const;
 
       flat_set<public_key_type> get_signature_keys( const chain_id_type& chain_id )const;
@@ -95,7 +95,7 @@ namespace smoke { namespace protocol {
                           const authority_getter& get_active,
                           const authority_getter& get_owner,
                           const authority_getter& get_posting,
-                          uint32_t max_recursion = SMOKE_MAX_SIG_CHECK_DEPTH,
+                          uint32_t max_recursion = CORE_MAX_SIG_CHECK_DEPTH,
                           bool allow_committe = false,
                           const flat_set< account_name_type >& active_aprovals = flat_set< account_name_type >(),
                           const flat_set< account_name_type >& owner_aprovals = flat_set< account_name_type >(),
@@ -115,8 +115,8 @@ namespace smoke { namespace protocol {
 
    /// @} transactions group
 
-} } // smoke::protocol
+} } // core::protocol
 
-FC_REFLECT( smoke::protocol::transaction, (ref_block_num)(ref_block_prefix)(expiration)(operations)(extensions) )
-FC_REFLECT_DERIVED( smoke::protocol::signed_transaction, (smoke::protocol::transaction), (signatures) )
-FC_REFLECT_DERIVED( smoke::protocol::annotated_signed_transaction, (smoke::protocol::signed_transaction), (transaction_id)(block_num)(transaction_num) );
+FC_REFLECT( core::protocol::transaction, (ref_block_num)(ref_block_prefix)(expiration)(operations)(extensions) )
+FC_REFLECT_DERIVED( core::protocol::signed_transaction, (core::protocol::transaction), (signatures) )
+FC_REFLECT_DERIVED( core::protocol::annotated_signed_transaction, (core::protocol::signed_transaction), (transaction_id)(block_num)(transaction_num) );

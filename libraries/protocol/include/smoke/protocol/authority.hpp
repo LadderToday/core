@@ -1,8 +1,8 @@
 #pragma once
-#include <smoke/protocol/types.hpp>
+#include <core/protocol/types.hpp>
 #include <fc/interprocess/container.hpp>
 
-namespace smoke { namespace protocol {
+namespace core { namespace protocol {
 
    struct authority
    {
@@ -92,16 +92,16 @@ void add_authority_accounts(
  * In addition we require the following:
  *
  * - All letters are lowercase
- * - Length is between (inclusive) SMOKE_MIN_ACCOUNT_NAME_LENGTH and SMOKE_MAX_ACCOUNT_NAME_LENGTH
+ * - Length is between (inclusive) CORE_MIN_ACCOUNT_NAME_LENGTH and CORE_MAX_ACCOUNT_NAME_LENGTH
  */
 bool is_valid_account_name( const string& name );
 
 bool operator == ( const authority& a, const authority& b );
 
-} } // namespace smoke::protocol
+} } // namespace core::protocol
 
 
-FC_REFLECT_TYPENAME( smoke::protocol::authority::account_authority_map)
-FC_REFLECT_TYPENAME( smoke::protocol::authority::key_authority_map)
-FC_REFLECT( smoke::protocol::authority, (weight_threshold)(account_auths)(key_auths) )
-FC_REFLECT_ENUM( smoke::protocol::authority::classification, (owner)(active)(key)(posting) )
+FC_REFLECT_TYPENAME( core::protocol::authority::account_authority_map)
+FC_REFLECT_TYPENAME( core::protocol::authority::key_authority_map)
+FC_REFLECT( core::protocol::authority, (weight_threshold)(account_auths)(key_auths) )
+FC_REFLECT_ENUM( core::protocol::authority::classification, (owner)(active)(key)(posting) )

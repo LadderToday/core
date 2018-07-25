@@ -1,15 +1,15 @@
 #pragma once
 
-#include <smoke/protocol/authority.hpp>
-#include <smoke/protocol/steem_operations.hpp>
+#include <core/protocol/authority.hpp>
+#include <core/protocol/steem_operations.hpp>
 
-#include <smoke/chain/steem_object_types.hpp>
-#include <smoke/chain/witness_objects.hpp>
+#include <core/chain/steem_object_types.hpp>
+#include <core/chain/witness_objects.hpp>
 
 #include <boost/multi_index/composite_key.hpp>
 
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
 
    using protocol::beneficiary_route_type;
 
@@ -93,7 +93,7 @@ namespace smoke { namespace chain {
          id_type           root_comment;
 
          asset             max_accepted_payout = asset( 1000000000, STEEM_SYMBOL );       /// SBD value of the maximum payout this post will receive
-         uint16_t          percent_steem_dollars = SMOKE_100_PERCENT; /// the percent of Steem Dollars to key, unkept amounts will be received as Steem Power
+         uint16_t          percent_steem_dollars = CORE_100_PERCENT; /// the percent of Steem Dollars to key, unkept amounts will be received as Steem Power
          bool              allow_replies = true;      /// allows a post to disable replies.
          bool              allow_votes   = true;      /// allows a post to receive votes;
          bool              allow_curation_rewards = true;
@@ -241,9 +241,9 @@ namespace smoke { namespace chain {
       allocator< comment_object >
    > comment_index;
 
-} } // smoke::chain
+} } // core::chain
 
-FC_REFLECT( smoke::chain::comment_object,
+FC_REFLECT( core::chain::comment_object,
              (id)(author)(permlink)
              (category)(parent_author)(parent_permlink)
              (title)(body)(json_metadata)(last_update)(created)(active)(last_payout)
@@ -254,9 +254,9 @@ FC_REFLECT( smoke::chain::comment_object,
              (max_accepted_payout)(percent_steem_dollars)(allow_replies)(allow_votes)(allow_curation_rewards)
              (beneficiaries)
           )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::comment_object, smoke::chain::comment_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::comment_object, core::chain::comment_index )
 
-FC_REFLECT( smoke::chain::comment_vote_object,
+FC_REFLECT( core::chain::comment_vote_object,
              (id)(voter)(comment)(weight)(rshares)(vote_percent)(last_update)(num_changes)
           )
-CHAINBASE_SET_INDEX_TYPE( smoke::chain::comment_vote_object, smoke::chain::comment_vote_index )
+CHAINBASE_SET_INDEX_TYPE( core::chain::comment_vote_object, core::chain::comment_vote_index )

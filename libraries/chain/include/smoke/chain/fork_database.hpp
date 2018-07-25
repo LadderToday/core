@@ -1,5 +1,5 @@
 #pragma once
-#include <smoke/protocol/block.hpp>
+#include <core/protocol/block.hpp>
 
 #include <boost/multi_index_container.hpp>
 #include <boost/multi_index/member.hpp>
@@ -8,12 +8,12 @@
 #include <boost/multi_index/mem_fun.hpp>
 
 
-namespace smoke { namespace chain {
+namespace core { namespace chain {
    using boost::multi_index_container;
    using namespace boost::multi_index;
 
-   using smoke::protocol::signed_block;
-   using smoke::protocol::block_id_type;
+   using core::protocol::signed_block;
+   using core::protocol::block_id_type;
 
    struct fork_item
    {
@@ -104,4 +104,4 @@ namespace smoke { namespace chain {
          shared_ptr<fork_item>    _head;
    };
 
-} } // smoke::chain
+} } // core::chain
